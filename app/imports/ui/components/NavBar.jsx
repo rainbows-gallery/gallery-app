@@ -31,8 +31,8 @@ const NavBar = () => {
             ) : ''}
           </Nav>
           <Nav className="justify-content-end d-flex">
-            <Link to="" className="p-2">Sign In</Link>
-            <Link to=""><Button variant="primary" className="rounded-corners">Sign Up</Button></Link>
+            <Link to="/signin" className="p-2">Sign In</Link>
+            <Link to="/signup"><Button variant="primary" className="rounded-corners">Sign Up</Button></Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
