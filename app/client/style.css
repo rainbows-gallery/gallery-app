@@ -7,11 +7,16 @@
   --matr-navbar-bg-rgb: 236, 236, 236;
 }
 
+.btn-primary {
+    background-color: #03352B !important;
+    border-color: #03352B !important;
+}
+
 /* Change bootstrap variable values.
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
 body {
-  --bs-light-rgb: var(--matr-navbar-bg-rgb);
+  --bs-light-rgb: #ffffff;
 }
 
 /* Set the alert background on the signin and signup pages. */
@@ -25,4 +30,17 @@ body {
   color: var(--bs-dark);
   padding-top: 10px;
   padding-bottom: 20px;
+}
+
+.searchText {
+    width: 528px;
+    height: 48px;
+}
+
+.rounded-corners {
+    border-radius: 47px !important;
+}
+
+.d-flex{
+    gap:20px;
 }
