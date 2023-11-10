@@ -26,6 +26,7 @@ body {
   padding-bottom: 20px;
 }
 
+
 .btn-primary{
 --bs-btn-bg:#01261f !important;
   --bs-btn-border-color: #01261f !important;
@@ -37,3 +38,8 @@ body {
   --bs-nav-link-color: white;
   --bs-navbar-active-color:white;
 }
+
+.login-signup-link {
+  font-size: 0.8rem;
+}
+
