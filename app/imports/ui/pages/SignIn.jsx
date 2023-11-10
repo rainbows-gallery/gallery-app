@@ -14,7 +14,7 @@ const SignIn = () => {
   const [error, setError] = useState('');
   const [redirect, setRedirect] = useState(false);
   const schema = new SimpleSchema({
-    email: String,
+    nameOrEmail: String,
     password: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
@@ -22,8 +22,8 @@ const SignIn = () => {
   // Handle Signin submission using Meteor's account mechanism.
   const submit = (doc) => {
     // console.log('submit', doc, redirect);
-    const { email, password } = doc;
-    Meteor.loginWithPassword(email, password, (err) => {
+    const { nameOrEmail, password } = doc;
+    Meteor.loginWithPassword(nameOrEmail, password, (err) => {
       if (err) {
         setError(err.reason);
       } else {
@@ -41,25 +41,28 @@ const SignIn = () => {
   }
   // Otherwise return the Login form.
   return (
-    <Container id="signin-page" className="py-3">
+    <Container id="signin-page" className="py-5">
       <Row className="justify-content-center">
-        <Col xs={5}>
-          <Col className="text-center">
-            <h2>Login to your account</h2>
-          </Col>
+        <Col xs={7}>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
-            <Card>
+            <Card className="border-0 rounded px-4">
               <Card.Body>
-                <TextField id="signin-form-email" name="email" placeholder="E-mail address" />
-                <TextField id="signin-form-password" name="password" placeholder="Password" type="password" />
+                <Card.Title><h2>Login</h2></Card.Title>
+                <hr />
+                <TextField id="signin-form-email" name="nameOrEmail" placeholder="Username/Email address" labelClassName="pt-3 pb-1 h5" inputClassName="rounded-pill border-dark" label="Username or Email Address" />
+                <TextField id="signin-form-password" name="password" placeholder="Password" type="password" labelClassName="pb-1 h5" inputClassName="rounded-pill border-dark" />
                 <ErrorsField />
-                <SubmitField id="signin-form-submit" />
+                <Row className="align-items-center py-3">
+                  <Col>
+                    <SubmitField id="signin-form-submit" value="Submit" inputClassName="rounded-pill btn btn-primary px-3 py-2" />
+                  </Col>
+                  <Col className="text-end login-signup-link">
+                    <Link to="/signup">Don&apos;t have an account?</Link>
+                  </Col>
+                </Row>
               </Card.Body>
             </Card>
           </AutoForm>
-          <Alert variant="light">
-            <Link to="/signup">Click here to Register</Link>
-          </Alert>
           {error === '' ? (
             ''
           ) : (
