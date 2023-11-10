@@ -14,7 +14,7 @@ const SignIn = () => {
   const [error, setError] = useState('');
   const [redirect, setRedirect] = useState(false);
   const schema = new SimpleSchema({
-    email: String,
+    nameOrEmail: String,
     password: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
@@ -22,8 +22,8 @@ const SignIn = () => {
   // Handle Signin submission using Meteor's account mechanism.
   const submit = (doc) => {
     // console.log('submit', doc, redirect);
-    const { email, password } = doc;
-    Meteor.loginWithPassword(email, password, (err) => {
+    const { nameOrEmail, password } = doc;
+    Meteor.loginWithPassword(nameOrEmail, password, (err) => {
       if (err) {
         setError(err.reason);
       } else {
@@ -49,8 +49,7 @@ const SignIn = () => {
               <Card.Body>
                 <Card.Title><h2>Login</h2></Card.Title>
                 <hr />
-                {/* NOTE FOR LATER: Figure out a way for login to accept either username or email to enter an account, for now, name is left as 'email' */}
-                <TextField id="signin-form-email" name="email" placeholder="Username/Email address" labelClassName="pt-3 pb-1 h5" inputClassName="rounded-pill border-dark" label="Username or Email Address" />
+                <TextField id="signin-form-email" name="nameOrEmail" placeholder="Username/Email address" labelClassName="pt-3 pb-1 h5" inputClassName="rounded-pill border-dark" label="Username or Email Address" />
                 <TextField id="signin-form-password" name="password" placeholder="Password" type="password" labelClassName="pb-1 h5" inputClassName="rounded-pill border-dark" />
                 <ErrorsField />
                 <Row className="align-items-center py-3">
