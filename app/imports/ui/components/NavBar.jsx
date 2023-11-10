@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Image, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
 import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 
 const NavBar = () => {
@@ -15,8 +15,9 @@ const NavBar = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand as={NavLink} to="/">
-          <h2>meteor-application-template-react</h2>
+        <Image src="/images/white-rainbows-gallery-logo.png" width="150px" />
+        <Navbar.Brand as={NavLink} to="/" className="p-3">
+          <h2>Rainbow Gallery</h2>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -31,18 +32,20 @@ const NavBar = () => {
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? (
-              <NavDropdown id="login-dropdown" title="Login">
-                <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/signin">
-                  <PersonFill />
-                  Sign
-                  in
-                </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-sign-up" as={NavLink} to="/signup">
-                  <PersonPlusFill />
-                  Sign
-                  up
-                </NavDropdown.Item>
-              </NavDropdown>
+              <Button>
+                <NavDropdown id="login-dropdown" title="Get Started" className="whiteText">
+                  <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/signin">
+                    <PersonFill />
+                    Sign
+                    in
+                  </NavDropdown.Item>
+                  <NavDropdown.Item id="login-dropdown-sign-up" as={NavLink} to="/signup">
+                    <PersonPlusFill />
+                    Sign
+                    up
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Button>
             ) : (
               <NavDropdown id="navbar-current-user" title={currentUser}>
                 <NavDropdown.Item id="navbar-sign-out" as={NavLink} to="/signout">
