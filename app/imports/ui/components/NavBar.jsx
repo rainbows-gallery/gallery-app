@@ -15,7 +15,7 @@ const NavBar = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Image src="/images/gallery-logo.png" width="75px" />
+        <Image src="/images/white-rainbows-gallery-logo.png" width="150px" />
         <Navbar.Brand as={NavLink} to="/" className="p-3">
           <h2>Rainbow Gallery</h2>
         </Navbar.Brand>
@@ -33,7 +33,7 @@ const NavBar = () => {
           <Nav className="justify-content-end">
             {currentUser === '' ? (
               <Button>
-                <NavDropdown id="login-dropdown" title="Get Started">
+                <NavDropdown id="login-dropdown" title="Get Started" className="whiteText">
                   <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/signin">
                     <PersonFill />
                     Sign

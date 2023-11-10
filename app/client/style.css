@@ -4,13 +4,13 @@
 /* Set up some CSS variables to theme the application. */
 body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
-  background: url('app/public/images/background-image.png') no-repeat center center fixed;
+  background: url('images/background-image.png') no-repeat center center fixed;
   background-size: cover;
 }
 
 :root {
-  --matr-navbar-bg: #A6A6A6;
-  --matr-navbar-bg-rgb: 166, 166, 166;
+  --matr-navbar-bg: white;
+  --matr-navbar-bg-rgb: 255, 255, 255;
 }
 
 /* Set the alert background on the signin and signup pages. */
@@ -27,5 +27,13 @@ body {
 }
 
 .btn-primary{
---bs-btn-bg:#537332;
+--bs-btn-bg:#01261f !important;
+  --bs-btn-border-color: #01261f !important;
+  --bs-btn-hover-bg: #01261f !important;
+}
+
+.whiteText{
+  color:white;
+  --bs-nav-link-color: white;
+  --bs-navbar-active-color:white;
 }
