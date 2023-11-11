@@ -1,17 +1,21 @@
 import React from 'react';
-import { Container, Row, Col, Form, FormGroup, FormControl, Button} from 'react-bootstrap';
+import { Container, Row, Col, Form, FormGroup, FormControl, Button, Image} from 'react-bootstrap';
 import { ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 
 const About = () => (
   <Container id="about" fluid className="py-3">
+    <Row className="d-flex justify-content-center">
+    <Image src="/images/about_picture.png" style={{width:'70%',height:'auto'}}/>
+    </Row>
+    <Container style={{ backgroundColor: 'white', padding: '10px',width:'70%'}} className="rounded">
     <Row className="align-middle text-center">
         <h1>About</h1>
     </Row>
     <Row className="py-4 d-flex justify-content-center">
-      <p style={{maxWidth: '60%'}}>
+      <p style={{maxWidth: '90%'}}>
         The Rainbow Gallery is a community networking service designed to help artists share their work with their peers. Our mission is to help connect University of Hawaii at Manoa (UH Manoa) undergraduate student artists who share the same passion for art. Here we provide a platform for students to upload photos of their original artwork to share with the UH community. Students are also able to interact with each other via liking and commenting on posts. We strive to keep Rainbow Gallery a positive environment and encourage students to help us in doing so.
       </p>
-      <p style={{maxWidth: '60%'}}>
+      <p style={{maxWidth: '90%'}}>
         This service was created by UH Manoa ICS undergraduate students as a final project for ICS 314.
       </p>
     </Row>
@@ -48,6 +52,7 @@ const About = () => (
       </Col>
       <Col></Col>
     </Row>
+      </Container>
   </Container>
 )
 

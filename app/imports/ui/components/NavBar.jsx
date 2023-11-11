@@ -31,6 +31,7 @@ const NavBar = () => {
             ) : ''}
           </Nav>
           <Nav className="justify-content-end">
+            <Nav.Link id="about" as={NavLink} to="/about" key="about">About</Nav.Link>
             {currentUser === '' ? (
               <Button>
                 <NavDropdown id="login-dropdown" title="Get Started" className="whiteText">
