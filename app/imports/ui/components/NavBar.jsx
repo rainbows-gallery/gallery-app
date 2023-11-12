@@ -4,7 +4,6 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Link, NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
-import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 
 const NavBar = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -21,7 +20,7 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
-            <input type="text" placeholder="Search" className="p-4 border border-secondary searchText rounded-corners" />
+            <input type="text" placeholder="Search" className="p-2 border border-secondary searchText rounded-corners" />
             {currentUser ? ([
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Add Stuff</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Stuff</Nav.Link>,
@@ -31,8 +30,11 @@ const NavBar = () => {
             ) : ''}
           </Nav>
           <Nav className="justify-content-end d-flex">
-            <Link to="/signin" className="p-2">Sign In</Link>
-            <Link to="/signup"><Button variant="primary" className="rounded-corners">Sign Up</Button></Link>
+            {!currentUser ? ([
+              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/about" key="about">About</Nav.Link>,
+              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/signin" key="signIn">Sign In</Nav.Link>,
+              <Link to="/signup"><Button variant="primary" className="rounded-corners">Sign Up</Button></Link>,
+            ]) : ''}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -15,6 +15,7 @@ const SignUp = ({ location }) => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
 
   const schema = new SimpleSchema({
+    username: String,
     email: String,
     password: String,
   });
@@ -22,8 +23,8 @@ const SignUp = ({ location }) => {
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password } = doc;
-    Accounts.createUser({ email, username: email, password }, (err) => {
+    const { username, email, password } = doc;
+    Accounts.createUser({ username, email, password }, (err) => {
       if (err) {
         setError(err.reason);
       } else {
@@ -40,27 +41,29 @@ const SignUp = ({ location }) => {
     return <Navigate to={from} />;
   }
   return (
-    <Container id="signup-page" className="py-3">
+    <Container id="signup-page" className="py-5">
       <Row className="justify-content-center">
-        <Col xs={5}>
-          <Col className="text-center">
-            <h2>Register your account</h2>
-          </Col>
+        <Col xs={7}>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
-            <Card>
+            <Card className="border-0 rounded px-4">
               <Card.Body>
-                <TextField name="email" placeholder="E-mail address" />
-                <TextField name="password" placeholder="Password" type="password" />
+                <Card.Title><h2>Sign Up</h2></Card.Title>
+                <hr />
+                <TextField name="username" placeholder="Username" labelClassName="pt-3 pb-1 h5" inputClassName="rounded-pill border-dark" />
+                <TextField name="email" placeholder="Email address" labelClassName="pb-1 h5" inputClassName="rounded-pill border-dark" />
+                <TextField name="password" placeholder="Password" type="password" labelClassName="pb-1 h5" inputClassName="rounded-pill border-dark" />
                 <ErrorsField />
-                <SubmitField />
+                <Row className="align-items-center py-3">
+                  <Col>
+                    <SubmitField value="Submit" inputClassName="rounded-pill btn btn-primary px-3 py-2" />
+                  </Col>
+                  <Col className="text-end login-signup-link">
+                    <Link to="/signin">Already have an account?</Link>
+                  </Col>
+                </Row>
               </Card.Body>
             </Card>
           </AutoForm>
-          <Alert variant="light">
-            Already have an account? Login
-            {' '}
-            <Link to="/signin">here</Link>
-          </Alert>
           {error === '' ? (
             ''
           ) : (

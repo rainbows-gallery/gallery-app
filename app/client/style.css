@@ -17,6 +17,14 @@
  */
 body {
   --bs-light-rgb: #ffffff;
+  --bs-light-rgb: var(--matr-navbar-bg-rgb);
+  background: url('images/background-image.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+:root {
+  --matr-navbar-bg: white;
+  --matr-navbar-bg-rgb: 255, 255, 255;
 }
 
 /* Set the alert background on the signin and signup pages. */
@@ -33,7 +41,7 @@ body {
 }
 
 .searchText {
-    width: 528px;
+    width: 628px !important;
     height: 48px;
 }
 
@@ -43,4 +51,20 @@ body {
 
 .d-flex{
     gap:20px;
+}
+
+.btn-primary{
+--bs-btn-bg:#01261f !important;
+  --bs-btn-border-color: #01261f !important;
+  --bs-btn-hover-bg: #01261f !important;
+}
+
+.whiteText{
+  color:white;
+  --bs-nav-link-color: white;
+  --bs-navbar-active-color:white;
+}
+
+.login-signup-link {
+  font-size: 0.8rem;
 }
