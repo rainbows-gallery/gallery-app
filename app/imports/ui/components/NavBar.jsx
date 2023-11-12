@@ -13,7 +13,7 @@ const NavBar = () => {
 
   return (
     <Navbar bg="light" expand="lg">
-      <Container fluid className={'m-2'}>
+      <Container fluid className="m-2">
         <Navbar.Brand as={NavLink} to="/">
           <img src="/images/Logo-navbar.svg" alt="rainbow gallery logo" width={146} />
         </Navbar.Brand>
@@ -31,10 +31,14 @@ const NavBar = () => {
           </Nav>
           <Nav className="justify-content-end d-flex">
             {!currentUser ? ([
+              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="about">Home</Nav.Link>,
               <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/about" key="about">About</Nav.Link>,
               <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/signin" key="signIn">Sign In</Nav.Link>,
               <Link to="/signup"><Button variant="primary" className="rounded-corners">Sign Up</Button></Link>,
-            ]) : ''}
+            ]) : [
+              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="about">Feed</Nav.Link>,
+              <Link to="/"><Button variant="primary" onClick={() => Meteor.logout()} className="rounded-corners">Sign Out</Button></Link>,
+            ]}
           </Nav>
         </Navbar.Collapse>
       </Container>
