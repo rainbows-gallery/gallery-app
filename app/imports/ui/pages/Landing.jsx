@@ -32,7 +32,7 @@ const Landing = () => {
       <ClickableImage
         width="100%"
         height="500px"
-        href="/photo-interact"
+        href="/"
         src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
         alt="Boat on Calm Water"
         userName="JohnNarrow"
