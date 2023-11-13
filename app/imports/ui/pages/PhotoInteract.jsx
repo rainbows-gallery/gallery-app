@@ -30,8 +30,8 @@ const PhotoInteract = () => {
             </div>
           </div>
           <div className="d-flex align-items-center">
-            <span><StarFill size={30}/></span>
-            <span><ShareFill size={30}/></span>
+            <span><StarFill size={30} /></span>
+            <span><ShareFill size={30} /></span>
           </div>
         </Card.Body>
         <ListGroup>
