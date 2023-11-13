@@ -45,10 +45,10 @@ const PhotoInteract = () => {
         </Card.Body>
         <ListGroup>
           {comments.map((comment, index) => (
-            <ListGroup.Item key={index}>{comment}</ListGroup.Item>
+            <ListGroup.Item key={index} className="mb-1">{comment}</ListGroup.Item>
           ))}
           <Form>
-            <Form.Group controlId="formComment">
+            <Form.Group controlId="formComment" className="mb-1">
               <Form.Control
                 type="text"
                 placeholder="Type your comment..."
