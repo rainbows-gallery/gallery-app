@@ -3,7 +3,16 @@ import { Card, Container, Form, Button, ListGroup, Image } from 'react-bootstrap
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
 
 const PhotoInteract = () => {
-  const [newComment, setNewComment] = useState([]);
+  const [newComment, setNewComment] = useState('');
+  const [comments, setComments] = useState(['Great photo!']);
+
+  // Function to handle adding a new comment
+  const handleAddComment = () => {
+    if (newComment.trim() !== '') {
+      setComments([...comments, newComment]);
+      setNewComment('');
+    }
+  };
 
   return (
     <Container id="photo-interact" className="py-3 bg-white rounded">
@@ -35,7 +44,7 @@ const PhotoInteract = () => {
           </div>
         </Card.Body>
         <ListGroup>
-          {newComment.map((comment, index) => (
+          {comments.map((comment, index) => (
             <ListGroup.Item key={index}>{comment}</ListGroup.Item>
           ))}
           <Form>
@@ -47,7 +56,7 @@ const PhotoInteract = () => {
                 onChange={(e) => setNewComment(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary">
+            <Button variant="primary" onClick={handleAddComment}>
               Comment
             </Button>
           </Form>
