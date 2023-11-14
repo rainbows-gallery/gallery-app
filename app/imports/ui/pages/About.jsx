@@ -61,7 +61,7 @@ const About = () => (
       <Row className="py-4 d-flex">
         <Col md={2} />
         <Col xs={4}>
-          <h2>Contact us</h2>
+          <h2>Contact Us</h2>
           <p>
             We are always looking to improve the functionality of our service for a better user experience. Any feedback is encouraged and highly appreciated.
           </p>
