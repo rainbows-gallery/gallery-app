@@ -1,6 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Form, FormGroup, FormControl, Button, Image } from 'react-bootstrap';
-import ContactButton from '../components/ContactButton';
+import { Container, Row, Image } from 'react-bootstrap';
 
 const About = () => (
   <Container id="about" fluid className="py-3">
@@ -58,39 +57,6 @@ const About = () => (
           </p>
         </Row>
       </Container>
-      <Row className="py-4 d-flex">
-        <Col md={2} />
-        <Col xs={4}>
-          <h2>Contact Us</h2>
-          <p>
-            We are always looking to improve the functionality of our service for a better user experience. Any feedback is encouraged and highly appreciated.
-          </p>
-        </Col>
-        <Col xs={4}>
-          <Form>
-            <FormGroup className="py-1">
-              <FormControl
-                type="text"
-                placeholder="Name"
-              />
-            </FormGroup>
-            <FormGroup className="py-1">
-              <FormControl
-                type="text"
-                placeholder="Email"
-              />
-            </FormGroup>
-            <FormGroup className="py-1">
-              <FormControl
-                type="text"
-                placeholder="Comments"
-              />
-            </FormGroup>
-            <ContactButton />
-          </Form>
-        </Col>
-        <Col />
-      </Row>
     </Container>
   </Container>
 );
