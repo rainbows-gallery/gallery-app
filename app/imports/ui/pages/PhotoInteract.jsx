@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
-import { Card, Container, Form, Button, ListGroup, Image } from 'react-bootstrap';
+import React from 'react';
+import { Card, Container, Image, ListGroup } from 'react-bootstrap';
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
+import { useTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router';
 import AddComment from '../components/AddComment';
 import { Comments } from '../../api/comment/Comments';
-import { useTracker } from 'meteor/react-meteor-data';
 import { Posts } from '../../api/Posts/Posts';
 
 const PhotoInteract = () => {
+  const { _id } = useParams();
 
-  const { ready, posts, comments } = useTracker(() => {
+  const { ready, post, comments } = useTracker(() => {
+    const subscription = Meteor.subscribe('posts'); // Update with your actual publication name
+    const subscription2 = Meteor.subscribe('comments'); // Update with your actual publication name
 
-    const subscription = Meteor.subscribe(Posts.userPublicationName);
-    const subscription2 = Meteor.subscribe(Comments.userPublicationName);
-    // Determine if the subscription is ready
     const rdy = subscription.ready() && subscription2.ready();
-    // Get the Stuff documents
-    const postsItems = Posts.collection.find({}).fetch();
-    const commentItems = Comments.collection.find({}).fetch();
+
+    const postItem = Posts.collection.findOne({ _id });
+    const commentItems = Comments.collection.find({ postId: _id }).fetch();
+
     return {
       ready: rdy,
-      posts: postsItems,
+      post: postItem,
       comments: commentItems,
     };
   }, []);
-  let fRef = null;
-  return (
+  useEffect(() => {
+    console.log(post)
+  }, [post]);
+
+  return ready ? (
     <Container id="photo-interact" className="py-3 bg-white rounded">
       <Card>
-        <Card.Img
+        <Image
           className="mx-auto mt-3"
           variant="top"
-          src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-          alt="Boat on Calm Water"
+          src={post.imageID}
           style={{ maxWidth: '80%' }}
         />
         <Card.Body className="d-flex align-items-center justify-content-between">
@@ -45,8 +50,8 @@ const PhotoInteract = () => {
               className="rounded-circle me-3"
             />
             <div>
-              <Card.Title>@JohnNarrow</Card.Title>
-              <Card.Text>Boat on calm water.</Card.Text>
+              <Card.Title>{post.owner}</Card.Title>
+              <Card.Text>{post.description}</Card.Text>
             </div>
           </div>
           <div className="d-flex align-items-center">
@@ -57,10 +62,29 @@ const PhotoInteract = () => {
         <ListGroup variant="flush">
           {comments.map((comment, index) => <Comment key={index} comment={comment} />)}
         </ListGroup>
-        {/*<AddComment owner={post?.owner} userId={post?._id} />*/}
+        <AddComment owner={post.owner} postId={post._id} />
       </Card>
     </Container>
-  );
+  ) : <LoadingSpinner />;
+};
+
+PhotoInteract.propTypes = {
+  post: PropTypes.shape({
+    description: PropTypes.string,
+    owner: PropTypes.string,
+    likes: PropTypes.number,
+    uploadDate: PropTypes.instanceOf(Date),
+    imageId: PropTypes.string,
+    _id: PropTypes.string,
+  }),
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      comment: PropTypes.string,
+      postId: PropTypes.string,
+      createdAt: PropTypes.instanceOf(Date),
+      owner: PropTypes.string,
+    })
+  ),
 };
 
 export default PhotoInteract;
