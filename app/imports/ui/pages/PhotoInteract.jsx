@@ -2,22 +2,29 @@ import React, { useState } from 'react';
 import { Card, Container, Form, Button, ListGroup, Image } from 'react-bootstrap';
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
+import AddComment from '../components/AddComment';
+import { Comments } from '../../api/comment/Comments';
+import { useTracker } from 'meteor/react-meteor-data';
+import { Posts } from '../../api/Posts/Posts';
 
 const PhotoInteract = () => {
 
-  const { ready, notes } = useTracker(() => {
+  const { ready, posts, comments } = useTracker(() => {
 
-    const subscription = Meteor.subscribe(Comments.userPublicationName);
-
-    const rdy = subscription.ready();
-
+    const subscription = Meteor.subscribe(Posts.userPublicationName);
+    const subscription2 = Meteor.subscribe(Comments.userPublicationName);
+    // Determine if the subscription is ready
+    const rdy = subscription.ready() && subscription2.ready();
+    // Get the Stuff documents
+    const postsItems = Posts.collection.find({}).fetch();
     const commentItems = Comments.collection.find({}).fetch();
     return {
-      comments: commentItems,
       ready: rdy,
+      posts: postsItems,
+      comments: commentItems,
     };
   }, []);
-
+  let fRef = null;
   return (
     <Container id="photo-interact" className="py-3 bg-white rounded">
       <Card>
@@ -47,7 +54,10 @@ const PhotoInteract = () => {
             <span><ShareFill size={30} /></span>
           </div>
         </Card.Body>
-        <AddComment owner={contact.owner} contactId={contact._id} />
+        <ListGroup variant="flush">
+          {comments.map((comment, index) => <Comment key={index} comment={comment} />)}
+        </ListGroup>
+        {/*<AddComment owner={post?.owner} userId={post?._id} />*/}
       </Card>
     </Container>
   );

@@ -4,7 +4,7 @@ import { ListGroup } from 'react-bootstrap';
 
 const Comment = ({ comment }) => (
   <ListGroup.Item>
-    <p className="fw-lighter">{note.createdAt.toLocaleDateString('en-US')}</p>
+    <p className="fw-lighter">{comment.createdAt.toLocaleDateString('en-US')}</p>
     <p>{comment.comment}</p>
   </ListGroup.Item>
 );

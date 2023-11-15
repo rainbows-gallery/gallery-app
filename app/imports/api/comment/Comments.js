@@ -27,6 +27,6 @@ class CommentsCollection {
 
 /**
  * The singleton instance of the NotesCollection.
- * @type {NotesCollection}
+ * @type {CommentsCollection}
  */
 export const Comments = new CommentsCollection();
