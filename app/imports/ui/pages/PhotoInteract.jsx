@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { Card, Container, Form, Button, ListGroup, Image } from 'react-bootstrap';
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
+import { Meteor } from 'meteor/meteor';
 
 const PhotoInteract = () => {
-  const [newComment, setNewComment] = useState('');
-  const [comments, setComments] = useState(['Great photo!']);
 
-  // Function to handle adding a new comment
-  const handleAddComment = () => {
-    if (newComment.trim() !== '') {
-      setComments([...comments, newComment]);
-      setNewComment('');
-    }
-  };
+  const { ready, notes } = useTracker(() => {
+
+    const subscription = Meteor.subscribe(Comments.userPublicationName);
+
+    const rdy = subscription.ready();
+
+    const commentItems = Comments.collection.find({}).fetch();
+    return {
+      comments: commentItems,
+      ready: rdy,
+    };
+  }, []);
 
   return (
     <Container id="photo-interact" className="py-3 bg-white rounded">
@@ -43,24 +47,7 @@ const PhotoInteract = () => {
             <span><ShareFill size={30} /></span>
           </div>
         </Card.Body>
-        <ListGroup>
-          {comments.map((comment, index) => (
-            <ListGroup.Item key={index} className="mb-1">{comment}</ListGroup.Item>
-          ))}
-          <Form>
-            <Form.Group controlId="formComment" className="mb-1">
-              <Form.Control
-                type="text"
-                placeholder="Type your comment..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={handleAddComment}>
-              Comment
-            </Button>
-          </Form>
-        </ListGroup>
+        <AddComment owner={contact.owner} contactId={contact._id} />
       </Card>
     </Container>
   );
