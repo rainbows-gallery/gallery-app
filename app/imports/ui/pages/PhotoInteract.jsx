@@ -34,7 +34,7 @@ const PhotoInteract = () => {
               className="rounded-circle me-3"
             />
             <div>
-              <Card.Title>@JohnNarrow</Card.Title>
+              <Card.Title></Card.Title>
               <Card.Text>Boat on calm water.</Card.Text>
             </div>
           </div>

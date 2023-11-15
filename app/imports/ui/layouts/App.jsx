@@ -24,7 +24,7 @@ const App = () => (
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/about" element={<About />} />
-        <Route path="/photo-interact" element={<PhotoInteract />} />
+        <Route path="/photo-interact/{asdf}" element={<PhotoInteract />} />
         <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
