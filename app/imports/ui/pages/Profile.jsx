@@ -1,13 +1,14 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import LoadingSpinner from '../components/LoadingSpinner';
-import Profiles from '../../api/Profiles/Profiles';
+import { Accounts } from 'meteor/accounts-base';
 import { Posts } from '../../api/Posts/Posts';
+import LoadingSpinner from '../components/LoadingSpinner';
+import Post from '../components/Post';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-const ShowProfile = () => {
+const Profile = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, posts } = useTracker(() => {
     // Note that this subscription will get cleaned up
@@ -25,33 +26,31 @@ const ShowProfile = () => {
   }, []);
   return (ready ? (
     <Container className="py-3">
-      <Row>
-        <Col className="text-center">
-          <h2>Profile</h2>
-        </Col>
+      <Row className="text-center">
+        <p>Profile</p>
       </Row>
-      {/* Here get profile Image */}
+      {/* Profile Photo Associated with Account */}
       <Row>
-        <h2>Profile Image Here</h2>
+        <Image className="rounded-circle" src={Accounts.image} alt={Accounts.username} width={40} />
       </Row>
+      {/* User name associated with account */}
       <Row>
-        <h2>Username Here</h2>
+        <p>{Accounts.email}</p>
       </Row>
-      <Row>
-        <h2>Posts </h2>
+      {/* Render the posts owned by this user */}
+      <Row className="text-center">
+        <p>Posts</p>
       </Row>
-      {/* Here you will make contacts actually posts */}
-      {/* <Row xs={1} md={2} lg={3} className="g-4"> */}
-      {/*  {posts.map((posts) => ( */}
-      {/*    <Col key={post._id}><Post */}
-      {/*      contact={contact} */}
-      {/*      notes={notes.filter(note => (note.contactId === contact._id))} */}
-      {/*    /> */}
-      {/*    </Col> */}
-      {/*  ))} */}
-      {/* </Row> */}
+      <Row xs={1} md={2} lg={3} className="g-4">
+        {posts.map((post) => (
+          <Col key={post._id}><Post
+            post={post}
+          />
+          </Col>
+        ))}
+      </Row>
     </Container>
   ) : <LoadingSpinner />);
 };
 
-export default ShowProfile;
+export default Profile;

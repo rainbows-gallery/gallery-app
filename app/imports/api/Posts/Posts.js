@@ -8,7 +8,7 @@ import SimpleSchema from 'simpl-schema';
 class PostsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'StuffsCollection';
+    this.name = 'PostsCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
@@ -50,6 +50,6 @@ class PostsCollection {
 
 /**
  * The singleton instance of the StuffsCollection.
- * @type {StuffsCollection}
+ * @type {PostsCollection}
  */
 export const Posts = new PostsCollection();
