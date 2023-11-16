@@ -12,6 +12,7 @@ class PostsCollection {
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
+
     this.schema = new SimpleSchema({
       description: String,
       owner: String,
