@@ -1,26 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 // import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 
 const SearchBar = () => {
   const [value, setValue] = useState('');
   const submitBtn = useRef(null);
+  const navigate = useNavigate();
   let isFocused = false;
 
+  // Handles the form submission, navigates to search results page and passes its input to it
   const handleSubmit = function (e) {
     e.preventDefault();
     e.stopPropagation();
-    console.log(value);
-  };
-  const handleFocus = function () {
-    isFocused = true;
+    navigate('/search', { state: value });
+    setValue('');
   };
 
-  const handleBlur = function () {
-    isFocused = false;
-  };
-
+  // Handles key presses and activates the hidden submission button on Enter press
   const handleKeyDown = function (e) {
     if (isFocused && e.key === 'Enter') {
       submitBtn.active = true;
@@ -29,8 +26,8 @@ const SearchBar = () => {
 
   return (
     <Form
-      onFocus={() => handleFocus()}
-      onBlur={() => handleBlur()}
+      onFocus={() => { isFocused = true; }}
+      onBlur={() => { isFocused = false; }}
       onSubmit={(e) => handleSubmit(e)}
     >
       <Form.Control
