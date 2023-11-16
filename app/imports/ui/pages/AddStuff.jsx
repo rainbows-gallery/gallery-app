@@ -63,6 +63,10 @@ const AddStuff = () => {
     }
   };
 
+  useEffect(() => {
+    
+  }, []);
+
   let fRef = null;
   return (
     <Container className="py-3">

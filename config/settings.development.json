@@ -4,10 +4,28 @@
     { "email": "john@foo.com", "password": "changeme" }
   ],
 
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  "defaultPosts": [
+    {
+      "description": "test",
+      "owner": "admin@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+    },
+    {
+      "description": "test",
+      "owner": "admin@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+    },
+    {
+      "description": "test",
+      "owner": "admin@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+    }
   ]
+
 }
