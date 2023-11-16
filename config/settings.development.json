@@ -2,5 +2,36 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" }
-  ]
+  ],
+
+  "defaultPosts": [
+    {
+      "description": "test",
+      "owner": "admin@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "deletedDate": null,
+      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+    },
+    {
+      "description": "test",
+      "owner": "admin@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "deletedDate": null,
+      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+    },
+    {
+      "description": "test",
+      "owner": "admin@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "deletedDate": null,
+      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+    }
+  ],
+  "CLOUDINARY_CLOUD_NAME": "dv9xwi8q2",
+  "CLOUDINARY_API_KEY": "866726865363988",
+  "CLOUDINARY_API_SECRET": "ArYqwSrLI7JUebXlGHY415xeDls"
+
 }

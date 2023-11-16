@@ -18,8 +18,12 @@ class PostsCollection {
       owner: String,
       likes: Number,
       uploadDate: Date,
-      image: String,
-      deletedDate: Date,
+      imageId: String,
+      deletedDate: {
+        type: Date,
+        optional: true,
+        defaultValue: null,
+      },
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
