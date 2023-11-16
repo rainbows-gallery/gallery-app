@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
@@ -6,62 +6,42 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Posts } from '../../api/Posts/Posts';
+import { AdvancedImage } from "@cloudinary/react";
+import UploadField from '../components/uploadField';
 
 // Create a schema to specify the structure of the data to appear in the form.
+
 const formSchema = new SimpleSchema({
   description: String,
-  image: { type: String, optional: true }, // Added for handling image URL
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the AddStuff page for adding a document. */
-const AddStuff = () => {
-  const [imageFile, setImageFile] = useState(null);
-
-  // Handle image file change
-  const handleImageChange = (e) => {
-    setImageFile(e.target.files[0]);
-  };
+const AddPosts = () => {
+  const [image, setImage] = useState('')
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { description } = data;
     const owner = Meteor.user().username;
-
-    if (imageFile) {
-      // Handle the image file upload
-      const upload = Posts.images.insert({
-        file: imageFile,
-        streams: 'dynamic',
-        chunkSize: 'dynamic',
-      }, false);
-
-      upload.on('end', (error, fileObj) => {
+    Posts.collection.insert(
+      { description, owner, image,  },
+      (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          // Now insert the post data, including the imageId
-          Posts.collection.insert(
-            { description, imageId: fileObj._id, owner },
-            (error) => {
-              if (error) {
-                swal('Error', error.message, 'error');
-              } else {
-                swal('Success', 'Post added successfully with image', 'success');
-                formRef.reset();
-                setImageFile(null);
-              }
-            },
-          );
+          swal('Success', 'Item added successfully', 'success');
+          formRef.reset();
         }
-      });
+      },
+    );
 
-      upload.start();
-    } else {
-      swal('Error', 'No image file selected', 'error');
-    }
   };
+
+  useEffect(() => {
+    console.log(image)
+  }, [image])
 
   let fRef = null;
   return (
@@ -73,7 +53,7 @@ const AddStuff = () => {
             <Card>
               <Card.Body>
                 <TextField name="description" />
-                <input type="file" onChange={handleImageChange} />
+                <UploadField onUpload={(x) => setImage(x)} />
                 <ErrorsField />
                 <SubmitField value="Submit" />
               </Card.Body>
@@ -85,4 +65,4 @@ const AddStuff = () => {
   );
 };
 
-export default AddStuff;
+export default AddPosts;
