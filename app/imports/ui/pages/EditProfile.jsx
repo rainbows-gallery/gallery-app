@@ -1,4 +1,4 @@
-//*** Is currently just EditContact Page copy pasted
+//* ** Is currently just EditContact Page copy pasted
 
 import React from 'react';
 import swal from 'sweetalert';

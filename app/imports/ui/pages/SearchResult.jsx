@@ -1,15 +1,10 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Card, Container, Image } from 'react-bootstrap';
+import { useTracker } from 'meteor/react-meteor-data';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
-
-const testData = [
-  { username: 'JamesNarrow' },
-  { username: 'JamesNarrowthe2nd' },
-  { username: 'JamesJamesJames' },
-  { username: 'LebronJames' },
-  { username: 'wowie' },
-];
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const SearchEntry = ({ userProfilePic, alt, userName, email, href, width = 64, height = 64 }) => (
   <Card className="border-0 rounded px-4 my-3 align-content-center">
@@ -31,20 +26,33 @@ const SearchResult = () => {
   const location = useLocation();
   const searchInput = location.state;
 
-  return (
+  const { ready, users } = useTracker(() => {
+    const userSubscriber = Meteor.subscribe('userList');
+    // Determine if the subscription is ready
+    const userReady = userSubscriber.ready();
+    // Get the Users
+    const currentUser = Meteor.users.find({ username: searchInput }).fetch();
+    return {
+      ready: userReady,
+      users: currentUser,
+    };
+  }, []);
+  return (ready ? (
     <Container id="search-results-page">
       <h1 className="text-white fw-bold">Searched for profiles named &quot;{searchInput}&quot;</h1>
-      {testData.map((entry) => (
-        <SearchEntry
-          userProfilePic="https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
-          alt="User Profile Picture"
-          userName={entry.username}
-          email="Email"
-          href="/"
-        />
-      ))}
+      {users.length !== 0 ? (
+        users.map((user) => (
+          <SearchEntry
+            userProfilePic={user.profile.image}
+            alt="User Profile Picture"
+            userName={user.username}
+            email={user.email}
+            href={`/profile/${user._id}`}
+          />
+        ))
+      ) : <h2 className="text-white">No profiles matched your input</h2>}
     </Container>
-  );
+  ) : <LoadingSpinner />);
 };
 
 SearchEntry.propTypes = {

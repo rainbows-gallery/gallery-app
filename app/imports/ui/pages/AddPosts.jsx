@@ -5,8 +5,8 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import Dropzone from 'react-dropzone';
 import { Posts } from '../../api/Posts/Posts';
-import Dropzone from 'react-dropzone'
 import UploadField from '../components/uploadField';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -23,14 +23,12 @@ const AddPosts = () => {
   const [file, setFile] = useState(null);
   const [dropzoneKey, setDropzoneKey] = useState(0);
 
-  const fileToDataURL = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
+  const fileToDataURL = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 
   const handleDrop = (acceptedFiles) => {
     const previewUrl = acceptedFiles[0] && URL.createObjectURL(acceptedFiles[0]);
@@ -50,7 +48,7 @@ const AddPosts = () => {
           console.error('Error uploading:', error);
         } else {
           const returnedResponse = JSON.parse(response);
-          console.log(returnedResponse)
+          console.log(returnedResponse);
           Posts.collection.insert(
             { description, owner, likes: 0, uploadDate: new Date(), imageId: returnedResponse.url },
             (error) => {
@@ -67,9 +65,8 @@ const AddPosts = () => {
           );
         }
       });
-    })
+    });
   };
-
 
   let fRef = null;
   return (
@@ -81,10 +78,10 @@ const AddPosts = () => {
             <Card>
               <Card.Body>
                 <Dropzone key={dropzoneKey} onDrop={handleDrop}>
-                  {({getRootProps, getInputProps}) => (
+                  {({ getRootProps, getInputProps }) => (
                     <section>
-                      <div {...getRootProps({className: 'rounded', style: {border: '2px dashed'}})}>
-                        <input {...getInputProps({accept: 'image/*', name: 'FileImage'})} />
+                      <div {...getRootProps({ className: 'rounded', style: { border: '2px dashed' } })}>
+                        <input {...getInputProps({ accept: 'image/*', name: 'FileImage' })} />
                         <p>You may drag and drop your image here or click and select it</p>
                         {imagePreview && <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px' }} />}
                       </div>

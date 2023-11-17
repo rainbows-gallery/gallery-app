@@ -49,6 +49,6 @@ Meteor.publish(null, function () {
   return this.ready();
 });
 
-Meteor.publish('userList', function (){
+Meteor.publish('userList', function () {
   return Meteor.users.find({});
 });

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Card, Container, Image, ListGroup } from 'react-bootstrap';
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
@@ -29,7 +29,7 @@ const PhotoInteract = () => {
     };
   }, []);
   useEffect(() => {
-    console.log(post)
+    console.log(post);
   }, [post]);
 
   return ready ? (
@@ -84,7 +84,7 @@ PhotoInteract.propTypes = {
       postId: PropTypes.string,
       createdAt: PropTypes.instanceOf(Date),
       owner: PropTypes.string,
-    })
+    }),
   ),
 };
 
