@@ -2,7 +2,6 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link, NavLink } from 'react-router-dom';
-import { Roles } from 'meteor/alanning:roles';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 import SearchBar from './SearchBar';
 
@@ -23,13 +22,6 @@ const NavBar = () => {
           {/* Left Side of NavBar, After Image. */}
           <Nav className="me-auto justify-content-start">
             <SearchBar id="search-bar-nav" />
-            {currentUser ? ([
-              <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Add Stuff</Nav.Link>,
-              <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Stuff</Nav.Link>,
-            ]) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>
-            ) : ''}
           </Nav>
           {/* Right side of navbar */}
           <Nav className="justify-content-end d-flex">

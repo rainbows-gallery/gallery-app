@@ -12,7 +12,7 @@ export const createUser = (username, email, password, image, role) => {
     password: password,
     // Add profile attribute (can have names, imge, etc, check link
     profile: {
-      image: image
+      image: image,
     },
   });
   if (role === 'admin') {

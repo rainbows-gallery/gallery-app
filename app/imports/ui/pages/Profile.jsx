@@ -4,7 +4,6 @@ import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Posts } from '../../api/Posts/Posts';
 import LoadingSpinner from '../components/LoadingSpinner';
-import Post from '../components/Post';
 import ClickableImage from '../components/ClickableImage';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -32,9 +31,7 @@ const Profile = () => {
         <p>Profile</p>
       </Row>
       {/* Profile Photo Associated with Account */}
-      <Row>
-        <Image className="rounded-circle" src={user.profile.image} alt={user.username} width={30} />
-      </Row>
+      <Image className="rounded-circle" src={user.profile.image} alt={user.username} width="100px" height="100px" />
       {/* User name associated with account */}
       <Row>
         <p>{user.username}</p>
@@ -44,14 +41,11 @@ const Profile = () => {
         <p>Posts</p>
       </Row>
       <Row xs={1} md={2} lg={3} className="g-4">
-        {posts.map((post) => {
-          console.log(post)
-          return(
-            <Col key={post._id}>
-              <ClickableImage width={'100%'} height={'300px'} userProfile={''} src={post.imageId} userName={user.username} href={`/photo-interact/${post._id}`} alt={'data'}/>
-            </Col>
-          )
-        })}
+        {posts.map((post) => (
+          <Col key={post._id}>
+            <ClickableImage width="100%" height="300px" userProfile={user.profile.image} src={post.imageId} userName={user.username} href={`/photo-interact/${post._id}`} alt="data" />
+          </Col>
+        ))}
       </Row>
     </Container>
   ) : <LoadingSpinner />);
