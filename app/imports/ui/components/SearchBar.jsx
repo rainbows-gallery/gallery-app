@@ -31,7 +31,7 @@ const SearchBar = () => {
       <Form.Control
         name="searchField"
         type="text"
-        placeholder="Search"
+        placeholder="Search for Profiles"
         className="p-2 border border-secondary searchText rounded-corners"
         value={value}
         onChange={(e) => setValue(e.target.value)}
