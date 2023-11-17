@@ -25,8 +25,16 @@ const SignUp = ({ location }) => {
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
     const { username, email, password } = doc;
-    const image = 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp';
-    const user = { username, email, password, image: image };
+    const image = 'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg';
+    const user = {
+      username: username,
+      email: email,
+      password: password,
+      // Add profile attribute (can have names, imge, etc, check link
+      profile: {
+        image: image
+      },
+    };
     Accounts.createUser(user, (err) => {
       if (err) {
         setError(err.reason);
