@@ -27,15 +27,21 @@ const Profile = () => {
   }, []);
   return (ready ? (
     <Container className="py-3">
-      <Row className="text-center">
-        <p>Profile</p>
+      <Row className="whiteText">
+        <h1>Profile</h1>
       </Row>
       {/* Profile Photo Associated with Account */}
+<<<<<<< Updated upstream
       <Row>
         <Image className="rounded-circle" src={user.image} alt={user.username} width={40} />
       </Row>
       {/* User name associated with account */}
       <Row>
+=======
+      <Image className="rounded-circle" src={user.profile.image} alt={user.username} width={150} height={150} />
+      {/* User name associated with account */}
+      <Row className="py-2">
+>>>>>>> Stashed changes
         <p>{user.username}</p>
       </Row>
       {/* Render the posts owned by this user */}
