@@ -1,7 +1,18 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    {
+      "email": "admin@foo.com",
+      "username": "admin@foo.com",
+      "password": "changeme",
+      "image":  "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg",
+      "role": "admin"
+    },
+    {
+      "email": "john@foo.com",
+      "username": "john@foo.com",
+      "password": "changeme",
+      "image":  "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+    }
   ],
 
   "defaultPosts": [
