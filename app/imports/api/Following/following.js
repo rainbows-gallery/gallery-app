@@ -1,5 +1,4 @@
 import { Mongo } from 'meteor/mongo';
-import { FilesCollection } from 'meteor/ostrio:files';
 import SimpleSchema from 'simpl-schema';
 
 /**
@@ -14,7 +13,7 @@ class PostsCollection {
     // Define the structure of each document in the collection.
 
     this.schema = new SimpleSchema({
-      followingUser: String,
+      isFollowingUser: String,
       followerUser: String,
       deletedDate: {
         type: Date,
