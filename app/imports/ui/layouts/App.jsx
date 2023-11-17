@@ -13,6 +13,8 @@ import NotAuthorized from '../pages/NotAuthorized';
 import About from '../pages/About';
 import PhotoInteract from '../pages/PhotoInteract';
 import SearchResult from '../pages/SearchResult';
+import AddPosts from '../pages/AddPosts';
+import Profile from '../pages/Profile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -25,9 +27,11 @@ const App = () => (
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/about" element={<About />} />
-        <Route path="/photo-interact/{asdf}" element={<PhotoInteract />} />
         <Route path="/search" element={<SearchResult />} />
+        <Route path="/photo-interact/:_id" element={<PhotoInteract />} />
         <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+        <Route path="/addPosts" element={<ProtectedRoute><AddPosts /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
