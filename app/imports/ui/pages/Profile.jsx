@@ -33,7 +33,7 @@ const Profile = () => {
       </Row>
       {/* Profile Photo Associated with Account */}
       <Row>
-        <Image className="rounded-circle" src={user.image} alt={user.username} width={40} />
+        <Image className="rounded-circle" src={user.profile.image} alt={user.username} width={30} />
       </Row>
       {/* User name associated with account */}
       <Row>
