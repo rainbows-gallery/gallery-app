@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Container, Image, ListGroup } from 'react-bootstrap';
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
@@ -8,22 +8,22 @@ import { useParams } from 'react-router';
 import AddComment from '../components/AddComment';
 import { Comments } from '../../api/comment/Comments';
 import { Posts } from '../../api/Posts/Posts';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const PhotoInteract = () => {
   const { _id } = useParams();
-
   const { ready, post, comments } = useTracker(() => {
-    const subscription = Meteor.subscribe('posts'); // Update with your actual publication name
-    const subscription2 = Meteor.subscribe('comments'); // Update with your actual publication name
+    const subscription = Meteor.subscribe('posts');
+    const subscription2 = Meteor.subscribe('comments');
 
     const rdy = subscription.ready() && subscription2.ready();
 
     const postItem = Posts.collection.findOne({ _id });
-    const commentItems = Comments.collection.find({ postId: _id }).fetch();
+    const commentItems = Comments.collection.find({ _id }).fetch();
 
     return {
       ready: rdy,
-      post: postItem,
+      post: postItem || {},
       comments: commentItems,
     };
   }, []);
@@ -37,7 +37,7 @@ const PhotoInteract = () => {
         <Image
           className="mx-auto mt-3"
           variant="top"
-          src={post.imageID}
+          src={post?.imageID || 'placeholder-image-url'}
           style={{ maxWidth: '80%' }}
         />
         <Card.Body className="d-flex align-items-center justify-content-between">
@@ -62,29 +62,29 @@ const PhotoInteract = () => {
         <ListGroup variant="flush">
           {comments.map((comment, index) => <Comment key={index} comment={comment} />)}
         </ListGroup>
-        <AddComment owner={post.owner} postId={post._id} />
+        <AddComment owner={post.owner} userId={Meteor.userId()}/>
       </Card>
     </Container>
   ) : <LoadingSpinner />;
 };
 
-PhotoInteract.propTypes = {
-  post: PropTypes.shape({
-    description: PropTypes.string,
-    owner: PropTypes.string,
-    likes: PropTypes.number,
-    uploadDate: PropTypes.instanceOf(Date),
-    imageId: PropTypes.string,
-    _id: PropTypes.string,
-  }),
-  comments: PropTypes.arrayOf(
-    PropTypes.shape({
-      comment: PropTypes.string,
-      postId: PropTypes.string,
-      createdAt: PropTypes.instanceOf(Date),
-      owner: PropTypes.string,
-    })
-  ),
-};
+ PhotoInteract.propTypes = {
+   post: PropTypes.shape({
+     description: PropTypes.string,
+     owner: PropTypes.string,
+     likes: PropTypes.number,
+     uploadDate: PropTypes.instanceOf(Date),
+     imageId: PropTypes.string,
+     _id: PropTypes.string,
+   }).isRequired, // Mark as required
+   comments: PropTypes.arrayOf(
+     PropTypes.shape({
+       comment: PropTypes.string,
+       postId: PropTypes.string,
+       createdAt: PropTypes.instanceOf(Date),
+       owner: PropTypes.string,
+     })
+   ),
+ };
 
 export default PhotoInteract;

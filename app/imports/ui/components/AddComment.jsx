@@ -52,7 +52,7 @@ const AddComment = ({ owner, contactId }) => {
                 <SubmitField value="Submit" />
                 <ErrorsField />
                 <HiddenField name="owner" value={owner} />
-                <HiddenField name="userId" value={contactId} />
+                <HiddenField name="userId" value={userId} />
                 <HiddenField name="createdAt" value={new Date()} />
               </Card.Body>
             </Card>
