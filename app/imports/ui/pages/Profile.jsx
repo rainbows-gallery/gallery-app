@@ -2,7 +2,6 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Accounts } from 'meteor/accounts-base';
 import { Posts } from '../../api/Posts/Posts';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Post from '../components/Post';
@@ -10,7 +9,7 @@ import Post from '../components/Post';
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Profile = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, posts } = useTracker(() => {
+  const { ready, posts, user } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Posts documents.
@@ -19,9 +18,11 @@ const Profile = () => {
     const rdy = subscription.ready();
     // Get the Posts
     const postItems = Posts.collection.find({}).fetch();
+    const currentUser = (Meteor.user() ?? 'undefined');
     return {
       posts: postItems,
       ready: rdy,
+      user: currentUser,
     };
   }, []);
   return (ready ? (
@@ -31,11 +32,11 @@ const Profile = () => {
       </Row>
       {/* Profile Photo Associated with Account */}
       <Row>
-        <Image className="rounded-circle" src={Accounts.image} alt={Accounts.username} width={40} />
+        <Image className="rounded-circle" src={user.image} alt={user.username} width={40} />
       </Row>
       {/* User name associated with account */}
       <Row>
-        <p>{Accounts.email}</p>
+        <p>{user.username}</p>
       </Row>
       {/* Render the posts owned by this user */}
       <Row className="text-center">

@@ -10,7 +10,8 @@ const createUser = (username, email, password, image, role) => {
     username: username,
     email: email,
     password: password,
-    photo: image,
+    // Add profile attribute (can have names, imge, etc, check link
+    image: image,
   });
   if (role === 'admin') {
     Roles.createRole(role, { unlessExists: true });
@@ -22,7 +23,7 @@ const createUser = (username, email, password, image, role) => {
 if (Meteor.users.find().count() === 0) {
   if (Meteor.settings.defaultAccounts) {
     console.log('Creating the default user(s)');
-    Meteor.settings.defaultAccounts.forEach(({ email, password, role }) => createUser(email, password, role));
+    Meteor.settings.defaultAccounts.forEach(({ username, email, password, image, role }) => createUser(username, email, password, image, role));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }
