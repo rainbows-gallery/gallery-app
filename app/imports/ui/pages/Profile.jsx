@@ -22,13 +22,13 @@ const Profile = () => {
     const rdy = subscription.ready();
     const userReady = userSubscriber.ready();
     // Get the Posts
-    const postItems = Posts.collection.find({}).fetch();
-    const currentUser = (Meteor.users.find({ _id }).fetch() ?? 'undefined');
+    const currentUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
+    const postItems = currentUser !== 'undefined' ? Posts.collection.find({ owner: currentUser.username }).fetch() : [];
     console.log(currentUser)
     return {
       posts: postItems,
       ready: rdy && userReady,
-      user: currentUser[0],
+      user: currentUser,
     };
   }, []);
   return (ready ? (
