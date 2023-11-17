@@ -36,7 +36,7 @@ const NavBar = () => {
             ]) : [
               <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="feed">Feed</Nav.Link>,
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/addPosts" key="add">Add Post</Nav.Link>,
-              <Nav.Link id="profile-nav" as={NavLink} to="/profile" key="profile">Profile</Nav.Link>,
+              <Nav.Link id="profile-nav" as={NavLink} to={`/profile/${Meteor.user()._id}`} key="profile">Profile</Nav.Link>,
               <Link to="/" key="signOut">
                 <Button variant="primary" onClick={() => Meteor.logout()} className="rounded-corners">Sign Out</Button>
               </Link>,
