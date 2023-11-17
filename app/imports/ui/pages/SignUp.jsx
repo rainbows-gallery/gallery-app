@@ -29,7 +29,6 @@ const SignUp = ({ location }) => {
       username: username,
       email: email,
       password: password,
-      // Add profile attribute (can have names, imge, etc, check link
       profile: {
         image: image,
       },
