@@ -22,22 +22,23 @@ const NavBar = () => {
           <Nav className="me-auto justify-content-start">
             <input type="text" placeholder="Search" className="p-2 border border-secondary searchText rounded-corners" />
             {currentUser ? ([
-              <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Add Stuff</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Stuff</Nav.Link>,
             ]) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>
-            ) : ''}
           </Nav>
           <Nav className="justify-content-end d-flex">
             {!currentUser ? ([
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="about">Home</Nav.Link>,
+              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="home">Home</Nav.Link>,
               <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/about" key="about">About</Nav.Link>,
               <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/signin" key="signIn">Sign In</Nav.Link>,
-              <Link to="/signup"><Button variant="primary" className="rounded-corners">Sign Up</Button></Link>,
+              <Link to="/signup" key="signup">
+                <Button variant="primary" className="rounded-corners">Sign Up</Button>
+              </Link>,
             ]) : [
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="about">Feed</Nav.Link>,
-              <Link to="/"><Button variant="primary" onClick={() => Meteor.logout()} className="rounded-corners">Sign Out</Button></Link>,
+              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="feed">Feed</Nav.Link>,
+              <Nav.Link id="add-stuff-nav" as={NavLink} to="/addPosts" key="add">Add Post</Nav.Link>,
+              <Link to="/" key="signOut">
+                <Button variant="primary" onClick={() => Meteor.logout()} className="rounded-corners">Sign Out</Button>
+              </Link>,
             ]}
           </Nav>
         </Navbar.Collapse>
