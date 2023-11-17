@@ -18,13 +18,16 @@ const SignUp = ({ location }) => {
     username: String,
     email: String,
     password: String,
+    //    image: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
     const { username, email, password } = doc;
-    Accounts.createUser({ username, email, password }, (err) => {
+    const image = 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp';
+    const user = { username, email, password, image: image };
+    Accounts.createUser(user, (err) => {
       if (err) {
         setError(err.reason);
       } else {
