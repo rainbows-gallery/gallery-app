@@ -2,27 +2,31 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import { useParams } from 'react-router';
 import { Posts } from '../../api/Posts/Posts';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ClickableImage from '../components/ClickableImage';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Profile = () => {
+  const { _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, posts, user } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Posts documents.
     const subscription = Meteor.subscribe(Posts.userPublicationName);
+    const userSubscriber = Meteor.subscribe('userList');
     // Determine if the subscription is ready
     const rdy = subscription.ready();
+    const userReady = userSubscriber.ready();
     // Get the Posts
     const postItems = Posts.collection.find({}).fetch();
-    const currentUser = (Meteor.user() ?? 'undefined');
+    const currentUser = (Meteor.users.find({ _id }).fetch() ?? 'undefined');
     return {
       posts: postItems,
-      ready: rdy,
-      user: currentUser,
+      ready: rdy && userReady,
+      user: currentUser[0],
     };
   }, []);
   return (ready ? (
