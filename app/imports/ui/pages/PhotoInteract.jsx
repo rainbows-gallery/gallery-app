@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import { Card, Container, Image, ListGroup } from 'react-bootstrap';
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
@@ -6,6 +6,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 import AddComment from '../components/AddComment';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Comments } from '../../api/comment/Comments';
 import { Posts } from '../../api/Posts/Posts';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -13,8 +14,8 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const PhotoInteract = () => {
   const { _id } = useParams();
   const { ready, post, comments } = useTracker(() => {
-    const subscription = Meteor.subscribe('posts');
-    const subscription2 = Meteor.subscribe('comments');
+    const subscription = Meteor.subscribe(Posts.everyOnePublicationName); // Update with your actual publication name
+    const subscription2 = Meteor.subscribe(Comments.userPublicationName); // Update with your actual publication name
 
     const rdy = subscription.ready() && subscription2.ready();
 
@@ -37,7 +38,8 @@ const PhotoInteract = () => {
         <Image
           className="mx-auto mt-3"
           variant="top"
-          src={post?.imageID || 'placeholder-image-url'}
+
+          src={post.imageId}
           style={{ maxWidth: '80%' }}
         />
         <Card.Body className="d-flex align-items-center justify-content-between">

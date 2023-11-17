@@ -15,8 +15,7 @@ Meteor.publish(Posts.userPublicationName, function () {
 
 Meteor.publish(Comments.userPublicationName, function () {
   if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Comments.collection.find({ owner: username });
+    return Comments.collection.find({});
   }
   return this.ready();
 });
