@@ -2,6 +2,7 @@
   "name": "gallery-app",
   "version": "1.0.0",
   "dependencies": {
+    "cloudinary": "^1.41.0",
     "react-bootstrap": "^2.9.1"
   }
 }

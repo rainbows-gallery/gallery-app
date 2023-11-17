@@ -1,27 +1,44 @@
-import React, { useState } from 'react';
-import { Card, Container, Form, Button, ListGroup, Image } from 'react-bootstrap';
+import React, {useEffect} from 'react';
+import { Card, Container, Image, ListGroup } from 'react-bootstrap';
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
+import { Meteor } from 'meteor/meteor';
+import { useTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router';
+import AddComment from '../components/AddComment';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { Comments } from '../../api/comment/Comments';
+import { Posts } from '../../api/Posts/Posts';
 
 const PhotoInteract = () => {
-  const [newComment, setNewComment] = useState('');
-  const [comments, setComments] = useState(['Great photo!']);
+  const { _id } = useParams();
 
-  // Function to handle adding a new comment
-  const handleAddComment = () => {
-    if (newComment.trim() !== '') {
-      setComments([...comments, newComment]);
-      setNewComment('');
-    }
-  };
+  const { ready, post, comments } = useTracker(() => {
+    const subscription = Meteor.subscribe(Posts.everyOnePublicationName); // Update with your actual publication name
+    const subscription2 = Meteor.subscribe(Comments.userPublicationName); // Update with your actual publication name
 
-  return (
+    const rdy = subscription.ready() && subscription2.ready();
+
+    const postItem = Posts.collection.findOne({ _id });
+    const commentItems = Comments.collection.find({ postId: _id }).fetch();
+
+    return {
+      ready: rdy,
+      post: postItem,
+      comments: commentItems,
+    };
+  }, []);
+  useEffect(() => {
+    console.log(post)
+  }, [post]);
+
+  return ready ? (
     <Container id="photo-interact" className="py-3 bg-white rounded">
       <Card>
-        <Card.Img
+        <Image
           className="mx-auto mt-3"
           variant="top"
-          src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-          alt="Boat on Calm Water"
+          src={post.imageId}
           style={{ maxWidth: '80%' }}
         />
         <Card.Body className="d-flex align-items-center justify-content-between">
@@ -34,8 +51,8 @@ const PhotoInteract = () => {
               className="rounded-circle me-3"
             />
             <div>
-              <Card.Title>@JohnNarrow</Card.Title>
-              <Card.Text>Boat on calm water.</Card.Text>
+              <Card.Title>{post.owner}</Card.Title>
+              <Card.Text>{post.description}</Card.Text>
             </div>
           </div>
           <div className="d-flex align-items-center">
@@ -43,27 +60,32 @@ const PhotoInteract = () => {
             <span><ShareFill size={30} /></span>
           </div>
         </Card.Body>
-        <ListGroup>
-          {comments.map((comment, index) => (
-            <ListGroup.Item key={index} className="mb-1">{comment}</ListGroup.Item>
-          ))}
-          <Form>
-            <Form.Group controlId="formComment" className="mb-1">
-              <Form.Control
-                type="text"
-                placeholder="Type your comment..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={handleAddComment}>
-              Comment
-            </Button>
-          </Form>
+        <ListGroup variant="flush">
+          {comments.map((comment, index) => <Comment key={index} comment={comment} />)}
         </ListGroup>
+        <AddComment owner={post.owner} postId={post._id} />
       </Card>
     </Container>
-  );
+  ) : <LoadingSpinner />;
+};
+
+PhotoInteract.propTypes = {
+  post: PropTypes.shape({
+    description: PropTypes.string,
+    owner: PropTypes.string,
+    likes: PropTypes.number,
+    uploadDate: PropTypes.instanceOf(Date),
+    imageId: PropTypes.string,
+    _id: PropTypes.string,
+  }),
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      comment: PropTypes.string,
+      postId: PropTypes.string,
+      createdAt: PropTypes.instanceOf(Date),
+      owner: PropTypes.string,
+    })
+  ),
 };
 
 export default PhotoInteract;
