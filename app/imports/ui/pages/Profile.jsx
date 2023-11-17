@@ -31,14 +31,27 @@ const Profile = () => {
   }, []);
   return (ready ? (
     <Container className="py-3">
-      <Row className="whiteText">
+      <Row className="whiteText text-center">
         <h1>Profile</h1>
       </Row>
-      {/* Profile Photo Associated with Account */}
-      <Image className="rounded-circle" src={user.profile.image} alt={user.username} width="200px" height="200px" />
-      {/* User name associated with account */}
-      <Row className="whiteText py-2">
-        <h3>{user.username}</h3>
+      <Row>
+        <Col>
+          {/* Profile Photo Associated with Account */}
+          <Image className="rounded-circle" src={user.profile.image} alt={user.username} width="200px" height="200px" />
+          {/* User name associated with account */}
+          <Row className="whiteText py-2">
+            <h3>{user.username}</h3>
+          </Row>
+        </Col>
+        <Col />
+        <Col className="justify-content-end">
+          <Row className="whiteText pt-5 py-2 px-4">
+            <h2>Followers</h2>
+          </Row>
+          <Row className="whiteText pt-5 py-2 px-4">
+            <h2>Following</h2>
+          </Row>
+        </Col>
       </Row>
       {/* Render the posts owned by this user */}
       <Row className="text-center whiteText">
