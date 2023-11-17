@@ -32,18 +32,18 @@ const Profile = () => {
   }, []);
   return (ready ? (
     <Container className="py-3">
-      <Row className="text-center">
-        <p>Profile</p>
+      <Row className="whiteText">
+        <h1>Profile</h1>
       </Row>
       {/* Profile Photo Associated with Account */}
-      <Image className="rounded-circle" src={user.profile.image} alt={user.username} width="100px" height="100px" />
+      <Image className="rounded-circle" src={user.profile.image} alt={user.username} width="200px" height="200px" />
       {/* User name associated with account */}
-      <Row className="text-center">
-        <p>{user.username}</p>
+      <Row className="whiteText py-2">
+        <h3>{user.username}</h3>
       </Row>
       {/* Render the posts owned by this user */}
-      <Row className="text-center">
-        <p>Posts</p>
+      <Row className="text-center whiteText">
+        <h2>Posts</h2>
       </Row>
       <Row xs={1} md={2} lg={3} className="g-4">
         {posts.map((post) => {
