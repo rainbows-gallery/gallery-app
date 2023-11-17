@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 
 const SearchBar = () => {
   const [value, setValue] = useState('');
@@ -12,7 +11,6 @@ const SearchBar = () => {
   // Handles the form submission, navigates to search results page and passes its input to it
   const handleSubmit = function (e) {
     e.preventDefault();
-    e.stopPropagation();
     navigate('/search', { state: value });
     setValue('');
   };

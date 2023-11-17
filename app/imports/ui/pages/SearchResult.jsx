@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Card, Container, Image } from 'react-bootstrap';
+import { _ } from 'meteor/underscore';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
@@ -25,28 +26,33 @@ const SearchEntry = ({ userProfilePic, alt, userName, email, href, width = 64, h
 const SearchResult = () => {
   const location = useLocation();
   const searchInput = location.state;
+  const filter = new RegExp(`${searchInput}`, 'i');
 
   const { ready, users } = useTracker(() => {
     const userSubscriber = Meteor.subscribe('userList');
     // Determine if the subscription is ready
     const userReady = userSubscriber.ready();
     // Get the Users
-    const currentUser = Meteor.users.find({ username: searchInput }).fetch();
+    // const currentUser = Meteor.users.find({ username: { $regex: `${searchInput}`, $options: 'i' } }).fetch();
+    const currentUser = Meteor.users.find({}).fetch();
     return {
       ready: userReady,
       users: currentUser,
     };
   }, []);
+
+  const userFiltered = _.filter(users, (user) => filter.test(user.username));
+
   return (ready ? (
     <Container id="search-results-page">
       <h1 className="text-white fw-bold">Searched for profiles named &quot;{searchInput}&quot;</h1>
-      {users.length !== 0 ? (
-        users.map((user) => (
+      {userFiltered.length !== 0 ? (
+        userFiltered.map((user) => (
           <SearchEntry
             userProfilePic={user.profile.image}
             alt="User Profile Picture"
             userName={user.username}
-            email={user.email}
+            email={user.emails[0].address}
             href={`/profile/${user._id}`}
           />
         ))
