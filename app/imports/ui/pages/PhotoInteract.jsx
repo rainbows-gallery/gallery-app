@@ -9,7 +9,6 @@ import AddComment from '../components/AddComment';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Comments } from '../../api/comment/Comments';
 import { Posts } from '../../api/Posts/Posts';
-import LoadingSpinner from '../components/LoadingSpinner';
 
 const PhotoInteract = () => {
   const { _id } = useParams();
