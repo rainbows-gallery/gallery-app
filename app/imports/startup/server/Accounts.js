@@ -11,7 +11,9 @@ const createUser = (username, email, password, image, role) => {
     email: email,
     password: password,
     // Add profile attribute (can have names, imge, etc, check link
-    profile: image,
+    profile: {
+      image: image
+    },
   });
   if (role === 'admin') {
     Roles.createRole(role, { unlessExists: true });
