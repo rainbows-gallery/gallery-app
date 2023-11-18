@@ -11,6 +11,13 @@ import FollowButton from '../components/FollowButton';
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Profile = () => {
   const { _id } = useParams();
+  const shownUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
+  function isUserShownUser() {
+    if (shownUser !== Meteor.user()) {
+      return false;
+    }
+    return true;
+  }
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, posts, user } = useTracker(() => {
     // Note that this subscription will get cleaned up
@@ -22,15 +29,14 @@ const Profile = () => {
     const rdy = subscription.ready();
     const userReady = userSubscriber.ready();
     // Get the Posts
-    const currentUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
-    const postItems = currentUser !== 'undefined' ? Posts.collection.find({ owner: currentUser.username }).fetch() : [];
+    // const shownUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
+    const postItems = shownUser !== 'undefined' ? Posts.collection.find({ owner: shownUser.username }).fetch() : [];
     return {
       posts: postItems,
       ready: rdy && userReady,
-      user: currentUser,
+      user: shownUser,
     };
   }, []);
-  const currentUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
   return (ready ? (
     <Container className="py-3">
       <Row className="whiteText text-center">
@@ -53,13 +59,9 @@ const Profile = () => {
           <Row className="whiteText pt-5 py-2 px-4">
             <h2>Following</h2>
           </Row>
-          {
-            Meteor.user() !== currentUser && (
-              <Row>
-                <FollowButton isFollowingUser={currentUser} />
-              </Row>
-            )
-          }
+          <Row isUserShownUser={false}>
+            <FollowButton isFollowingUser={shownUser} />
+          </Row>
         </Col>
       </Row>
       {/* Render the posts owned by this user */}
