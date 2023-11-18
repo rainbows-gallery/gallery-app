@@ -59,14 +59,11 @@ const Profile = () => {
         <h2>Posts</h2>
       </Row>
       <Row xs={1} md={2} lg={3} className="g-4">
-        {posts.map((post) => {
-          console.log(post);
-          return (
-            <Col key={post._id}>
-              <ClickableImage width="100%" height="300px" userProfile={user.profile.image} src={post.imageId} userName={user.username} href={`/photo-interact/${post._id}`} alt="data" />
-            </Col>
-          );
-        })}
+        {posts.map((post) => (
+          <Col key={post._id}>
+            <ClickableImage width="100%" height="300px" userProfile={user.profile.image} src={post.imageId} userName={user.username} href={`/photo-interact/${post._id}`} alt="data" />
+          </Col>
+        ))}
       </Row>
     </Container>
   ) : <LoadingSpinner />);

@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Posts } from '../../api/Posts/Posts';
 import { Comments } from '../../api/comment/Comments';
+import { useParams } from 'react-router';
+import { following } from '../../api/Following/following';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -49,6 +51,40 @@ Meteor.publish(null, function () {
   return this.ready();
 });
 
-Meteor.publish('userList', function (){
+Meteor.publish('userList', function () {
   return Meteor.users.find({});
+});
+
+Meteor.methods({
+  'following.toggleFollow'(isFollowingUser) {
+    const { _id } = useParams();
+    const isFollowingUserId = Meteor.users.find({ _id }).fetch()[0] ?? 'undefined';
+    // Check if the current user is already following the target user
+    const existingFollow = FollowCollection.findOne({
+      isFollowingUser: isFollowingUserId,
+      followerUser: Meteor.userId(),
+    });
+
+    if (existingFollow) {
+      // If already following, remove the follow entry
+      FollowCollection.remove(existingFollow._id);
+      return false;
+    } else {
+      // If not following, add a new follow entry
+      FollowCollection.insert({
+        isFollowingUser: isFollowingUserId,
+        followerUser: Meteor.userId(),
+      });
+      return true;
+    }
+  },
+});
+
+Meteor.publish('followingCollection.publication.user', function (isFollowingUserId) {
+  const { _id } = useParams();
+  const isFollowingUserId = Meteor.users.find({ _id }).fetch()[0] ?? 'undefined';
+  return FollowCollection.find({
+    isFollowingUser: isFollowingUserId,
+    followerUser: Meteor.userId(),
+  });
 });
