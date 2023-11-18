@@ -6,6 +6,7 @@ import { useParams } from 'react-router';
 import { Posts } from '../../api/Posts/Posts';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ClickableImage from '../components/ClickableImage';
+import FollowButton from '../components/FollowButton';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Profile = () => {
@@ -30,6 +31,7 @@ const Profile = () => {
       user: currentUser,
     };
   }, []);
+  const currentUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
   return (ready ? (
     <Container className="py-3">
       <Row className="whiteText text-center">
@@ -52,6 +54,13 @@ const Profile = () => {
           <Row className="whiteText pt-5 py-2 px-4">
             <h2>Following</h2>
           </Row>
+          {
+            Meteor.user() !== currentUser && (
+              <Row>
+                <FollowButton isFollowingUser={currentUser} />
+              </Row>
+            )
+          }
         </Col>
       </Row>
       {/* Render the posts owned by this user */}
