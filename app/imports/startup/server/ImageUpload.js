@@ -17,13 +17,12 @@ Meteor.methods({
 
     // Upload to Cloudinary
     return cloudinary.uploader.upload(file, {
-      resource_type: "image",
-    }).then((result) => {
+      resource_type: 'image',
+    }).then((result) =>
       // Handle successful upload
-      return JSON.stringify(result, null, 2);
-    }).catch((error) => {
+      JSON.stringify(result, null, 2)).catch((error) => {
       // Handle errors
       throw new Meteor.Error('upload-failed', error.message);
     });
-  }
+  },
 });

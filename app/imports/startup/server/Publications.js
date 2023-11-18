@@ -52,6 +52,8 @@ Meteor.publish(null, function () {
 Meteor.publish('userList', function () {
   return Meteor.users.find({});
 });
+
 Meteor.publish(Follows.everyOnePublicationName, function () {
   return Follows.collection.find();
 });
+

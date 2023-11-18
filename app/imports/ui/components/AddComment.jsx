@@ -5,8 +5,8 @@ import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import PropTypes from 'prop-types';
-import { Comments } from '../../api/comment/Comments';
 import { Meteor } from 'meteor/meteor';
+import { Comments } from '../../api/comment/Comments';
 import comment from './Comment';
 
 // Create a schema to specify the structure of the data to appear in the form.

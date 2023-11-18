@@ -18,7 +18,6 @@ const SignUp = ({ location }) => {
     username: String,
     email: String,
     password: String,
-    //    image: String,
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
@@ -31,7 +30,7 @@ const SignUp = ({ location }) => {
       email: email,
       password: password,
       profile: {
-        image: image
+        image: image,
       },
     };
     Accounts.createUser(user, (err) => {

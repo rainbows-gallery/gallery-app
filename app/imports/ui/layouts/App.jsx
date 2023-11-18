@@ -12,6 +12,7 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import About from '../pages/About';
 import PhotoInteract from '../pages/PhotoInteract';
+import SearchResult from '../pages/SearchResult';
 import AddPosts from '../pages/AddPosts';
 import Profile from '../pages/Profile';
 
@@ -26,6 +27,7 @@ const App = () => (
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/about" element={<About />} />
+        <Route path="/search" element={<SearchResult />} />
         <Route path="/photo-interact/:_id" element={<PhotoInteract />} />
         <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
         <Route path="/addPosts" element={<ProtectedRoute><AddPosts /></ProtectedRoute>} />

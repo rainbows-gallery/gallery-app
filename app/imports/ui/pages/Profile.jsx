@@ -24,7 +24,6 @@ const Profile = () => {
     // Get the Posts
     const currentUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
     const postItems = currentUser !== 'undefined' ? Posts.collection.find({ owner: currentUser.username }).fetch() : [];
-    console.log(currentUser);
     return {
       posts: postItems,
       ready: rdy && userReady,
