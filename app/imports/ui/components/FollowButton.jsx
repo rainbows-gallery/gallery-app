@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Meteor } from 'meteor/meteor';
+import { Follows } from '../../api/Following/following';
+import { useParams } from 'react-router';
 
 const FollowButton = ({ followerUser, isFollowingUser }) => {
-  const [loading, setLoading] = useState(false);
-  const [isFollowing, setIsFollowing] = useState(false);
-
-  useEffect(() => {
-    // Check if the current user is already following the target user
-    const subscription = Meteor.subscribe('followingCollection.publication.user', isFollowingUser);
-
-    return () => {
-      subscription.stop();
-    };
-  }, [isFollowingUser]);
 
   const handleButtonClick = async () => {
-    setLoading(true);
+    function toggleFollow() {
 
-    try {
-      // Call the Meteor method to toggle follow/unfollow
-      Meteor.call('following.toggleFollow', isFollowingUser, (error, result) => {
-        if (error) {
-          console.error('Error toggling follow/unfollow:', error.reason);
-        } else {
-          setIsFollowing(result);
-        }
+      const existingFollow = Follows.collection.findOne({
+        isFollowingUser: isFollowingUser,
+        followerUser: Meteor.userId(),
       });
-    } finally {
-      setLoading(false);
+
+      if (existingFollow) {
+        // If already following, remove the follow entry
+        Follows.collection.remove(existingFollow._id);
+      } else {
+        const { _id } = useParams();
+        // If not following, add a new follow entry
+        Follows.insert({
+          isFollowingUser: Meteor.users.find({ _id }).fetch(),
+          followerUser: Meteor.userId(),
+        });
+      }
     }
+    toggleFollow(isFollowingUser);
   };
 
   return (
@@ -40,4 +37,3 @@ const FollowButton = ({ followerUser, isFollowingUser }) => {
 };
 
 export default FollowButton;
-

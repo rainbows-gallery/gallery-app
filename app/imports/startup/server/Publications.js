@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+import { useParams } from 'react-router';
 import { Posts } from '../../api/Posts/Posts';
 import { Comments } from '../../api/comment/Comments';
 import { Follows } from '../../api/Following/following';
-import { useParams } from 'react-router';
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
 Meteor.publish(Posts.userPublicationName, function () {
@@ -40,9 +40,6 @@ Meteor.publish(Comments.adminPublicationName, function () {
 Meteor.publish(Posts.everyOnePublicationName, function () {
   return Posts.collection.find();
 });
-Meteor.publish(Follows.everyOnePublicationName, function(){
-  return Follows.collection.find();
-});
 // alanning:roles publication
 // Recommended code to publish roles for each user.
 Meteor.publish(null, function () {
@@ -55,37 +52,6 @@ Meteor.publish(null, function () {
 Meteor.publish('userList', function () {
   return Meteor.users.find({});
 });
-
-Meteor.methods({
-  'following.toggleFollow'(isFollowingUser) {
-    const { _id } = useParams();
-    const isFollowingUserId = Meteor.users.find({ _id }).fetch()[0] ?? 'undefined';
-    // Check if the current user is already following the target user
-    const existingFollow = FollowCollection.collection.findOne({
-      isFollowingUser: isFollowingUserId,
-      followerUser: Meteor.userId(),
-    });
-
-    if (existingFollow) {
-      // If already following, remove the follow entry
-      FollowCollection.collection.remove(existingFollow._id);
-      return false;
-    } else {
-      // If not following, add a new follow entry
-      FollowCollection.insert({
-        isFollowingUser: isFollowingUserId,
-        followerUser: Meteor.userId(),
-      });
-      return true;
-    }
-  },
-});
-
-Meteor.publish('followingCollection.publication.user', function (followingUserId) {
-  const { _id } = useParams();
-  const isFollowingUserId = Meteor.users.find({ _id }).fetch()[0] ?? 'undefined';
-  return FollowCollection.find({
-    isFollowingUser: followingUserId,
-    followerUser: Meteor.userId(),
-  });
+Meteor.publish(Follows.everyOnePublicationName, function () {
+  return Follows.collection.find();
 });
