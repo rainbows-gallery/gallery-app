@@ -5,7 +5,7 @@ import SimpleSchema from 'simpl-schema';
 /**
  * The StuffsCollection. It encapsulates state and variable values for stuff.
  */
-class PostsCollection {
+class FlowingCollection {
   constructor() {
     // The name of this collection.
     this.name = 'followingCollection';
@@ -35,4 +35,4 @@ class PostsCollection {
  * The singleton instance of the StuffsCollection.
  * @type {PostsCollection}
  */
-export const Posts = new PostsCollection();
+export const Follow = new FlowingCollection();

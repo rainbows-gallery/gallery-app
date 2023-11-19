@@ -15,6 +15,14 @@
     }
   ],
 
+  "defaultFollow": [
+    {
+      "followingUser": "john@foo.com",
+      "followerUser": "admin@foo.com",
+      "deletedDate": null
+    }
+  ],
+
   "defaultPosts": [
     {
       "description": "test",
@@ -26,7 +34,7 @@
     },
     {
       "description": "test",
-      "owner": "admin@foo.com",
+      "owner": "john@foo.com",
       "likes": 10,
       "uploadDate": "2020-10-15",
       "deletedDate": null,

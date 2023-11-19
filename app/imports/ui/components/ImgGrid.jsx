@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import ClickableImage from './ClickableImage';
+import { Gallery } from "react-grid-gallery";
 
 const ImgGrid = () => (
   <Row>
