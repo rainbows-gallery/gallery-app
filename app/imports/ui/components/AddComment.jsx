@@ -5,14 +5,12 @@ import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import PropTypes from 'prop-types';
-import { Meteor } from 'meteor/meteor';
 import { Comments } from '../../api/comment/Comments';
-import comment from './Comment';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   comment: String,
-  userId: String,
+  postId: String,
   createdAt: Date,
   owner: String,
 });
@@ -20,13 +18,13 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the AddStuff page for adding a document. */
-const AddComment = ({ owner, contactId }) => {
+const AddComment = ({ owner, postId }) => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { comment, createdAt } = data;
     Comments.collection.insert(
-      { comment, createdAt, userId, owner },
+      { comment, createdAt, postId, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -52,7 +50,7 @@ const AddComment = ({ owner, contactId }) => {
                 <SubmitField value="Submit" />
                 <ErrorsField />
                 <HiddenField name="owner" value={owner} />
-                <HiddenField name="userId" value={contactId} />
+                <HiddenField name="postId" value={postId} />
                 <HiddenField name="createdAt" value={new Date()} />
               </Card.Body>
             </Card>
@@ -65,6 +63,6 @@ const AddComment = ({ owner, contactId }) => {
 
 AddComment.propTypes = {
   owner: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  postId: PropTypes.string.isRequired,
 };
 export default AddComment;
