@@ -27,6 +27,13 @@ const About = () => (
           <h1 className="text-center">
             How to Use the Rainbow Gallery App
           </h1>
+          <h2 className="pt-1">
+            How to Run Rainbow Gallery Locally
+          </h2>
+          <p className="text-black">
+            To run Rainbow Gallery locally, clone our repository onto your device.
+            If you do not have node installed and accessible on your device, you will need to do that first, then come back here. &apos;cd&apos; into the app folder of gallery-app. The run meteor npm install, followed by meteor npm run start!
+          </p>
           <h2>
             Log In or Sign Up
           </h2>
