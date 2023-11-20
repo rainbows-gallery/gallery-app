@@ -1,20 +1,16 @@
 import { Mongo } from 'meteor/mongo';
-import { FilesCollection } from 'meteor/ostrio:files';
 import SimpleSchema from 'simpl-schema';
 
-/**
- * The StuffsCollection. It encapsulates state and variable values for stuff.
- */
-class FlowingCollection {
+
+class FollowCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'followingCollection';
+    this.name = 'FollowingCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
-
     this.schema = new SimpleSchema({
-      followingUser: String,
+      isFollowingUser: String,
       followerUser: String,
       deletedDate: {
         type: Date,
@@ -33,6 +29,8 @@ class FlowingCollection {
 
 /**
  * The singleton instance of the StuffsCollection.
- * @type {PostsCollection}
+ * @type {FollowCollection}
  */
-export const Follow = new FlowingCollection();
+
+export const Follows = new FollowCollection();
+

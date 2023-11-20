@@ -46,7 +46,7 @@ const App = () => (
  * @param {any} { component: Component, ...rest }
  */
 const ProtectedRoute = ({ children }) => {
-  const isLogged = Meteor.userId() !== null;
+  const isLogged = !!Meteor.userId();
   return isLogged ? children : <Navigate to="/signin" />;
 };
 

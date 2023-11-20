@@ -4,31 +4,48 @@ import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import { Posts } from '../../api/Posts/Posts';
+import { Follows } from '../../api/Following/following';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ClickableImage from '../components/ClickableImage';
+import FollowButton from '../components/FollowButton';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Profile = () => {
+  // get userID for the profile you are looking at
   const { _id } = useParams();
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, posts, user } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Posts documents.
-    const subscription = Meteor.subscribe(Posts.userPublicationName);
-    const userSubscriber = Meteor.subscribe('userList');
-    // Determine if the subscription is ready
-    const rdy = subscription.ready();
-    const userReady = userSubscriber.ready();
-    // Get the Posts
-    const currentUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
-    const postItems = currentUser !== 'undefined' ? Posts.collection.find({ owner: currentUser.username }).fetch() : [];
+  // Check to see if it is properly getting the value
+  console.log(` id: ${_id}`);
+  const { ready, posts, shownUser, user } = useTracker(() => {
+    // subscribe to posts
+    const postSubscription = Meteor.subscribe(Posts.userPublicationName);
+    // subscribe to userList
+    const userSubscription = Meteor.subscribe('userList');
+    // subscribe to use Follows
+    const followSubscription = Meteor.subscribe(Follows.userPublicationName);
+    // check to see if subscriptions are ready
+    const rdy = postSubscription.ready() && userSubscription.ready() && followSubscription.ready();
+    // console log to check
+    console.log(`post subscription: ${postSubscription.ready()}`);
+    console.log(`user subscription: ${userSubscription.ready()}`);
+    console.log(`follows subscription: ${followSubscription.ready()}`);
+    // establish users
+    const showingThisUser = Meteor.users.findOne({ _id });
+    const currentUser = Meteor.user();
+    // // check to see that they are loaded correctly !! CANNOT DO THIS because need to wait for subscription to be ready
+    // console.log(`Showing this user: ${showingThisUser.username}`);
+    // console.log(`Current user: ${currentUser.username}`);
+    // get posts
+    const postItems = currentUser ? Posts.collection.find({ owner: showingThisUser.username }).fetch() : [];
     return {
+      ready: rdy,
       posts: postItems,
-      ready: rdy && userReady,
+      shownUser: showingThisUser,
       user: currentUser,
     };
-  }, []);
+  }, [_id]);
+  function isUserShownUser() {
+    return shownUser.username === user.username;
+  }
   return (ready ? (
     <Container className="py-3">
       <Row className="whiteText text-center">
@@ -37,19 +54,34 @@ const Profile = () => {
       <Row>
         <Col>
           {/* Profile Photo Associated with Account */}
-          <Image className="rounded-circle" src={user.profile.image} alt={user.username} width="200px" height="200px" />
+          <Image className="rounded-circle" src={shownUser.profile.image} alt={shownUser.username} width="200px" height="200px" />
           {/* User name associated with account */}
           <Row className="whiteText py-2">
-            <h3>{user.username}</h3>
+            <h3>{shownUser ? shownUser.username : 'User Not Found'}</h3>
           </Row>
         </Col>
         <Col />
         <Col className="justify-content-end">
-          <Row className="whiteText pt-5 py-2 px-4">
+          <Row className="whiteText pt-3 py-2 px-4">
             <h2>Followers</h2>
+          </Row>
+          <Row className="p-1">
+            <Col />
+            <Col>
+              <h2 className="whiteText">{Follows.collection.find({ isFollowingUser: shownUser.username }).count()}</h2>
+            </Col>
           </Row>
           <Row className="whiteText pt-5 py-2 px-4">
             <h2>Following</h2>
+          </Row>
+          <Row className="p-1">
+            <Col />
+            <Col>
+              <h2 className="whiteText">{Follows.collection.find({ followerUser: shownUser.username }).count()}</h2>
+            </Col>
+          </Row>
+          <Row className="p-3">
+            {!isUserShownUser() && <FollowButton isFollowingUser={shownUser.username} followerUser={user.username} /> }
           </Row>
         </Col>
       </Row>
@@ -60,7 +92,7 @@ const Profile = () => {
       <Row xs={1} md={2} lg={3} className="g-4">
         {posts.map((post) => (
           <Col key={post._id}>
-            <ClickableImage width="100%" height="300px" userProfile={user.profile.image} src={post.imageId} userName={user.username} href={`/photo-interact/${post._id}`} alt="data" />
+            <ClickableImage width="100%" height="300px" userProfile={shownUser.profile.image} src={post.imageId} userName={shownUser.username} href={`/photo-interact/${post._id}`} alt="data" />
           </Col>
         ))}
       </Row>
