@@ -4,11 +4,10 @@ import SimpleSchema from 'simpl-schema';
 class FollowCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'followingCollection';
+    this.name = 'FollowingCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
-
     this.schema = new SimpleSchema({
       isFollowingUser: String,
       followerUser: String,
