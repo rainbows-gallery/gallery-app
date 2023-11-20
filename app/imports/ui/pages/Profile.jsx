@@ -4,6 +4,7 @@ import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import { Posts } from '../../api/Posts/Posts';
+import { Follows } from '../../api/Following/following';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ClickableImage from '../components/ClickableImage';
 import FollowButton from '../components/FollowButton';
@@ -19,14 +20,20 @@ const Profile = () => {
     const postSubscription = Meteor.subscribe(Posts.userPublicationName);
     // subscribe to userList
     const userSubscription = Meteor.subscribe('userList');
+    // subscribe to use Follows
+    const followSubscription = Meteor.subscribe(Follows.userPublicationName);
     // check to see if subscriptions are ready
-    const rdy = postSubscription.ready() && userSubscription.ready();
+    const rdy = postSubscription.ready() && userSubscription.ready() && followSubscription.ready();
     // console log to check
     console.log(`post subscription: ${postSubscription.ready()}`);
     console.log(`user subscription: ${userSubscription.ready()}`);
+    console.log(`follows subscription: ${followSubscription.ready()}`);
     // establish users
     const showingThisUser = Meteor.users.findOne({ _id });
     const currentUser = Meteor.user();
+    // // check to see that they are loaded correctly !! CANNOT DO THIS because need to wait for subscription to be ready
+    // console.log(`Showing this user: ${showingThisUser.username}`);
+    // console.log(`Current user: ${currentUser.username}`);
     // get posts
     const postItems = currentUser ? Posts.collection.find({ owner: showingThisUser.username }).fetch() : [];
     return {

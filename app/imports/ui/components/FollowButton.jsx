@@ -12,12 +12,12 @@ const FollowButton = ({ isFollowingUser, followerUser }) => {
     followerUser: followerUser,
   });
   function toggleFollow() {
-    if (existingFollow !== null) {
+    if (existingFollow !== null && existingFollow !== undefined) {
       // If already following, remove the follow entry
       Follows.collection.remove(existingFollow._id);
     } else {
       // If not following, add a new follow entry
-      Follows.insert({
+      Follows.collection.insert({
         isFollowingUser: isFollowingUser,
         followerUser: followerUser,
       });
