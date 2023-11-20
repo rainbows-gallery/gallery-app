@@ -62,13 +62,25 @@ const Profile = () => {
         </Col>
         <Col />
         <Col className="justify-content-end">
-          <Row className="whiteText pt-5 py-2 px-4">
+          <Row className="whiteText pt-3 py-2 px-4">
             <h2>Followers</h2>
+          </Row>
+          <Row className="p-1">
+            <Col />
+            <Col>
+              <h2 className="whiteText">{Follows.collection.find({ isFollowingUser: shownUser.username }).count()}</h2>
+            </Col>
           </Row>
           <Row className="whiteText pt-5 py-2 px-4">
             <h2>Following</h2>
           </Row>
-          <Row>
+          <Row className="p-1">
+            <Col />
+            <Col>
+              <h2 className="whiteText">{Follows.collection.find({ followerUser: shownUser.username }).count()}</h2>
+            </Col>
+          </Row>
+          <Row className="p-3">
             {!isUserShownUser() && <FollowButton isFollowingUser={shownUser.username} followerUser={user.username} /> }
           </Row>
         </Col>
