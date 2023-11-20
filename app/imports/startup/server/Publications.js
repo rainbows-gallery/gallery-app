@@ -45,6 +45,21 @@ Meteor.publish('userList', function () {
   return Meteor.users.find({});
 });
 
+// Following Schema Publishers
+Meteor.publish(Follows.userPublicationName, function () {
+  if (this.userId) {
+    return Follows.collection.find({ deletedDate: null });
+  }
+  return this.ready();
+});
+
+Meteor.publish(Follows.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Follows.collection.find();
+  }
+  return this.ready();
+});
+
 Meteor.publish(Follows.everyOnePublicationName, function () {
-  return Follows.collection.find();
+  return Follows.collection.find({ deletedDate: null });
 });
