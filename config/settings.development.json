@@ -17,7 +17,7 @@
 
   "defaultFollow": [
     {
-      "followingUser": "john@foo.com",
+      "isFollowingUser": "john@foo.com",
       "followerUser": "admin@foo.com",
       "deletedDate": null
     }

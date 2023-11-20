@@ -1,7 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-
 class FollowCollection {
   constructor() {
     // The name of this collection.
@@ -33,4 +32,3 @@ class FollowCollection {
  */
 
 export const Follows = new FollowCollection();
-

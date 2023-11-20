@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Posts } from '../../api/Posts/Posts.js';
-import { Follow } from '../../api/Following/following';
+import { Follows } from '../../api/Following/following';
 
 /* eslint-disable no-console */
 
@@ -10,7 +10,7 @@ const addDataPosts = (data) => {
 };
 
 const addDataFollow = (data) => {
-  Follow.collection.insert(data);
+  Follows.collection.insert(data);
 };
 
 // Initialize the StuffsCollection if empty.
@@ -21,7 +21,7 @@ if (Posts.collection.find().count() === 0) {
   }
 }
 
-if (Follow.collection.find().count() === 0) {
+if (Follows.collection.find().count() === 0) {
   if (Meteor.settings.defaultFollow) {
     console.log('Creating default data.');
     Meteor.settings.defaultFollow.forEach(data => addDataFollow(data));

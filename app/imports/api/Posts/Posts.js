@@ -1,5 +1,4 @@
 import { Mongo } from 'meteor/mongo';
-import { FilesCollection } from 'meteor/ostrio:files';
 import SimpleSchema from 'simpl-schema';
 
 /**

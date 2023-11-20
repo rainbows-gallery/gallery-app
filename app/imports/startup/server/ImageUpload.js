@@ -9,6 +9,7 @@ cloudinary.config({
 });
 
 Meteor.methods({
+  // eslint-disable-next-line meteor/audit-argument-checks
   'image.upload'(file) {
     // Ensure the user is logged in if required
     if (!this.userId) {

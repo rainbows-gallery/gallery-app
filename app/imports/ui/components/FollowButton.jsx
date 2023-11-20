@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import { Meteor } from 'meteor/meteor';
-import { useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import { Follows } from '../../api/Following/following';
 

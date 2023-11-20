@@ -5,9 +5,7 @@ import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import PropTypes from 'prop-types';
-import { Meteor } from 'meteor/meteor';
 import { Comments } from '../../api/comment/Comments';
-import comment from './Comment';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -66,5 +64,6 @@ const AddComment = ({ owner, contactId }) => {
 AddComment.propTypes = {
   owner: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
+  contactId: PropTypes.string.isRequired,
 };
 export default AddComment;
