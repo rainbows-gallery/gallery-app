@@ -75,7 +75,7 @@ const Landing = () => {
           userName={highlight.owner}
           userProfile={users.find(x => x.username === highlight.owner).profile.image}
         />
-      ) : <h1>For some reason their are no posts at this time please come back later for more posts ...</h1>}
+      ) : <h1 className="text-center">Follow some accounts to begin viewing artwork!</h1>}
       <Gallery
         images={galleryPosts}
         onClick={(index) => {
