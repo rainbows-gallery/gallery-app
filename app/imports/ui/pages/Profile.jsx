@@ -10,33 +10,35 @@ import FollowButton from '../components/FollowButton';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Profile = () => {
+  // get userID for the profile you are looking at
   const { _id } = useParams();
-  const shownUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
-  function isUserShownUser() {
-    if (shownUser !== Meteor.user()) {
-      return false;
-    }
-    return true;
-  }
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, posts, user } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Posts documents.
-    const subscription = Meteor.subscribe(Posts.userPublicationName);
-    const userSubscriber = Meteor.subscribe('userList');
-    // Determine if the subscription is ready
-    const rdy = subscription.ready();
-    const userReady = userSubscriber.ready();
-    // Get the Posts
-    // const shownUser = (Meteor.users.find({ _id }).fetch()[0] ?? 'undefined');
-    const postItems = shownUser !== 'undefined' ? Posts.collection.find({ owner: shownUser.username }).fetch() : [];
+  // Check to see if it is properly getting the value
+  console.log(` id: ${_id}`);
+  const { ready, posts, shownUser, user } = useTracker(() => {
+    // subscribe to posts
+    const postSubscription = Meteor.subscribe(Posts.userPublicationName);
+    // subscribe to userList
+    const userSubscription = Meteor.subscribe('userList');
+    // check to see if subscriptions are ready
+    const rdy = postSubscription.ready() && userSubscription.ready();
+    // console log to check
+    console.log(`post subscription: ${postSubscription.ready()}`);
+    console.log(`user subscription: ${userSubscription.ready()}`);
+    // establish users
+    const showingThisUser = Meteor.users.findOne({ _id });
+    const currentUser = Meteor.user();
+    // get posts
+    const postItems = currentUser ? Posts.collection.find({ owner: showingThisUser.username }).fetch() : [];
     return {
+      ready: rdy,
       posts: postItems,
-      ready: rdy && userReady,
-      user: shownUser,
+      shownUser: showingThisUser,
+      user: currentUser,
     };
   }, []);
+  function isUserShownUser() {
+    return shownUser.username === user.username;
+  }
   return (ready ? (
     <Container className="py-3">
       <Row className="whiteText text-center">
@@ -45,10 +47,10 @@ const Profile = () => {
       <Row>
         <Col>
           {/* Profile Photo Associated with Account */}
-          <Image className="rounded-circle" src={user.profile.image} alt={user.username} width="200px" height="200px" />
+          <Image className="rounded-circle" src={shownUser.profile.image} alt={shownUser.username} width="200px" height="200px" />
           {/* User name associated with account */}
           <Row className="whiteText py-2">
-            <h3>{user.username}</h3>
+            <h3>{shownUser ? shownUser.username : 'User Not Found'}</h3>
           </Row>
         </Col>
         <Col />
@@ -59,8 +61,8 @@ const Profile = () => {
           <Row className="whiteText pt-5 py-2 px-4">
             <h2>Following</h2>
           </Row>
-          <Row isUserShownUser={false}>
-            <FollowButton isFollowingUser={shownUser} />
+          <Row>
+            {!isUserShownUser() && <FollowButton isFollowingUser={shownUser.username} followerUser={user.username} /> }
           </Row>
         </Col>
       </Row>
@@ -71,7 +73,7 @@ const Profile = () => {
       <Row xs={1} md={2} lg={3} className="g-4">
         {posts.map((post) => (
           <Col key={post._id}>
-            <ClickableImage width="100%" height="300px" userProfile={user.profile.image} src={post.imageId} userName={user.username} href={`/photo-interact/${post._id}`} alt="data" />
+            <ClickableImage width="100%" height="300px" userProfile={shownUser.profile.image} src={post.imageId} userName={shownUser.username} href={`/photo-interact/${post._id}`} alt="data" />
           </Col>
         ))}
       </Row>

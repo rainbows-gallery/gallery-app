@@ -40,14 +40,6 @@ Meteor.publish(Comments.adminPublicationName, function () {
 Meteor.publish(Posts.everyOnePublicationName, function () {
   return Posts.collection.find();
 });
-// alanning:roles publication
-// Recommended code to publish roles for each user.
-Meteor.publish(null, function () {
-  if (this.userId) {
-    return Meteor.roleAssignment.find({ 'user._id': this.userId });
-  }
-  return this.ready();
-});
 
 Meteor.publish('userList', function () {
   return Meteor.users.find({});
@@ -56,4 +48,3 @@ Meteor.publish('userList', function () {
 Meteor.publish(Follows.everyOnePublicationName, function () {
   return Follows.collection.find();
 });
-

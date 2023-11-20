@@ -5,22 +5,21 @@ import { useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import { Follows } from '../../api/Following/following';
 
-const FollowButton = ({ isFollowingUser }) => {
+const FollowButton = ({ isFollowingUser, followerUser }) => {
 
   const existingFollow = Follows.collection.findOne({
     isFollowingUser: isFollowingUser,
-    followerUser: Meteor.userId(),
+    followerUser: followerUser,
   });
   function toggleFollow() {
     if (existingFollow !== null) {
       // If already following, remove the follow entry
       Follows.collection.remove(existingFollow._id);
     } else {
-      const { _id } = useParams();
       // If not following, add a new follow entry
       Follows.insert({
-        isFollowingUser: Meteor.users.find({ _id }).fetch(),
-        followerUser: Meteor.userId(),
+        isFollowingUser: isFollowingUser,
+        followerUser: followerUser,
       });
     }
   }
@@ -36,5 +35,6 @@ const FollowButton = ({ isFollowingUser }) => {
 
 FollowButton.propTypes = {
   isFollowingUser: PropTypes.string.isRequired,
+  followerUser: PropTypes.string.isRequired,
 };
 export default FollowButton;
