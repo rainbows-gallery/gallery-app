@@ -58,7 +58,7 @@ const PhotoInteract = () => {
           </div>
         </Card.Body>
         <ListGroup variant="flush">
-          {comments.map((comment, index) => <Comment key={index} comment={comment} collection={Comments.collection} />)}
+          {comments.map((comment, index) => <Comment key={index} comment={comment} collection={Comments.collection} post={post} />)}
         </ListGroup>
         <AddComment owner={post.owner} postId={post._id} />
       </Card>

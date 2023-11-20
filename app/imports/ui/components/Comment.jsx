@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Button, Col, ListGroup, Row } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
-const Comment = ({ comment, collection }) => {
+
+const Comment = ({ comment, collection, post }) => {
   const removeItem = (id) => {
     collection.remove(id);
   };
@@ -17,7 +18,17 @@ const Comment = ({ comment, collection }) => {
             <footer className="blockquote-footer">{comment.owner}</footer>
           </div>
         </Col>
-        {Meteor.user().username === comment.owner && (
+        {Meteor.user().username === comment.owner && Meteor.user().profile.role !== 'admin' && (
+          <Col xs="auto">
+            <Button
+              variant="light"
+              onClick={() => removeItem(comment._id)}
+            >
+              <Trash />
+            </Button>
+          </Col>
+        )}
+        {Meteor.user().username === post.owner && Meteor.user().profile.role === 'admin' && (
           <Col xs="auto">
             <Button
               variant="light"
@@ -42,7 +53,15 @@ Comment.propTypes = {
     _id: PropTypes.string,
   }).isRequired,
   collection: PropTypes.object.isRequired,
+  post: PropTypes.shape({
+    description: PropTypes.string,
+    owner: PropTypes.string,
+    likes: PropTypes.number,
+    uploadDate: PropTypes.instanceOf(Date),
+    imageId: PropTypes.string,
+    deletedDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.oneOf([null])]),
+    _id: PropTypes.string,
+  }),
 };
-
 
 export default Comment;
