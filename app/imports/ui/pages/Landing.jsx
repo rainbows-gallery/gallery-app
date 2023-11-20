@@ -30,7 +30,6 @@ const Landing = () => {
     const following = signedIn !== ''
       ? Follow.collection.find({followerUser: signedIn}, {fields: {followingUser: 1}}).fetch().map(x => x.followingUser)
       : [];
-    console.log(following)
     // Get the Stuff documents
     const posts = signedIn !== ''
       ? Posts.collection.find({owner: {$in: following}}, { sort: { uploadDate: 1, likes: -1 } }).fetch()
@@ -45,10 +44,9 @@ const Landing = () => {
   }, []);
 
   useEffect(() => {
-    if (posts) {
+    if (ready) {
       setGalleryPosts(posts.map((post) => {
         const currentUser = users.find(x => x.username === post.owner)
-        console.log(currentUser)
         return {
           src: post.imageId,
           width: 520,
