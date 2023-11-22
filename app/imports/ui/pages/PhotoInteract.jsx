@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Container, Image, ListGroup } from 'react-bootstrap';
-import { StarFill, ShareFill } from 'react-bootstrap-icons';
+import { StarFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
@@ -57,7 +57,7 @@ const PhotoInteract = () => {
           </div>
         </Card.Body>
         <ListGroup variant="flush">
-          {comments.map((comment, index) => <Comment key={index} comment={comment} collection={Comments.collection} post={post} />)}
+          {comments.map((comment, index) => <Comment key={index} comment={comment} post={post} />)}
         </ListGroup>
         <AddComment owner={Meteor.user().username} postId={post._id} />
       </Card>
