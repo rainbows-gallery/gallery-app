@@ -13,7 +13,7 @@ class CommentsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       comment: String,
-      userId: String,
+      postId: String,
       createdAt: Date,
       owner: String,
     });
