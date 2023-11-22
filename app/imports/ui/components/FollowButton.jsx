@@ -28,6 +28,7 @@ const FollowButton = ({ isFollowingUser, followerUser }) => {
       console.log(`${isFollowingUser} is now followed by ${followerUser}`);
     }
     isAFollow();
+    window.location.reload(); // is ugly but works
   }
   const handleButtonClick = async () => {
     toggleFollow();
