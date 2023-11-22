@@ -55,13 +55,6 @@ const About = () => (
             To delete a photo, click on it and then press the trash icon.
             To add a photo, click add post and you will be taken to a page to add your content!
           </p>
-          <h2 className="pt-1">
-            How to Run Rainbow Gallery Locally
-          </h2>
-          <p className="text-black">
-            To run Rainbow Gallery locally, clone our repository onto your device.
-            If you do not have node installed and accessible on your device, you will need to do that first, then come back here. &apos;cd&apos; into the app folder of gallery-app. The run meteor npm install, followed by meteor npm run start!
-          </p>
         </Row>
       </Container>
     </Container>

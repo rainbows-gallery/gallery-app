@@ -28,7 +28,6 @@ const PhotoInteract = () => {
       comments: commentItems,
     };
   }, []);
-
   return ready ? (
     <Container id="photo-interact" className="py-3 bg-white rounded">
       <Card>
@@ -53,13 +52,13 @@ const PhotoInteract = () => {
             </div>
           </div>
           <div className="d-flex align-items-center">
-            <span><StarFill size={30} /></span>
+            { Meteor.user() && <span><StarFill size={30} /></span> }
           </div>
         </Card.Body>
         <ListGroup variant="flush">
           {comments.map((comment, index) => <Comment key={index} comment={comment} post={post} />)}
         </ListGroup>
-        <AddComment owner={Meteor.user().username} postId={post._id} />
+        { Meteor.user() && <AddComment owner={Meteor.user().username} postId={post._id} /> }
       </Card>
     </Container>
   ) : <LoadingSpinner />;
