@@ -25,28 +25,52 @@
 
   "defaultPosts": [
     {
-      "description": "test",
+      "description": "Abstraction",
       "owner": "admin@foo.com",
       "likes": 10,
       "uploadDate": "2020-10-15",
       "deletedDate": null,
-      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+      "imageId": "https://cdn.shopify.com/s/files/1/0102/7555/3342/files/texture-abstract-structure-colorful_2_600x600.jpg?v=1637265614"
     },
     {
-      "description": "test",
+      "description": "Rainbows Everywhere by Sara Sherwood",
       "owner": "john@foo.com",
       "likes": 10,
       "uploadDate": "2020-10-15",
       "deletedDate": null,
-      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+      "imageId": "https://www.sarasherwood.co.uk/wp-content/uploads/2017/05/97570-Rainbows_Everywhere-1200x591.jpg"
     },
     {
-      "description": "test",
+      "description": "Geometric Rhythms, Original Abstract by Sally Trace",
       "owner": "admin@foo.com",
       "likes": 10,
       "uploadDate": "2020-10-15",
       "deletedDate": null,
-      "imageId": "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+      "imageId": "https://www.sallytrace.com/cdn/shop/products/Geometric-Rhythms-Abstract-Art.jpg?v=1627762176&width=1646"
+    },
+    {
+      "description": "Faces",
+      "owner": "admin@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "deletedDate": null,
+      "imageId": "https://arthive.net/res/media/img/oy800/article/815/7567090@2x.jpg"
+    },
+    {
+      "description": "Waves on a Sunset Shore",
+      "owner": "john@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "deletedDate": null,
+      "imageId": "https://storage.googleapis.com/pod_public/1300/154181.jpg"
+    },
+    {
+      "description": "Ballet in the Sky",
+      "owner": "john@foo.com",
+      "likes": 10,
+      "uploadDate": "2020-10-15",
+      "deletedDate": null,
+      "imageId": "https://www.theartist.me/wp-content/uploads/2016/03/abstract-expressionism.jpg"
     }
   ],
   "CLOUDINARY_CLOUD_NAME": "dv9xwi8q2",
