@@ -22,11 +22,11 @@ const AddPosts = () => {
   const [file, setFile] = useState(null);
   const [dropzoneKey, setDropzoneKey] = useState(0);
 
-  const fileToDataURL = (file) => new Promise((resolve, reject) => {
+  const fileToDataURL = (fileVal) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(fileVal);
   });
 
   const handleDrop = (acceptedFiles) => {
@@ -40,8 +40,8 @@ const AddPosts = () => {
     const { description } = data;
     const owner = Meteor.user().username;
 
-    fileToDataURL(file).then((data) => {
-      Meteor.call('image.upload', data, (error, response) => {
+    fileToDataURL(file).then((dataVal) => {
+      Meteor.call('image.upload', dataVal, (error, response) => {
         if (error) {
           // Handle the error
           console.error('Error uploading:', error);
@@ -50,9 +50,9 @@ const AddPosts = () => {
           console.log(returnedResponse);
           Posts.collection.insert(
             { description, owner, likes: 0, uploadDate: new Date(), imageId: returnedResponse.url },
-            (error) => {
-              if (error) {
-                swal('Error', error.message, 'error');
+            (errorTwo) => {
+              if (errorTwo) {
+                swal('Error', errorTwo.message, 'error');
               } else {
                 swal('Success', 'Item added successfully', 'success');
                 formRef.reset();
@@ -79,8 +79,21 @@ const AddPosts = () => {
                 <Dropzone key={dropzoneKey} onDrop={handleDrop}>
                   {({ getRootProps, getInputProps }) => (
                     <section>
-                      <div {...getRootProps({ className: 'rounded', style: { border: '2px dashed' } })}>
-                        <input {...getInputProps({ accept: 'image/*', name: 'FileImage' })} />
+                      <div
+                        // This is needed for the dropzone component for drag drop a file
+                        // eslint-disable-next-line react/jsx-props-no-spreading
+                        {...getRootProps({
+                          className: 'rounded',
+                          style: { border: '2px dashed' },
+                        })}
+                      >
+                        <input
+                          // This is needed for the dropzone component for drag drop a file
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {
+                            ...getInputProps({ accept: 'image/*', name: 'FileImage' })
+                          }
+                        />
                         <p>You may drag and drop your image here or click and select it</p>
                         {imagePreview && <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px' }} />}
                       </div>

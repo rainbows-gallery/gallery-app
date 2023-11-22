@@ -19,11 +19,10 @@ Meteor.methods({
     // Upload to Cloudinary
     return cloudinary.uploader.upload(file, {
       resource_type: 'image',
-    }).then((result) =>
-      // Handle successful upload
-      JSON.stringify(result, null, 2)).catch((error) => {
-      // Handle errors
-      throw new Meteor.Error('upload-failed', error.message);
+    }).then((result) => {
+      JSON.stringify(result, null, 2).catch((error) => {
+        throw new Meteor.Error('upload-failed', error.message);
+      });
     });
   },
 });
