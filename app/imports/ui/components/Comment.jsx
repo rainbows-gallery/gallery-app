@@ -18,17 +18,7 @@ const Comment = ({ comment, collection, post }) => {
             <footer className="blockquote-footer">{comment.owner}</footer>
           </div>
         </Col>
-        {Meteor.user().username === comment.owner && Meteor.user().profile.role !== 'admin' && (
-          <Col xs="auto">
-            <Button
-              variant="light"
-              onClick={() => removeItem(comment._id)}
-            >
-              <Trash />
-            </Button>
-          </Col>
-        )}
-        {Meteor.user().username === post.owner && Meteor.user().profile.role === 'admin' && (
+        {Meteor.user() && (Meteor.user().username === comment.owner || Meteor.user().username === post.owner || Meteor.user().profile.role === 'admin') && (
           <Col xs="auto">
             <Button
               variant="light"
