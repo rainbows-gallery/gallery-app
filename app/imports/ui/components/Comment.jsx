@@ -18,7 +18,7 @@ const Comment = ({ comment, collection, post }) => {
             <footer className="blockquote-footer">{comment.owner}</footer>
           </div>
         </Col>
-        {Meteor.user() && (Meteor.user().username === comment.owner || Meteor.user().username === post.owner || Meteor.user().profile.role === 'admin') && (
+        {Meteor.user() && (Meteor.user().username === comment.owner || Meteor.user().username === post.owner || Meteor.user().username === 'admin@foo.com') && (
           <Col xs="auto">
             <Button
               variant="light"
@@ -51,7 +51,7 @@ Comment.propTypes = {
     imageId: PropTypes.string,
     deletedDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.oneOf([null])]),
     _id: PropTypes.string,
-  }),
+  }).isRequired,
 };
 
 export default Comment;
