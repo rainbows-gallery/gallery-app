@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Container, Image, ListGroup } from 'react-bootstrap';
-import { StarFill, ShareFill } from 'react-bootstrap-icons';
+import { StarFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
@@ -28,7 +28,6 @@ const PhotoInteract = () => {
       comments: commentItems,
     };
   }, []);
-
   return ready ? (
     <Container id="photo-interact" className="py-3 bg-white rounded">
       <Card>
@@ -59,7 +58,7 @@ const PhotoInteract = () => {
         <ListGroup variant="flush">
           {comments.map((comment, index) => <Comment key={index} comment={comment} collection={Comments.collection} post={post} />)}
         </ListGroup>
-        <AddComment owner={Meteor.user().username} postId={post._id} />
+        { Meteor.user() && <AddComment owner={Meteor.user().username} postId={post._id} /> }
       </Card>
     </Container>
   ) : <LoadingSpinner />;
