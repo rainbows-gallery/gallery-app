@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Card, Container, Image, ListGroup } from 'react-bootstrap';
 import { StarFill, ShareFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 import AddComment from '../components/AddComment';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Comments } from '../../api/comment/Comments';
+import Comment from '../components/Comment';
 import { Posts } from '../../api/Posts/Posts';
 
 const PhotoInteract = () => {
@@ -28,9 +28,6 @@ const PhotoInteract = () => {
       comments: commentItems,
     };
   }, []);
-  useEffect(() => {
-    console.log(post);
-  }, [post]);
 
   return ready ? (
     <Container id="photo-interact" className="py-3 bg-white rounded">
@@ -60,31 +57,12 @@ const PhotoInteract = () => {
           </div>
         </Card.Body>
         <ListGroup variant="flush">
-          {comments.map((comment, index) => <Comment key={index} comment={comment} />)}
+          {comments.map((comment, index) => <Comment key={index} comment={comment} collection={Comments.collection} post={post} />)}
         </ListGroup>
-        <AddComment owner={post.owner} postId={post._id} />
+        <AddComment owner={Meteor.user().username} postId={post._id} />
       </Card>
     </Container>
   ) : <LoadingSpinner />;
-};
-
-PhotoInteract.propTypes = {
-  post: PropTypes.shape({
-    description: PropTypes.string,
-    owner: PropTypes.string,
-    likes: PropTypes.number,
-    uploadDate: PropTypes.instanceOf(Date),
-    imageId: PropTypes.string,
-    _id: PropTypes.string,
-  }),
-  comments: PropTypes.arrayOf(
-    PropTypes.shape({
-      comment: PropTypes.string,
-      postId: PropTypes.string,
-      createdAt: PropTypes.instanceOf(Date),
-      owner: PropTypes.string,
-    }),
-  ),
 };
 
 export default PhotoInteract;
