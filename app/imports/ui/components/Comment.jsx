@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Col, ListGroup, Row } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
-import { Comments } from "../../api/comment/Comments";
+import { Comments } from '../../api/comment/Comments';
 
 const Comment = ({ comment, post }) => {
   const removeItem = (id) => {
