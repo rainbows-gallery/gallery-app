@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Button, Col, ListGroup, Row } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
+import { Comments } from '../../api/comment/Comments';
 
-const Comment = ({ comment, collection, post }) => {
+const Comment = ({ comment, post }) => {
   const removeItem = (id) => {
-    collection.remove(id);
+    Comments.collection.remove(id);
   };
   return (
     <ListGroup.Item>
@@ -42,7 +43,6 @@ Comment.propTypes = {
     owner: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
-  collection: PropTypes.object.isRequired,
   post: PropTypes.shape({
     description: PropTypes.string,
     owner: PropTypes.string,

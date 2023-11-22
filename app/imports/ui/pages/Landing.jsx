@@ -54,7 +54,12 @@ const Landing = () => {
           caption: post.description,
           thumbnailCaption: (
             <div className="p-2 d-flex position-absolute bottom-0 start-0 bg-white w-100 opacity-75">
-              <img className="rounded-circle" src={currentUser.profile.image} alt={post.owner} width={40} />
+              <img
+                className="rounded-circle"
+                src={currentUser.profile ? currentUser.profile.image : ''}
+                alt={post.owner}
+                width={40}
+              />
               <h3 className="text-black">@{post.owner}</h3>
             </div>
           ),
@@ -62,7 +67,9 @@ const Landing = () => {
       }));
     }
   }, [posts]);
-  useEffect(() => { console.log(`highlight : ${highlight}`); }, [highlight]);
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
   return ready ? (
     <Container id="landing-page" className="py-3 bg-white rounded">
       { highlight !== undefined ? (
@@ -73,7 +80,7 @@ const Landing = () => {
           src={highlight.imageId}
           alt={highlight.description}
           userName={highlight.owner}
-          userProfile={users.find(x => x.username === highlight.owner).profile.image}
+          userProfile={users.find(x => x.username === highlight.owner).profile ? users.find(x => x.username === highlight.owner).profile.image : ''}
         />
       ) : <h1 className="text-center">Follow some accounts to begin viewing artwork!</h1>}
       <Gallery
