@@ -44,7 +44,7 @@ const SearchResult = () => {
 
   return (ready ? (
     <Container id="search-results-page">
-      <h1 className="text-white fw-bold">Searched for profiles with username including &quot;{searchInput}&quot;</h1>
+      <h1 className="fw-bold">Searched for profiles with username including &quot;{searchInput}&quot;</h1>
       {usersFiltered.length !== 0 ? (
         usersFiltered.map((user) => (
           <SearchEntry
@@ -57,7 +57,7 @@ const SearchResult = () => {
             width={64}
           />
         ))
-      ) : <h2 className="text-white">No profiles matched your input</h2>}
+      ) : <h2>No profiles matched your input</h2>}
     </Container>
   ) : <LoadingSpinner />);
 };

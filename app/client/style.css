@@ -18,7 +18,7 @@
 body {
   --bs-light-rgb: #ffffff;
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
-  background: #ECECEC;
+  background: #ECECEC !important;
   background-size: cover;
 }
 

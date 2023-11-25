@@ -48,7 +48,7 @@ const Profile = () => {
   }
   return (ready ? (
     <Container className="py-3">
-      <Row className="whiteText text-center">
+      <Row className="text-center">
         <h1>Profile</h1>
       </Row>
       <Row>
