@@ -14,13 +14,12 @@ const Comment = ({ comment, post }) => {
       <Row>
         <Col>
           <div>
-            <p className="comment-item">{comment.createdAt.toLocaleDateString('en-US')}</p>
+            <p className="comment-item" style={{ color: '#595959' }}>{comment.owner}:  {comment.createdAt.toLocaleDateString('en-US')}</p>
             <p className="comment-item">{comment.comment}</p>
-            <footer className="blockquote-footer">{comment.owner}</footer>
           </div>
         </Col>
         {Meteor.user() && (Meteor.user().username === comment.owner || Meteor.user().username === post.owner || Meteor.user().username === 'admin@foo.com') && (
-          <Col xs="auto">
+          <Col xs="auto" className="p-4">
             <Button
               variant="light"
               onClick={() => removeItem(comment._id)}

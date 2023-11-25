@@ -4,11 +4,11 @@ import { Container, Row, Image } from 'react-bootstrap';
 const About = () => (
   <Container id="about" fluid className="py-3">
     <Row className="d-flex justify-content-center">
-      <Image src="/images/about_picture.png" style={{ width: '70%', height: 'auto' }} />
+      <Image src="/images/about_picture.png" style={{ width: '100%', height: 'auto', padding: 0 }} />
     </Row>
     <Container style={{ backgroundColor: 'white', padding: '10px', width: '70%' }} className="rounded">
       <Row className="align-middle text-center pt-3">
-        <h1>About</h1>
+        <h1>About Us</h1>
       </Row>
       <Row className="py-4 d-flex justify-content-center">
         <p style={{ maxWidth: '90%' }} className="text-black">
@@ -24,31 +24,31 @@ const About = () => (
       </Row>
       <Container style={{ backgroundColor: 'white', padding: '10px', width: '90%' }} className="rounded">
         <Row className="align-middle">
-          <h1 className="text-center">
+          <h2 className="text-center py-2">
             How to Use the Rainbow Gallery App
-          </h1>
-          <h2>
-            Log In or Sign Up
           </h2>
+          <h3 className="py-3">
+            Log In or Sign Up
+          </h3>
           <p className="text-black">
             If you have created an account with us before, simply log in using either your username or email and your password.
           </p>
-          <h2>
+          <h3 className="py-2">
             Home
-          </h2>
+          </h3>
           <p className="text-black">
             Once you have logged in, you will be taken to a home page showing your current feed. Feed is populated based on the accounts that you follow. From the home page, you can view your profile, feed, or search new users to follow!
           </p>
-          <h2>
+          <h3 className="py-2">
             Viewing Photos
-          </h2>
+          </h3>
           <p className="text-black">
             If you would like to view a photo from your feed in greater detail, simply click on the photo and you will be able to see it full size, along with comments added to the post.
             Additionally, you can click share to copy the photo link and send it to your friends!
           </p>
-          <h2>
+          <h3 className="py-2">
             Account Modifications
-          </h2>
+          </h3>
           <p className="text-black">
             Although you are not able to change your username or email once created, you can add or remove photos
             from your profile from the &apos;profile&apos; tab.

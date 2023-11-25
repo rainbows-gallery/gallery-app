@@ -18,7 +18,7 @@
 body {
   --bs-light-rgb: #ffffff;
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
-  background: url('images/background-image.png') no-repeat center center fixed;
+  background: #ECECEC;
   background-size: cover;
 }
 

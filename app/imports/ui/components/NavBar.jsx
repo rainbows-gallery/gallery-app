@@ -13,7 +13,7 @@ const NavBar = () => {
 
   return (
     <Navbar bg="light" expand="lg">
-      <Container fluid className="m-2">
+      <Container fluid>
         <Navbar.Brand as={NavLink} to="/">
           <img src="/images/Logo-navbar.svg" alt="rainbow gallery logo" width={146} />
         </Navbar.Brand>

@@ -52,42 +52,36 @@ const Profile = () => {
         <h1>Profile</h1>
       </Row>
       <Row>
-        <Col>
+        <Col />
+        <Col className="d-flex flex-column align-items-center justify-content-center">
           {/* Profile Photo Associated with Account */}
           <Image className="rounded-circle" src={shownUser.profile.image} alt={shownUser.username} width="200px" height="200px" />
           {/* User name associated with account */}
-          <Row className="whiteText py-2">
-            <h3>{shownUser ? shownUser.username : 'User Not Found'}</h3>
-          </Row>
+          <h3>{shownUser ? shownUser.username : 'User Not Found'}</h3>
         </Col>
-        <Col />
-        <Col className="justify-content-end">
-          <Row className="whiteText pt-3 py-2 px-4">
-            <h2>Followers</h2>
-          </Row>
-          <Row className="p-1">
-            <Col />
-            <Col>
-              <h2 className="whiteText">{Follows.collection.find({ isFollowingUser: shownUser.username }).count()}</h2>
-            </Col>
-          </Row>
-          <Row className="whiteText pt-5 py-2 px-4">
-            <h2>Following</h2>
-          </Row>
-          <Row className="p-1">
-            <Col />
-            <Col>
-              <h2 className="whiteText">{Follows.collection.find({ followerUser: shownUser.username }).count()}</h2>
-            </Col>
-          </Row>
-          <Row className="p-3">
-            {!isUserShownUser() && <FollowButton isFollowingUser={shownUser.username} followerUser={user.username} /> }
+        <Col>
+          <Row className="text-end p-3">
+            <Container> {/* Wrap the button in a Container */}
+              {!isUserShownUser() && <FollowButton className="btn-sm" isFollowingUser={shownUser.username} followerUser={user.username} />}
+            </Container>
           </Row>
         </Col>
       </Row>
+      <Row className="text-center black Text pt-3">
+        <Col />
+        <Col>
+          <h5>Followers</h5>
+          <h5 className="black Text">{Follows.collection.find({ isFollowingUser: shownUser.username }).count()}</h5>
+        </Col>
+        <Col>
+          <h5>Following</h5>
+          <h5 className="black Text">{Follows.collection.find({ followerUser: shownUser.username }).count()}</h5>
+        </Col>
+        <Col />
+      </Row>
       {/* Render the posts owned by this user */}
-      <Row className="text-center whiteText">
-        <h2>Posts</h2>
+      <Row className="text-center black Text py-3">
+        <h3>Gallery</h3>
       </Row>
       <Row xs={1} md={2} lg={3} className="g-4">
         {posts.map((post) => (

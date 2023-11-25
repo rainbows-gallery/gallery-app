@@ -9,7 +9,7 @@ const ClickableImage = ({ src, href, alt, width, height, userName, userProfile }
       <img src={src} alt={alt} width={width} />
       <div className="p-2 d-flex position-absolute bottom-0 start-0 bg-white w-100 opacity-75">
         <img className="rounded-circle" src={userProfile} alt={userName} width={40} />
-        <h3 className="text-black">@{userName}</h3>
+        <h5 className="text-black">@{userName}</h5>
       </div>
     </div>
   </Link>

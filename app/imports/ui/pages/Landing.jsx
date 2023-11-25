@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Image } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Gallery } from 'react-grid-gallery';
@@ -49,8 +49,8 @@ const Landing = () => {
         const currentUser = users.find(x => x.username === post.owner);
         return {
           src: post.imageId,
-          width: 520,
-          height: 212,
+          width: '100%',
+          height: '100%',
           caption: post.description,
           thumbnailCaption: (
             <div className="p-2 d-flex position-absolute bottom-0 start-0 bg-white w-100 opacity-75">
@@ -60,7 +60,7 @@ const Landing = () => {
                 alt={post.owner}
                 width={40}
               />
-              <h3 className="text-black">@{post.owner}</h3>
+              <h5 className="text-black">@{post.owner}</h5>
             </div>
           ),
         };
@@ -71,26 +71,28 @@ const Landing = () => {
     console.log(users);
   }, [users]);
   return ready ? (
-    <Container id="landing-page" className="py-3 bg-white rounded">
-      { highlight !== undefined ? (
-        <ClickableImage
-          width="100%"
-          height="500px"
-          href={`/photo-interact/${highlight._id}`}
-          src={highlight.imageId}
-          alt={highlight.description}
-          userName={highlight.owner}
-          userProfile={users.find(x => x.username === highlight.owner).profile ? users.find(x => x.username === highlight.owner).profile.image : ''}
+    <>
+      <Container className="m-0 min-vw-100">
+        {!Meteor.userId() && highlight !== undefined && (
+          <Row className="d-flex justify-content-center">
+            <Image src="/images/rainbow.png" style={{ width: '100%', height: 'auto', padding: 0 }} />
+          </Row>
+        )}
+      </Container>
+      <Container id="landing-page" className="py-3 bg-white rounded">
+        {!Meteor.userId() && highlight !== undefined && (
+          <h2 className="py-4">Recent Posts</h2>
+        )}
+        { highlight === undefined && (<h1 className="text-center">Follow some accounts to begin viewing artwork!</h1>)}
+        <Gallery
+          images={galleryPosts}
+          onClick={(index) => {
+            navigate(`/photo-interact/${posts[index]._id}`);
+          }}
+          enableImageSelection={false}
         />
-      ) : <h1 className="text-center">Follow some accounts to begin viewing artwork!</h1>}
-      <Gallery
-        images={galleryPosts}
-        onClick={(index) => {
-          navigate(`/photo-interact/${posts[index]._id}`);
-        }}
-        enableImageSelection={false}
-      />
-    </Container>
+      </Container>
+    </>
   ) : <LoadingSpinner />;
 };
 
