@@ -4,11 +4,13 @@ import { StarFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
+// import { Roles } from 'meteor/alanning:roles';
 import AddComment from '../components/AddComment';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Comments } from '../../api/comment/Comments';
 import Comment from '../components/Comment';
 import { Posts } from '../../api/Posts/Posts';
+import TrashPostButton from '../components/TrashPostButton';
 
 const PhotoInteract = () => {
   const { _id } = useParams();
@@ -53,6 +55,7 @@ const PhotoInteract = () => {
           </div>
           <div className="d-flex align-items-center">
             { Meteor.user() && <span><StarFill size={30} /></span> }
+            <span><TrashPostButton postId={post._id} /></span>
           </div>
         </Card.Body>
         <ListGroup variant="flush">
