@@ -85,7 +85,7 @@ const Landing = () => {
         {!Meteor.userId() && (
           <h2 className="py-4">Recent Posts</h2>
         )}
-        { galleryPosts.length === 0 && (<h1 className="text-center">Follow some accounts to begin viewing artwork!</h1>)}
+        { galleryPosts.length === 0 && (<h1 className="text-center">Follow some accounts to begin viewing artwork!For inspiration, check the discover tab!</h1>)}
         <Gallery
           images={galleryPosts}
           onClick={(index) => {

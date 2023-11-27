@@ -34,8 +34,12 @@ const NavBar = () => {
                 <Button id="signup" variant="primary" className="rounded-corners">Sign Up</Button>
               </Link>,
             ]) : [
-              <Nav.Link id="home" as={NavLink} to="/" key="feed">Feed</Nav.Link>,
-              <Nav.Link id="add-page-nav" as={NavLink} to="/addPosts" key="add">Add Post</Nav.Link>,
+
+              // If there is a user logged in, then show:
+              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="feed">Feed</Nav.Link>,
+              <Nav.Link id="discover-nav" as={NavLink} to="/discover" key="discover">Discover</Nav.Link>,
+              <Nav.Link id="add-stuff-nav" as={NavLink} to="/addPosts" key="add">Add Post</Nav.Link>,
+
               <Nav.Link id="profile-nav" as={NavLink} to={`/profile/${Meteor.user()._id}`} key="profile">Profile</Nav.Link>,
               <Link to="/" key="signOut">
                 <Button id="signOut" variant="primary" onClick={() => Meteor.logout()} className="rounded-corners">Sign Out</Button>

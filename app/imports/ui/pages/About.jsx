@@ -40,11 +40,17 @@ const About = () => (
             Once you have logged in, you will be taken to a home page showing your current feed. Feed is populated based on the accounts that you follow. From the home page, you can view your profile, feed, or search new users to follow!
           </p>
           <h3 className="py-2">
+            Searching Profiles
+          </h3>
+          <p className="text-black">
+            In the search bar next to the rainbow logo, enter a username you'd like to find! Once you have typed in a user name, press "enter".
+          </p>
+          <h3 className="py-2">
             Viewing Photos
           </h3>
           <p className="text-black">
             If you would like to view a photo from your feed in greater detail, simply click on the photo and you will be able to see it full size, along with comments added to the post.
-            Additionally, you can click share to copy the photo link and send it to your friends!
+            Additionally, you can star the post to save it to your favorites!
           </p>
           <h3 className="py-2">
             Account Modifications

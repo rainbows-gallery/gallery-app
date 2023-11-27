@@ -1,72 +1,123 @@
-//* ** Is currently just EditContact Page copy pasted
-
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SubmitField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
+import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { useParams } from 'react-router';
+import Dropzone from 'react-dropzone';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Contacts } from '../../api/contact/Contacts';
 
-const bridge = new SimpleSchema2Bridge(Contacts.schema);
+const formSchema = new SimpleSchema({
+  bio: String,
+});
 
-/* Renders the EditContact page for editing a single document. */
-const EditContact = () => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const { _id } = useParams();
-  // console.log('EditContact', _id);
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { doc, ready } = useTracker(() => {
+const bridge = new SimpleSchema2Bridge(formSchema);
+/* Renders the EditProfile page for editing a single document. */
+const EditProfile = () => {
+  const [imagePreview, setImagePreview] = useState(null);
+  const [file, setFile] = useState(null);
+  const [dropzoneKey, setDropzoneKey] = useState(0);
+
+  const fileToDataURL = (fileVal) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(fileVal);
+  });
+
+  const handleDrop = (acceptedFiles) => {
+    const previewUrl = acceptedFiles[0] && URL.createObjectURL(acceptedFiles[0]);
+    setFile(acceptedFiles[0]);
+    setImagePreview(previewUrl);
+  };
+
+  const { user, ready } = useTracker(() => {
     // Get access to Contact documents.
-    const subscription = Meteor.subscribe(Contacts.userPublicationName);
+    const subscription = Meteor.subscribe('userList');
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the document
-    const document = Contacts.collection.findOne(_id);
+    const userFetch = Meteor.user();
     return {
-      doc: document,
+      user: userFetch,
       ready: rdy,
     };
-  }, [_id]);
-  // console.log('EditContact', doc, ready);
-  // On successful submit, insert the data.
-  const submit = (data) => {
-    const { firstName, lastName, address, image, description } = data;
-    Contacts.collection.update(_id, { $set: { firstName, lastName, address, image, description } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
-  };
+  }, []);
 
+  const submit = (data, formRef) => {
+    const { bio } = data;
+
+    fileToDataURL(file).then((dataVal) => {
+      Meteor.call('image.upload', dataVal, (error, response) => {
+        if (error) {
+          // Handle the error
+          console.error('Error uploading:', error);
+        } else {
+          const returnedResponse = JSON.parse(response);
+          console.log(returnedResponse);
+          Meteor.users.update(
+            { _id: Meteor.user()._id },
+            { $set: { profile: { bio, image: returnedResponse.url } } },
+            (errorTwo) => {
+              if (errorTwo) {
+                swal('Error', errorTwo.message, 'error');
+              } else {
+                swal('Success', 'Item added successfully', 'success');
+                formRef.reset();
+                setDropzoneKey(prevKey => prevKey + 1);
+                setImagePreview(null);
+                setFile(null);
+              }
+            },
+          );
+        }
+      });
+    });
+  };
+  let fRef = null;
   return ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Col className="text-center"><h2>Edit Contact</h2></Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
+          <Col className="text-center"><h2>Edit Your Profile</h2></Col>
+          <AutoForm schema={bridge} ref={ref => { fRef = ref; }} onSubmit={data => submit(data, fRef)} model={user}>
             <Card>
               <Card.Body>
+                <p className="text-black">Upload a new profile photo by clicking or dragging a photo into the dotted box below:</p>
+                <Dropzone key={dropzoneKey} onDrop={handleDrop}>
+                  {({ getRootProps, getInputProps }) => (
+                    <section>
+                      <div
+                        // This is needed for the dropzone component for drag drop a file
+                        // eslint-disable-next-line react/jsx-props-no-spreading
+                        {...getRootProps({
+                          className: 'rounded',
+                          style: { border: '2px dashed' },
+                        })}
+                      >
+                        <input
+                          // This is needed for the dropzone component for drag drop a file
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {
+                            ...getInputProps({ accept: 'image/*', name: 'FileImage' })
+                          }
+                        />
+                        <p>You may drag and drop your image here or click and select it</p>
+                        {imagePreview && <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px' }} />}
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
                 <Row>
-                  <Col>
-                    <TextField name="firstName" />
-                  </Col>
-                  <Col>
-                    <TextField name="lastName" />
-                  </Col>
+                  <LongTextField className="pt-3" name="bio" />
                 </Row>
-                <Row>
-                  <Col>
-                    <TextField name="address" />
-                  </Col>
-                  <Col>
-                    <TextField name="image" />
-                  </Col>
-                </Row>
-                <LongTextField name="description" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
+                <Link to={`/profile/${Meteor.user()._id}`}> Back to Profile</Link>
+                <p className="text-black">Note: you must upload both a photo and a bio at the same time to successfully update your profile</p>
               </Card.Body>
             </Card>
           </AutoForm>
@@ -76,4 +127,4 @@ const EditContact = () => {
   ) : <LoadingSpinner />;
 };
 
-export default EditContact;
+export default EditProfile;

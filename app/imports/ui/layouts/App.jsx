@@ -15,6 +15,8 @@ import PhotoInteract from '../pages/PhotoInteract';
 import SearchResult from '../pages/SearchResult';
 import AddPosts from '../pages/AddPosts';
 import Profile from '../pages/Profile';
+import Discover from '../pages/Discover';
+import EditProfile from '../pages/EditProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -30,8 +32,10 @@ const App = () => (
         <Route path="/search" element={<SearchResult />} />
         <Route path="/photo-interact/:_id" element={<PhotoInteract />} />
         <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+        <Route path="/discover" element={<ProtectedRoute><Discover /></ProtectedRoute>} />
         <Route path="/addPosts" element={<ProtectedRoute><AddPosts /></ProtectedRoute>} />
         <Route path="/profile/:_id" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/EditProfile" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
