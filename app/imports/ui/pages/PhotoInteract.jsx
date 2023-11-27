@@ -56,7 +56,7 @@ const PhotoInteract = () => {
           </div>
         </Card.Body>
         <ListGroup variant="flush">
-          {comments.map((comment, index) => <Comment key={index} comment={comment} post={post} />)}
+          {comments.map((comment, index) => <Comment id={index} key={index} comment={comment} post={post} />)}
         </ListGroup>
         { Meteor.user() && <AddComment owner={Meteor.user().username} postId={post._id} /> }
       </Card>

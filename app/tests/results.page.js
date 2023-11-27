@@ -1,8 +1,8 @@
 import { Selector } from 'testcafe';
 
-class LandingPage {
+class ResultPage {
   constructor() {
-    this.pageId = '#landing-page';
+    this.pageId = '#search-results-page';
     this.pageSelector = Selector(this.pageId);
   }
 
@@ -11,9 +11,9 @@ class LandingPage {
     await testController.expect(this.pageSelector.exists).ok();
   }
 
-  async goToPhotoInteract(testController) {
-    await testController.click('#pic-0');
+  async goToProfile(testController) {
+    await testController.click('#profile-0');
   }
 }
 
-export const landingPage = new LandingPage();
+export const resultPage = new ResultPage();
