@@ -48,9 +48,6 @@ const Profile = () => {
   }
   return (ready ? (
     <Container className="py-3">
-      <Row className="text-center">
-        <h1>Profile</h1>
-      </Row>
       <Row>
         <Col />
         <Col className="d-flex flex-column align-items-center justify-content-center">

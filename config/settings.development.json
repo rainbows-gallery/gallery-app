@@ -8,16 +8,88 @@
       "role": "admin"
     },
     {
-      "email": "john@foo.com",
-      "username": "john@foo.com",
-      "password": "changeme",
-      "image":  "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+      "email": "ohia@hawaii.edu",
+      "username": "photography_by_aaron",
+      "password": "password123",
+      "image":  "https://photographyicon.com/wp-content/uploads/2010/08/guy-jumping-in-the-air.jpg"
+    },
+    {
+      "email": "gardenia@hawaii.edu",
+      "username": "isa_sculpts",
+      "password": "password123",
+      "image":  "https://pnca.willamette.edu/images/uploads/PNCA-Student-Work-Katie-Sifford-2017.jpg"
+    },
+    {
+      "email": "llima@hawaii.edu",
+      "username": "umis_rugs",
+      "password": "password123",
+      "image":  "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/40ea83255cacb066bb57d3a51cd37b48.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp"
+    },
+    {
+      "email": "naupaka@hawaii.edu",
+      "username": "fashionista_anna",
+      "password": "password123",
+      "image":  "https://www.farn-ct.ac.uk/wp-content/uploads/2019/08/Fashion-Eloise-Hales-June-2019-14.jpg"
+    },
+    {
+      "email": "plumeria@hawaii.edu",
+      "username": "peters_pots",
+      "password": "password123",
+      "image":  "https://hardwickhandmade.com/wp-content/uploads/2019/12/cropped-IMG_0855-scaled-1.jpg"
+    },
+    {
+      "email": "pikake@hawaii.edu",
+      "username": "tessas_textiles",
+      "password": "password123",
+      "image":  "https://www.textileartist.org/wp-content/uploads/2013/12/Effervescence_Detail_Stattin_TA2-Kristine-Stattin-feature.jpg"
+    },
+    {
+      "email": "ti@hawaii.edu",
+      "username": "lei_by_leah",
+      "password": "password123",
+      "image":  "https://808arts.com/cdn/shop/products/hawaii-artist-aloha-de-mele-Lei-Ers-matted-print.jpg?v=1666234788"
+    },
+    {
+      "email": "hibiscus@hawaii.edu",
+      "username": "kamaka_tiki",
+      "password": "password123",
+      "image":  "https://cdn.designtoscano.com/product_images/gods-of-the-hawaiian-isle-tiki-wall-plaques-set-of-two-al91864/606d7b8b5fc37c00194c5cc4/zoom.jpg?c=1630591233"
+    },
+    {
+      "email": "ginger@hawaii.edu",
+      "username": "carving_cameron",
+      "password": "password123",
+      "image":  "https://hardwooddistributors.org/wp-content/uploads/Carved-Starburst-Design-32224241.jpg"
+    },
+    {
+      "email": "hala@hawaii.edu",
+      "username": "knitting_is_life",
+      "password": "password123",
+      "image":  "https://news.artnet.com/app/news-upload/2019/02/knitting-1430153_1920-1024x685.jpg"
+    },
+    {
+      "email": "anthurium@hawaii.edu",
+      "username": "glassworks_by_hannah",
+      "password": "password123",
+      "image":  "https://d3mvlb3hz2g78.cloudfront.net/wp-content/uploads/2021/01/thumb_720_450_dreamstime_m_60158490.jpg"
+    },
+    {
+      "email": "tuberose@hawaii.edu",
+      "username": "makeup_by_alyssa",
+      "password": "password123",
+      "image":  "https://artinstituteofmakeup.com/wp-content/uploads/2019/03/makeup-certification.jpg"
+    },
+    {
+      "email": "protea@hawaii.edu",
+      "username": "life_in_film",
+      "password": "password123",
+      "image":  "https://www.japantimes.co.jp/uploads/imported_images/uploads/2019/07/n-film-takahashi-b-20190708.jpg"
     }
   ],
 
   "defaultFollow": [
     {
-      "isFollowingUser": "john@foo.com",
+      "isFollowingUser": "ohia@foo.com",
       "followerUser": "admin@foo.com",
       "deletedDate": null
     }
@@ -25,52 +97,292 @@
 
   "defaultPosts": [
     {
-      "description": "Abstraction",
-      "owner": "admin@foo.com",
+      "description": "morning thoughts on the east side",
+      "owner": "photography_by_aaron",
       "likes": 10,
-      "uploadDate": "2020-10-15",
+      "uploadDate": "2023-11-26",
       "deletedDate": null,
-      "imageId": "https://cdn.shopify.com/s/files/1/0102/7555/3342/files/texture-abstract-structure-colorful_2_600x600.jpg?v=1637265614"
+      "imageId": "https://cdn.realhawaii.co/assets/koko-head-sunrise1.jpeg"
     },
     {
-      "description": "Rainbows Everywhere by Sara Sherwood",
-      "owner": "john@foo.com",
-      "likes": 10,
-      "uploadDate": "2020-10-15",
+      "description": "Eddie's wave",
+      "owner": "photography_by_aaron",
+      "likes": 25,
+      "uploadDate": "2023-10-21",
       "deletedDate": null,
-      "imageId": "https://www.sarasherwood.co.uk/wp-content/uploads/2017/05/97570-Rainbows_Everywhere-1200x591.jpg"
+      "imageId": "https://static01.nyt.com/images/2023/01/16/multimedia/16eddie-surf-01-zvfp/16eddie-surf-01-zvfp-videoSixteenByNine3000.jpg"
     },
     {
-      "description": "Geometric Rhythms, Original Abstract by Sally Trace",
-      "owner": "admin@foo.com",
-      "likes": 10,
-      "uploadDate": "2020-10-15",
+      "description": "fisher's luck",
+      "owner": "photography_by_aaron",
+      "likes": 5,
+      "uploadDate": "2023-11-25",
       "deletedDate": null,
-      "imageId": "https://www.sallytrace.com/cdn/shop/products/Geometric-Rhythms-Abstract-Art.jpg?v=1627762176&width=1646"
+      "imageId": "https://cdn2.veltra.com/ptr/20190204203856_1459854999_13990_0.jpg"
     },
     {
-      "description": "Faces",
-      "owner": "admin@foo.com",
-      "likes": 10,
-      "uploadDate": "2020-10-15",
+      "description": "manoa gold",
+      "owner": "photography_by_aaron",
+      "likes": 13,
+      "uploadDate": "2023-8-15",
       "deletedDate": null,
-      "imageId": "https://arthive.net/res/media/img/oy800/article/815/7567090@2x.jpg"
+      "imageId": "https://live.staticflickr.com/6202/6068101733_f74fb4dbb9_b.jpg"
     },
     {
-      "description": "Waves on a Sunset Shore",
-      "owner": "john@foo.com",
-      "likes": 10,
-      "uploadDate": "2020-10-15",
+      "description": "experimenting with cardboard",
+      "owner": "isa_sculpts",
+      "likes": 20,
+      "uploadDate": "2023-2-11",
       "deletedDate": null,
-      "imageId": "https://storage.googleapis.com/pod_public/1300/154181.jpg"
+      "imageId": "https://i.pinimg.com/474x/8f/13/5b/8f135bcb08678efdcb0e1eff579a2771.jpg"
     },
     {
-      "description": "Ballet in the Sky",
-      "owner": "john@foo.com",
-      "likes": 10,
-      "uploadDate": "2020-10-15",
+      "description": "the collection",
+      "owner": "isa_sculpts",
+      "likes": 30,
+      "uploadDate": "2023-3-05",
       "deletedDate": null,
-      "imageId": "https://www.theartist.me/wp-content/uploads/2016/03/abstract-expressionism.jpg"
+      "imageId": "https://www.toxel.com/wp-content/uploads/2016/09/cardboardsculptures01.jpg"
+    },
+    {
+      "description": "back to clay",
+      "owner": "isa_sculpts",
+      "likes": 20,
+      "uploadDate": "2023-2-11",
+      "deletedDate": null,
+      "imageId": "https://cdnb.artstation.com/p/assets/images/images/024/692/993/large/alison-dooley-20190301-110750-2.jpg?1583237972"
+    },
+    {
+      "description": "practicing hair texture",
+      "owner": "isa_sculpts",
+      "likes": 20,
+      "uploadDate": "2023-10-12",
+      "deletedDate": null,
+      "imageId": "https://i.pinimg.com/736x/52/ba/90/52ba90f9d89ce07fcf897d84a72e6e6a.jpg"
+    },
+    {
+      "description": "first time using my tufting gun",
+      "owner": "umis_rugs",
+      "likes": 5,
+      "uploadDate": "2023-5-17",
+      "deletedDate": null,
+      "imageId": "https://static.mywebsites360.com/eb1b473c3d784f3a937fc1b5e0857bad/i/ad4daf998a754666bd3cc5bd07e5493a/1/4SoifmQp45JMgBnHp7ed2/EAAE29C9-32F6-4348-B1FF-BD9DAA60E1D6%20%25281%2529.jpeg"
+    },
+    {
+      "description": "getting better and trying new things",
+      "owner": "umis_rugs",
+      "likes": 10,
+      "uploadDate": "2023-1-21",
+      "deletedDate": null,
+      "imageId": "https://i.pinimg.com/736x/60/5c/a3/605ca36bdf7a66c379bd9231fdb12ac7.jpg"
+    },
+    {
+      "description": "my favorite so far!",
+      "owner": "umis_rugs",
+      "likes": 5,
+      "uploadDate": "2023-6-17",
+      "deletedDate": null,
+      "imageId": "https://assets.bigcartel.com/product_images/319994493/IMG-2187.jpg?auto=format&fit=max&w=1000"
+    },
+    {
+      "description": "flower power",
+      "owner": "umis_rugs",
+      "likes": 8,
+      "uploadDate": "2023-8-30",
+      "deletedDate": null,
+      "imageId": "https://preview.redd.it/3-months-in-and-this-is-my-first-rug-of-the-year-3-5ft-v0-8svz2coo9kaa1.jpg?width=640&crop=smart&auto=webp&s=5959652785e7e0b94cf6b90e90282c991f3698b8"
+    },
+    {
+      "description": "my first full piece",
+      "owner": "fashionista_anna",
+      "likes": 2,
+      "uploadDate": "2023-9-10",
+      "deletedDate": null,
+      "imageId": "https://portal-media.cca.edu/images/webimage-418DFF94-5FC9-43DD-B5A6859794F43F21.width-1130.jpg"
+    },
+    {
+      "description": "new ideas",
+      "owner": "fashionista_anna",
+      "likes": 15,
+      "uploadDate": "2023-10-30",
+      "deletedDate": null,
+      "imageId": "https://admin.showstudio.com/images/O0OFVIXUD3O-Ep1PyG1zMkRZ3yI=/407203/width-2880/Edinburgh_College_of_Art_Amelia_Wang_Fashion_Design_Menswear__Womenswear_rvOV3AS.jpg"
+    },
+    {
+      "description": "from my last class project",
+      "owner": "fashionista_anna",
+      "likes": 10,
+      "uploadDate": "2023-11-27",
+      "deletedDate": null,
+      "imageId": "https://portal-media.cca.edu/images/small_digital_png-Fashion_commencement_exhibiti.original.png"
+    },
+    {
+      "description": "the show",
+      "owner": "fashionista_anna",
+      "likes": 3,
+      "uploadDate": "2023-11-27",
+      "deletedDate": null,
+      "imageId": "https://www.fafafoom.com/wp-content/uploads/2012/05/BrookeMWright-CCA2012-7.jpg"
+    },
+    {
+      "description": "first pot of the year",
+      "owner": "peters_pots",
+      "likes": 13,
+      "uploadDate": "2023-01-10",
+      "deletedDate": null,
+      "imageId": "https://images.food52.com/qnvenqdoc7ZRQLr5xdqjoiwCbDQ=/1500x1125/ae6a67ab-e3f8-42c2-a2d3-5ea1f9802360--2021-0603_sawyer-ceramics_garlic-pot_silo_mj-kroeger.jpg"
+    },
+    {
+      "description": "trying out different colors with mugs",
+      "owner": "peters_pots",
+      "likes": 10,
+      "uploadDate": "2023-05-11",
+      "deletedDate": null,
+      "imageId": "https://images.squarespace-cdn.com/content/v1/55c4e018e4b0f380d6520d7d/1601530930472-FHZ6KUCEU2BSC4DMV0C5/Speckled%2BMugs.jpg"
+    },
+    {
+      "description": "my new favorite glazing job",
+      "owner": "peters_pots",
+      "likes": 6,
+      "uploadDate": "2023-6-20",
+      "deletedDate": null,
+      "imageId": "https://pawleystudios.com/wp-content/uploads/2023/05/IMG_4711-conv.jpg"
+    },
+    {
+      "description": "my first full set",
+      "owner": "peters_pots",
+      "likes": 10,
+      "uploadDate": "2023-10-31",
+      "deletedDate": null,
+      "imageId": "https://www.shopsaltandsundry.com/cdn/shop/products/Salt_Sundry_NightshiftCeramics_WaveMugs_001_1800x.jpg?v=1665695953"
+    },
+    {
+      "description": "a masterpiece",
+      "owner": "tessas_textiles",
+      "likes": 10,
+      "uploadDate": "2023-02-20",
+      "deletedDate": null,
+      "imageId": "https://www.palmbeachdailynews.com/gcdn/presto/2021/12/17/NPBD/c7a648eb-7728-4b9c-a2b3-d57cd9f27d14-121321_fiber_art_01.jpg?width=660&height=440&fit=crop&format=pjpg&auto=webp"
+    },
+    {
+      "description": "faces",
+      "owner": "tessas_textiles",
+      "likes": 11,
+      "uploadDate": "2023-05-12",
+      "deletedDate": null,
+      "imageId": "https://i.pinimg.com/originals/dd/2f/9e/dd2f9e2ad79e17c029c228cab06e8163.png"
+    },
+    {
+      "description": "loving the colors",
+      "owner": "tessas_textiles",
+      "likes": 10,
+      "uploadDate": "2023-07-13",
+      "deletedDate": null,
+      "imageId": "https://www.textileartist.org/wp-content/uploads/2022/12/A.Sproule_11-April-Sproule.jpg"
+    },
+    {
+      "description": "newest adventure",
+      "owner": "tessas_textiles",
+      "likes": 5,
+      "uploadDate": "2023-10-20",
+      "deletedDate": null,
+      "imageId": "https://blog.artweb.com/wp-content/uploads/2022/10/moss-and-fungi-landscape.jpg"
+    },
+    {
+      "description": "island colors",
+      "owner": "lei_by_leah",
+      "likes": 15,
+      "uploadDate": "2023-04-13",
+      "deletedDate": null,
+      "imageId": "https://images.squarespace-cdn.com/content/v1/571c296d22482efa17890ad9/1619816198278-M1QI25PWYMT46RB5S190/Karp+come+back+from+Hawaii+and+checking+in+with+Alana+who+is+way+past+heartbroken_.jpg?format=1500w"
+    },
+    {
+      "description": "did this for may day",
+      "owner": "lei_by_leah",
+      "likes": 15,
+      "uploadDate": "2023-05-11",
+      "deletedDate": null,
+      "imageId": "https://wpcdn.us-east-1.vip.tn-cloud.net/www.hawaiimagazine.com/content/uploads/2020/12/2018-Leis.jpg"
+    },
+    {
+      "description": "tried something new",
+      "owner": "lei_by_leah",
+      "likes": 10,
+      "uploadDate": "2023-06-13",
+      "deletedDate": null,
+      "imageId": "https://d7hftxdivxxvm.cloudfront.net/?height=731&quality=85&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2FIJYd-AwQD_LdtoMe19MNIw%2Fnormalized.jpg&width=800"
+    },
+    {
+      "description": "glass lei",
+      "owner": "lei_by_leah",
+      "likes": 15,
+      "uploadDate": "2023-05-11",
+      "deletedDate": null,
+      "imageId": "https://www.arlie-glass.com/cdn/shop/files/IMG_4508_533x.jpg?v=1688196836"
+    },
+    {
+      "description": "koa wood",
+      "owner": "kamaka_tiki",
+      "likes": 10,
+      "uploadDate": "2023-10-13",
+      "deletedDate": null,
+      "imageId": "https://cdn11.bigcommerce.com/s-f7yrwu2fgw/images/stencil/1280x1280/products/16875/39625/20220719_020156535_iOS__86532.1659630873.jpg?c=2"
+    },
+    {
+      "description": "this was a big project",
+      "owner": "kamaka_tiki",
+      "likes": 8,
+      "uploadDate": "2023-8-17",
+      "deletedDate": null,
+      "imageId": "https://s.turbifycdn.com/aah/yhst-75377436552253/12-kona-style-tiki-ku-tiki-god-of-strength-natural-acacia-koa-provenance-kona-original-bishop-museum-hawaii-33.gif"
+    },
+    {
+      "description": "for my brother",
+      "owner": "kamaka_tiki",
+      "likes": 10,
+      "uploadDate": "2023-10-13",
+      "deletedDate": null,
+      "imageId": "https://s.turbifycdn.com/aah/yhst-75377436552253/12-kona-style-tiki-lono-tiki-god-of-fishing-abundance-natural-acacia-koa-wood-hawaii-museum-replica-32.gif"
+    },
+    {
+      "description": "something different",
+      "owner": "kamaka_tiki",
+      "likes": 14,
+      "uploadDate": "2023-11-13",
+      "deletedDate": null,
+      "imageId": "https://thehawaiistore.com/cdn/shop/files/TIKI-WOOD-5_-MUG_2000x.jpg?v=1697167812"
+    },
+    {
+      "description": "my favorite carving so far",
+      "owner": "carving_cameron",
+      "likes":1,
+      "uploadDate": "2023-01-11",
+      "deletedDate": null,
+      "imageId": "https://www.oceaniacarving.com/uploads/8/2/2/9/8229051/pxl-20230808-023151583-portrait_orig.jpg"
+    },
+    {
+      "description": "intricate little piece",
+      "owner": "carving_cameron",
+      "likes":10,
+      "uploadDate": "2023-06-01",
+      "deletedDate": null,
+      "imageId": "https://d16kd6gzalkogb.cloudfront.net/magazine_images/Kcho-R.E.C.-Rectifying-the-Course-.-Image-via-artsobserver.com_.jpg"
+    },
+    {
+      "description": "from the sea",
+      "owner": "carving_cameron",
+      "likes":1,
+      "uploadDate": "2023-08-15",
+      "deletedDate": null,
+      "imageId": "https://nebula.wsimg.com/ac70c6ace34c4a4a15669313de3792f4?AccessKeyId=0AEDCBEE75EDEBF920BC&disposition=0&alloworigin=1"
+    },
+    {
+      "description": "just for fun",
+      "owner": "carving_cameron",
+      "likes":1,
+      "uploadDate": "2023-10-11",
+      "deletedDate": null,
+      "imageId": "https://i.etsystatic.com/19076644/r/il/7ae1fa/1914755778/il_fullxfull.1914755778_k7j0.jpg"
     }
   ],
   "CLOUDINARY_CLOUD_NAME": "dv9xwi8q2",
