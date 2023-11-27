@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, SubmitField } from 'uniforms-bootstrap5';
@@ -81,7 +82,7 @@ const EditProfile = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Col className="text-center"><h2>Edit Contact</h2></Col>
+          <Col className="text-center"><h2>Edit Your Profile</h2></Col>
           <AutoForm schema={bridge} ref={ref => { fRef = ref; }} onSubmit={data => submit(data, fRef)} model={user}>
             <Card>
               <Card.Body>
@@ -114,6 +115,7 @@ const EditProfile = () => {
                 </Row>
                 <SubmitField value="Submit" />
                 <ErrorsField />
+                <Link to={`/profile/${Meteor.user()._id}`}> Back to Profile</Link>
               </Card.Body>
             </Card>
           </AutoForm>

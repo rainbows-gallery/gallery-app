@@ -45,6 +45,7 @@ const Profile = () => {
     };
   }, [_id]);
   function isUserShownUser() {
+    console.log(shownUser);
     return shownUser.username === user.username;
   }
   return (ready ? (
@@ -59,7 +60,6 @@ const Profile = () => {
           <Image className="rounded-circle" src={shownUser.profile.image} alt={shownUser.username} width="200px" height="200px" />
           {/* User name associated with account */}
           <h3>{shownUser ? shownUser.username : 'User Not Found'}</h3>
-          <Link to="/EditProfile">Edit Profile Photo</Link>
         </Col>
         <Col>
           <Row className="text-end p-3">
@@ -68,6 +68,10 @@ const Profile = () => {
             </Container>
           </Row>
         </Col>
+      </Row>
+      <Row className="p-2 text-center">
+        <p className="text-black text-center">{shownUser.profile.bio}</p>
+        {isUserShownUser() && <Link to="/EditProfile">Edit Profile</Link>}
       </Row>
       <Row className="text-center black Text pt-3">
         <Col />
