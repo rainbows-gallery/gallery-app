@@ -25,12 +25,14 @@ const SignUp = ({ location }) => {
   const submit = (doc) => {
     const { username, email, password } = doc;
     const image = 'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg';
+    const bio = '';
     const user = {
       username: username,
       email: email,
       password: password,
       profile: {
         image: image,
+        bio: bio,
       },
     };
     Accounts.createUser(user, (err) => {

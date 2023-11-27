@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Posts } from '../../api/Posts/Posts';
 import { Follows } from '../../api/Following/following';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -58,6 +59,7 @@ const Profile = () => {
           <Image className="rounded-circle" src={shownUser.profile.image} alt={shownUser.username} width="200px" height="200px" />
           {/* User name associated with account */}
           <h3>{shownUser ? shownUser.username : 'User Not Found'}</h3>
+          <Link to="/EditProfile">Edit Profile Photo</Link>
         </Col>
         <Col>
           <Row className="text-end p-3">
