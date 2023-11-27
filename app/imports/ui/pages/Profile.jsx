@@ -49,7 +49,7 @@ const Profile = () => {
     return shownUser.username === user.username;
   }
   return (ready ? (
-    <Container className="py-3">
+    <Container id="profile-page" className="py-3">
       <Row className="text-center">
         <h1>Profile</h1>
       </Row>

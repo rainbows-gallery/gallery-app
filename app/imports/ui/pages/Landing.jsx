@@ -13,7 +13,7 @@ const Landing = () => {
   const [galleryPosts, setGalleryPosts] = useState([]);
   const navigate = useNavigate();
 
-  const { posts, users, highlight, ready } = useTracker(() => {
+  const { posts, users, ready } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
@@ -35,7 +35,6 @@ const Landing = () => {
       : Posts.collection.find({}, { sort: { likes: -1 } }).fetch();
     const usersDef = (Meteor.users.find({}).fetch() ?? 'undefined');
     return {
-      highlight: postsDef.shift(),
       posts: postsDef,
       users: usersDef,
       ready: rdy && userRdy && followRdy,
@@ -44,7 +43,7 @@ const Landing = () => {
 
   useEffect(() => {
     if (ready) {
-      setGalleryPosts(posts.map((post) => {
+      setGalleryPosts(posts.map((post, index) => {
         const currentUser = users.find(x => x.username === post.owner);
         return {
           src: post.imageId,
@@ -52,7 +51,14 @@ const Landing = () => {
           height: '100%',
           caption: post.description,
           thumbnailCaption: (
-            <div className="p-2 d-flex position-absolute bottom-0 start-0 bg-white w-100 opacity-75">
+            <div
+              id={`pic-${index.toString()}`}
+              onClick={() => { navigate(`/photo-interact/${posts[index]._id}`); }}
+              onKeyDown={(e) => { if (e.key === 'Enter') navigate(`/photo-interact/${posts[index]._id}`); }}
+              role="button"
+              tabIndex="0"
+              className="p-2 d-flex position-absolute bottom-0 start-0 bg-white w-100 opacity-75"
+            >
               <img
                 className="rounded-circle"
                 src={currentUser.profile ? currentUser.profile.image : ''}
@@ -66,23 +72,20 @@ const Landing = () => {
       }));
     }
   }, [posts]);
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
   return ready ? (
     <>
       <Container className="m-0 min-vw-100">
-        {!Meteor.userId() && highlight !== undefined && (
+        {!Meteor.userId() && (
           <Row className="d-flex justify-content-center">
             <Image src="/images/rainbow.png" style={{ width: '100%', height: 'auto', padding: 0 }} />
           </Row>
         )}
       </Container>
       <Container id="landing-page" className="py-3 bg-white rounded">
-        {!Meteor.userId() && highlight !== undefined && (
+        {!Meteor.userId() && (
           <h2 className="py-4">Recent Posts</h2>
         )}
-        { highlight === undefined && (<h1 className="text-center">Follow some accounts to begin viewing artwork! For inspiration, check the discover tab!</h1>)}
+        { galleryPosts.length === 0 && (<h1 className="text-center">Follow some accounts to begin viewing artwork!For inspiration, check the discover tab!</h1>)}
         <Gallery
           images={galleryPosts}
           onClick={(index) => {

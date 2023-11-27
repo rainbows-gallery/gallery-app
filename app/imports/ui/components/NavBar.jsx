@@ -27,20 +27,22 @@ const NavBar = () => {
           <Nav className="justify-content-end d-flex">
             {/* If there is no user logged in, then show: */}
             {!currentUser ? ([
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="home">Home</Nav.Link>,
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/about" key="about">About</Nav.Link>,
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/signin" key="signIn">Sign In</Nav.Link>,
+              <Nav.Link id="home" as={NavLink} to="/" key="home">Home</Nav.Link>,
+              <Nav.Link id="about" as={NavLink} to="/about" key="about">About</Nav.Link>,
+              <Nav.Link id="signIn" as={NavLink} to="/signin" key="signIn">Sign In</Nav.Link>,
               <Link to="/signup" key="signup">
-                <Button variant="primary" className="rounded-corners">Sign Up</Button>
+                <Button id="signup" variant="primary" className="rounded-corners">Sign Up</Button>
               </Link>,
             ]) : [
+
               // If there is a user logged in, then show:
               <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/" key="feed">Feed</Nav.Link>,
               <Nav.Link id="discover-nav" as={NavLink} to="/discover" key="discover">Discover</Nav.Link>,
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/addPosts" key="add">Add Post</Nav.Link>,
+
               <Nav.Link id="profile-nav" as={NavLink} to={`/profile/${Meteor.user()._id}`} key="profile">Profile</Nav.Link>,
               <Link to="/" key="signOut">
-                <Button variant="primary" onClick={() => Meteor.logout()} className="rounded-corners">Sign Out</Button>
+                <Button id="signOut" variant="primary" onClick={() => Meteor.logout()} className="rounded-corners">Sign Out</Button>
               </Link>,
             ]}
           </Nav>

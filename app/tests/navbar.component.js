@@ -17,18 +17,7 @@ class NavBar {
     if (!visible) {
       await testController.click('button.navbar-toggler');
     }
-    await testController.click('#login-dropdown');
-    await testController.click('#login-dropdown-sign-in');
-  }
-
-  /** Check that the specified user is currently logged in. */
-  async isLoggedIn(testController, username) {
-    const visible = await Selector('#basic-navbar-nav').visible;
-    if (!visible) {
-      await testController.click('button.navbar-toggler');
-    }
-    const loggedInUser = Selector('#navbar-current-user').innerText;
-    await testController.expect(loggedInUser).eql(username);
+    await testController.click('#signIn');
   }
 
   /** Check that someone is logged in, then click items to logout. */
@@ -37,9 +26,7 @@ class NavBar {
     if (!visible) {
       await testController.click('button.navbar-toggler');
     }
-    await testController.expect(Selector('#navbar-current-user').exists).ok();
-    await testController.click('#navbar-current-user');
-    await testController.click('#navbar-sign-out');
+    await testController.click('#signOut');
   }
 
   /** Pull down login menu, go to sign up page. */
@@ -49,8 +36,43 @@ class NavBar {
     if (!visible) {
       await testController.click('button.navbar-toggler');
     }
-    await testController.click('#login-dropdown');
-    await testController.click('#login-dropdown-sign-up');
+    await testController.click('#signup');
+  }
+
+  async gotoHomePage(testController) {
+    await this.ensureLogout(testController);
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#home');
+  }
+
+  async gotoUploadPage(testController) {
+    await this.ensureLogout(testController);
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#add-page-nav');
+  }
+
+  async gotoAboutPage(testController) {
+    await this.ensureLogout(testController);
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#about');
+  }
+
+  async search(testController) {
+    await this.ensureLogout(testController);
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.typeText('#search-bar-nav', 'john\n');
   }
 }
 

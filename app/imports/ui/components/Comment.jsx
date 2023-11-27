@@ -5,9 +5,9 @@ import { Trash } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { Comments } from '../../api/comment/Comments';
 
-const Comment = ({ comment, post }) => {
-  const removeItem = (id) => {
-    Comments.collection.remove(id);
+const Comment = ({ comment, post, id }) => {
+  const removeItem = (idVal) => {
+    Comments.collection.remove(idVal);
   };
   return (
     <ListGroup.Item>
@@ -21,6 +21,7 @@ const Comment = ({ comment, post }) => {
         {Meteor.user() && (Meteor.user().username === comment.owner || Meteor.user().username === post.owner || Meteor.user().username === 'admin@foo.com') && (
           <Col xs="auto" className="p-4">
             <Button
+              id={`delete-comment-${id}`}
               variant="light"
               onClick={() => removeItem(comment._id)}
             >
@@ -51,6 +52,7 @@ Comment.propTypes = {
     deletedDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.oneOf([null])]),
     _id: PropTypes.string,
   }).isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default Comment;
