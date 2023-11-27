@@ -43,7 +43,7 @@ const About = () => (
             Searching Profiles
           </h3>
           <p className="text-black">
-            In the search bar next to the rainbow logo, enter a username you'd like to find! Once you have typed in a user name, press "enter".
+            In the search bar next to the rainbow logo, enter a username you&apos;d like to find! Once you have typed in a user name, press &quot;enter&quot;.
           </p>
           <h3 className="py-2">
             Viewing Photos

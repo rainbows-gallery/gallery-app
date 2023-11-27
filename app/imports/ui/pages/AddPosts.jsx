@@ -87,6 +87,7 @@ const AddPosts = () => {
                           style: { border: '2px dashed' },
                         })}
                       >
+                        <p className="text-black">You may drag and drop your image here or click and select it</p>
                         <input
                           // This is needed for the dropzone component for drag drop a file
                           // eslint-disable-next-line react/jsx-props-no-spreading
@@ -94,7 +95,6 @@ const AddPosts = () => {
                             ...getInputProps({ accept: 'image/*', name: 'FileImage' })
                           }
                         />
-                        <p>You may drag and drop your image here or click and select it</p>
                         {imagePreview && <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px' }} />}
                       </div>
                     </section>
