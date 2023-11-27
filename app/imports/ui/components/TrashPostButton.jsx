@@ -10,14 +10,14 @@ const TrashPostButton = ({ postId, comments, redirectTo }) => {
   const navigate = useNavigate();
 
   // Remove post and its associated comments from collection and navigate to another page
-  const removePost = function (id, commentArr) {
-    commentArr.map((comment) => Comments.collection.remove(comment._id));
-    Posts.collection.remove(id);
+  const removePost = function () {
+    comments.map((comment) => Comments.collection.remove(comment._id));
+    Posts.collection.remove(postId);
     navigate(redirectTo);
   };
 
   return (
-    <Button variant="link" className="text-danger ps-0" onClick={() => removePost(postId, comments, redirectTo)}><Trash3Fill size={30} /></Button>
+    <Button variant="link" className="text-danger ps-0" onClick={() => removePost()}><Trash3Fill size={30} /></Button>
   );
 };
 

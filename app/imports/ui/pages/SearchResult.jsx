@@ -21,7 +21,7 @@ const SearchEntry = ({ userProfilePic, id, alt, userName, email, href, width = 6
           className="rounded-circle me-4 float-start"
         />
         <Card.Title>@{userName}</Card.Title>
-        <Card.Text className="text-muted">{email}</Card.Text>
+        <Card.Text className="text-muted h6">{email}</Card.Text>
       </Card.Body>
     </Card>
   </Link>
