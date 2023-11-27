@@ -31,7 +31,7 @@ const NavBar = () => {
               <Nav.Link id="about" as={NavLink} to="/about" key="about">About</Nav.Link>,
               <Nav.Link id="signIn" as={NavLink} to="/signin" key="signIn">Sign In</Nav.Link>,
               <Link to="/signup" key="signup">
-                <Button variant="primary" className="rounded-corners">Sign Up</Button>
+                <Button id="signup" variant="primary" className="rounded-corners">Sign Up</Button>
               </Link>,
             ]) : [
               <Nav.Link id="home" as={NavLink} to="/" key="feed">Feed</Nav.Link>,

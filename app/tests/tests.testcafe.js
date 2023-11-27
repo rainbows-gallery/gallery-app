@@ -6,11 +6,13 @@ import { photoInteractPage } from './photoInteract.page';
 import { profilePage } from './profile.page';
 // import { uploadPage } from './upload.page';
 import { navBar } from './navbar.component';
+import { signupPage } from './signup.page';
 
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'admin@foo.com', password: 'changeme' };
+const testUser = { username: 'test@foo.com', password: 'changeme' };
 
 fixture('meteor-application-template-react localhost test with default db')
   .page('http://localhost:3000');
@@ -91,4 +93,9 @@ test('PhotoInteract Comment Page test', async (testController) => {
   await photoInteractPage.deleteComment(testController);
   await navBar.logout(testController);
   await landingPage.isDisplayed(testController);
+});
+
+test('signup', async (testController) => {
+  await navBar.gotoSignUpPage(testController);
+  await signupPage.signupUser(testController, testUser.username, testUser.password);
 });

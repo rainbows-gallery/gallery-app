@@ -36,7 +36,7 @@ class NavBar {
     if (!visible) {
       await testController.click('button.navbar-toggler');
     }
-    await testController.click('#signUp');
+    await testController.click('#signup');
   }
 
   async gotoHomePage(testController) {

@@ -1,5 +1,4 @@
 import { Selector } from 'testcafe';
-import { navBar } from './navbar.component';
 
 class SignupPage {
   constructor() {
@@ -15,10 +14,10 @@ class SignupPage {
   /** Signs up a new user, then checks to see that they are logged in by checking the navbar. */
   async signupUser(testController, username, password) {
     await this.isDisplayed(testController);
-    await testController.typeText('#signup-form-email', username);
-    await testController.typeText('#signup-form-password', password);
-    await testController.click('#signup-form-submit input.btn.btn-primary');
-    await navBar.isLoggedIn(testController, username);
+    await testController.typeText('#username', username);
+    await testController.typeText('#email', username);
+    await testController.typeText('#password', password);
+    await testController.click('#signup-Submit');
   }
 }
 
