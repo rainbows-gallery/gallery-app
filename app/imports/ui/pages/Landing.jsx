@@ -4,7 +4,6 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Gallery } from 'react-grid-gallery';
 import { useNavigate } from 'react-router-dom';
-import ClickableImage from '../components/ClickableImage';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Posts } from '../../api/Posts/Posts';
 import { Follows } from '../../api/Following/following';
@@ -83,7 +82,7 @@ const Landing = () => {
         {!Meteor.userId() && highlight !== undefined && (
           <h2 className="py-4">Recent Posts</h2>
         )}
-        { highlight === undefined && (<h1 className="text-center">Follow some accounts to begin viewing artwork!</h1>)}
+        { highlight === undefined && (<h1 className="text-center">Follow some accounts to begin viewing artwork! For inspiration, check the discover tab!</h1>)}
         <Gallery
           images={galleryPosts}
           onClick={(index) => {
