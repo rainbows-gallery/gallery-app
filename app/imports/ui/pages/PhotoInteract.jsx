@@ -55,7 +55,7 @@ const PhotoInteract = () => {
           </div>
           <div className="d-flex align-items-center">
             { Meteor.user() && <span><StarFill size={30} /></span> }
-            <span><TrashPostButton postId={post._id} /></span>
+            { Meteor.user() && <span><TrashPostButton postId={post._id} /></span>}
           </div>
         </Card.Body>
         <ListGroup variant="flush">
