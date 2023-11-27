@@ -86,6 +86,7 @@ const EditProfile = () => {
           <AutoForm schema={bridge} ref={ref => { fRef = ref; }} onSubmit={data => submit(data, fRef)} model={user}>
             <Card>
               <Card.Body>
+                <p htmlFor="fileInput">Upload a new profile photo:</p>
                 <Dropzone key={dropzoneKey} onDrop={handleDrop}>
                   {({ getRootProps, getInputProps }) => (
                     <section>
@@ -116,6 +117,7 @@ const EditProfile = () => {
                 <SubmitField value="Submit" />
                 <ErrorsField />
                 <Link to={`/profile/${Meteor.user()._id}`}> Back to Profile</Link>
+                <p className="text-black">Note: you must upload both a photo and a bio to successfully update your profile</p>
               </Card.Body>
             </Card>
           </AutoForm>
