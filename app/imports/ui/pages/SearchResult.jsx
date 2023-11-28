@@ -1,15 +1,15 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Card, Container, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const SearchEntry = ({ userProfilePic, id, alt, userName, email, href, width = 64, height = 64 }) => (
-  <Link to={href} className="h2">
+  <Link to={href} className="text-decoration-none">
     <Card className="border-0 rounded px-4 my-3 align-content-center">
       <Card.Body>
         <Image
@@ -20,8 +20,8 @@ const SearchEntry = ({ userProfilePic, id, alt, userName, email, href, width = 6
           height={height}
           className="rounded-circle me-4 float-start"
         />
-        <Card.Title>@{userName}</Card.Title>
-        <Card.Text className="text-muted h6">{email}</Card.Text>
+        <Card.Title><h2>@{userName}</h2></Card.Title>
+        <Card.Text className="text-muted">{email}</Card.Text>
       </Card.Body>
     </Card>
   </Link>
