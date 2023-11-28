@@ -26,6 +26,13 @@ class NavBar {
     if (!visible) {
       await testController.click('button.navbar-toggler');
     }
+
+    const overlay = Selector('.swal-overlay');
+    if (await overlay.visible) {
+      // If so, find and click the close button (or another element to dismiss the overlay)
+      await testController.click(overlay.find('.swal-button')); // Replace '.close-button-selector' with the actual selector for the close button or element
+    }
+
     await testController.click('#signOut');
   }
 
