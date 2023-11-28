@@ -42,6 +42,7 @@ test('Test that landing page and search profile without signing in', async (test
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
+  await testController.wait(1000);
   await navBar.logout(testController);
   await landingPage.isDisplayed(testController);
 });
@@ -85,6 +86,7 @@ test('Follow & Unfollow test', async (testController) => {
   await profilePage.unFollow(testController);
   await profilePage.follow(testController);
   await navBar.gotoHomePage(testController);
+  await testController.wait(1000);
   await navBar.logout(testController);
   await landingPage.isDisplayed(testController);
 });
