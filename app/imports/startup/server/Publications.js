@@ -60,3 +60,12 @@ Meteor.publish(Comments.adminPublicationName, function () {
 Meteor.publish('userList', function () {
   return Meteor.users.find({});
 });
+
+// alanning:roles publication
+// Publishes roles for each user.
+Meteor.publish(null, function () {
+  if (this.userId) {
+    return Meteor.roleAssignment.find({ 'user._id': this.userId });
+  }
+  return this.ready();
+});

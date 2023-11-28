@@ -4,11 +4,13 @@ import { StarFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
+import { Roles } from 'meteor/alanning:roles';
 import AddComment from '../components/AddComment';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Comments } from '../../api/comment/Comments';
 import Comment from '../components/Comment';
 import { Posts } from '../../api/Posts/Posts';
+import TrashPostButton from '../components/TrashPostButton';
 
 const PhotoInteract = () => {
   const { _id } = useParams();
@@ -17,7 +19,7 @@ const PhotoInteract = () => {
     const subscription = Meteor.subscribe(Posts.everyOnePublicationName); // Update with your actual publication name
     const subscription2 = Meteor.subscribe(Comments.userPublicationName); // Update with your actual publication name
 
-    const rdy = subscription.ready() && subscription2.ready();
+    const rdy = subscription.ready() && subscription2.ready() && Roles.subscription.ready();
 
     const postItem = Posts.collection.findOne({ _id });
     const commentItems = Comments.collection.find({ postId: _id }).fetch();
@@ -53,6 +55,7 @@ const PhotoInteract = () => {
           </div>
           <div className="d-flex align-items-center">
             { Meteor.user() && <span><StarFill size={30} /></span> }
+            { Meteor.user() && (Meteor.user().username === post.owner || Roles.userIsInRole(Meteor.user(), 'admin')) && <span><TrashPostButton postId={post._id} comments={comments} redirectTo="/" /></span>}
           </div>
         </Card.Body>
         <ListGroup variant="flush">
