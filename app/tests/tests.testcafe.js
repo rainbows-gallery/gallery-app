@@ -52,6 +52,7 @@ test('Test that signin landing and photoInteract and signout work', async (testC
   await signinPage.signin(testController, credentials.username, credentials.password);
   await landingPage.isDisplayed(testController);
   await landingPage.goToPhotoInteract(testController);
+  await testController.wait(1000);
   await navBar.logout(testController);
   await landingPage.isDisplayed(testController);
 });
@@ -111,11 +112,13 @@ test('upload Image', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await testController.wait(1000);
   await signinPage.signin(testController, credentials.username, credentials.password);
+  await testController.wait(1000);
   await landingPage.isDisplayed(testController);
   await navBar.gotoUploadPage(testController);
   await testController.wait(1000);
   await uploadPage.isDisplayed(testController);
   await uploadPage.postImage(testController);
+  await testController.wait(1000);
   await navBar.logout(testController);
   await testController.wait(1000);
   await landingPage.isDisplayed(testController);
