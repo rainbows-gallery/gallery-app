@@ -3,21 +3,24 @@ import { Meteor } from 'meteor/meteor';
 import { Card, CardBody, Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Posts } from '../../api/Posts/Posts';
 
 const ProfileTab = ({ userName, userProfilePic, userEmail, href, onePost, userBio }) => (
-  <Card className="h-100">
-    <Card.Header>
-      <Image src={userProfilePic} width={75} />
-      <Card.Title><a href={href} className="h2">@{userName}</a></Card.Title>
-      <Card.Subtitle>{userEmail}</Card.Subtitle>
-    </Card.Header>
-    <CardBody>
-      <Card.Text className="text-black">{userBio}</Card.Text>
-      <Image src={onePost} width={150} />
-    </CardBody>
-  </Card>
+  <Link to={href} className="text-decoration-none">
+    <Card className="h-100">
+      <Card.Header>
+        <Image src={userProfilePic} width={64} height={64} className="float-start" roundedCircle />
+        <Card.Title className="text-end"><h2>@{userName}</h2></Card.Title>
+        <Card.Subtitle className="text-end text-muted">{userEmail}</Card.Subtitle>
+      </Card.Header>
+      <CardBody>
+        <Card.Text className="text-black">{userBio}</Card.Text>
+        <Image src={onePost} width={150} />
+      </CardBody>
+    </Card>
+  </Link>
 );
 const Discover = () => {
   const { ready, users } = useTracker(() => {
@@ -26,10 +29,10 @@ const Discover = () => {
     // Determine if the subscription is ready
     const rdy = userSubscriber.ready() && postSubscription.ready();
     // Get the Users
-    const currentUser = Meteor.users.find({}).fetch();
+    const userList = Meteor.users.find({ _id: { $ne: Meteor.user()._id } }).fetch();
     return {
       ready: rdy,
-      users: currentUser,
+      users: userList,
     };
   }, []);
   return (ready ? (
