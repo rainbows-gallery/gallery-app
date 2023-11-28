@@ -11,8 +11,10 @@ class UploadPage {
     await testController.expect(this.pageSelector.exists).ok();
   }
 
-  async goToProfile(testController) {
-    await testController.click('#profile-0');
+  async postImage(testController) {
+    await testController.setFilesToUpload('#upload-input', ['test.png']);
+    await testController.typeText('#description', 'test');
+    await testController.click('#post-Submit');
   }
 }
 
