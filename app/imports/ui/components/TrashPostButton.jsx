@@ -38,7 +38,7 @@ const TrashPostButton = ({ postId, comments, redirectTo }) => {
         onEntered={() => { isClickOnce = true; }}
         onExit={() => { isClickOnce = false; }}
       >
-        <Tooltip>Are you sure you want to delete this post? (This action can&apos;t be reverted)</Tooltip>
+        <Tooltip>Are you sure you want to delete this post? (This action can not be reverted)</Tooltip>
       </Overlay>
     </>
   );
