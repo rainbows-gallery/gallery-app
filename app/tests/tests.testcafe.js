@@ -42,9 +42,10 @@ test('Test that landing page and search profile without signing in', async (test
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await testController.wait(1000);
+  await testController.wait(2000);
   await landingPage.isDisplayed();
   await navBar.logout(testController);
+  await testController.wait(2000);
   await landingPage.isDisplayed(testController);
 });
 
@@ -53,8 +54,9 @@ test('Test that signin landing and photoInteract and signout work', async (testC
   await signinPage.signin(testController, credentials.username, credentials.password);
   await landingPage.isDisplayed(testController);
   await landingPage.goToPhotoInteract(testController);
-  await testController.wait(1000);
+  await testController.wait(2000);
   await navBar.logout(testController);
+  await testController.wait(2000);
   await landingPage.isDisplayed(testController);
 });
 
@@ -71,9 +73,9 @@ test('Test that signin landing and search and profile and signout work', async (
   await testController.wait(1000);
   await profilePage.isDisplayed(testController);
   await navBar.gotoHomePage(testController);
-  await testController.wait(1000);
+  await testController.wait(2000);
   await navBar.logout(testController);
-  await testController.wait(1000);
+  await testController.wait(2000);
   await landingPage.isDisplayed(testController);
 });
 
