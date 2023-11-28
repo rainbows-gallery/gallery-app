@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { AutoForm, ErrorsField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -92,7 +92,7 @@ const AddPosts = () => {
                           // This is needed for the dropzone component for drag drop a file
                           // eslint-disable-next-line react/jsx-props-no-spreading
                           {
-                            ...getInputProps({ accept: 'image/*', name: 'FileImage' })
+                            ...getInputProps({ id: 'upload-input', accept: 'image/*', name: 'FileImage' })
                           }
                         />
                         {imagePreview && <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px' }} />}
@@ -100,9 +100,9 @@ const AddPosts = () => {
                     </section>
                   )}
                 </Dropzone>
-                <TextField name="description" />
+                <TextField id="description" name="description" />
                 <ErrorsField />
-                <SubmitField value="Submit" />
+                <Button id="post-Submit" color="primary" type="submit">Submit</Button>
               </Card.Body>
             </Card>
           </AutoForm>

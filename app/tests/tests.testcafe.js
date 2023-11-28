@@ -4,7 +4,7 @@ import { signinPage } from './signin.page';
 import { resultPage } from './results.page';
 import { photoInteractPage } from './photoInteract.page';
 import { profilePage } from './profile.page';
-// import { uploadPage } from './upload.page';
+import { uploadPage } from './upload.page';
 import { navBar } from './navbar.component';
 import { signupPage } from './signup.page';
 
@@ -91,6 +91,17 @@ test('PhotoInteract Comment Page test', async (testController) => {
   await photoInteractPage.isDisplayed(testController);
   await photoInteractPage.comment(testController);
   await photoInteractPage.deleteComment(testController);
+  await navBar.logout(testController);
+  await landingPage.isDisplayed(testController);
+});
+
+test('upload Image', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await landingPage.isDisplayed(testController);
+  await navBar.gotoUploadPage(testController);
+  await uploadPage.isDisplayed(testController);
+  await uploadPage.postImage(testController);
   await navBar.logout(testController);
   await landingPage.isDisplayed(testController);
 });
