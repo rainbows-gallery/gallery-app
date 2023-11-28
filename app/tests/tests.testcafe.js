@@ -43,9 +43,10 @@ test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await testController.wait(2000);
-  await landingPage.isDisplayed();
+  await landingPage.isDisplayed(testController);
   await navBar.logout(testController);
   await testController.wait(2000);
+  await landingPage.isDisplayed(testController);
 });
 
 test('Test that signin landing and photoInteract and signout work', async (testController) => {
@@ -122,7 +123,6 @@ test('upload Image', async (testController) => {
   await uploadPage.postImage(testController);
   await testController.wait(1000);
   await navBar.logout(testController);
-  await testController.wait(1000);
 });
 
 test('signup', async (testController) => {
