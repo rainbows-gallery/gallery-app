@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Card, CardBody, Col, Container, Image, Row } from 'react-bootstrap';
+import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -10,15 +10,21 @@ import { Posts } from '../../api/Posts/Posts';
 const ProfileTab = ({ userName, userProfilePic, userEmail, href, onePost, userBio }) => (
   <Link to={href} className="text-decoration-none">
     <Card className="h-100">
-      <Card.Header>
+      <Card.Header className="py-3">
         <Image src={userProfilePic} width={64} height={64} className="float-start" roundedCircle />
         <Card.Title className="text-end"><h2>@{userName}</h2></Card.Title>
         <Card.Subtitle className="text-end text-muted">{userEmail}</Card.Subtitle>
+        {userBio ? <Card.Text className="text-black pt-2 ">Bio: {userBio}</Card.Text> : ''}
       </Card.Header>
-      <CardBody>
-        <Card.Text className="text-black">{userBio}</Card.Text>
-        <Image src={onePost} width={150} />
-      </CardBody>
+      {onePost ? (
+        <Card.Body className="text-center">
+          <Image src={onePost} className="w-75" thumbnail />
+        </Card.Body>
+      ) : (
+        <Card.Body className="text-center">
+          <Card.Text className="text-muted">This profile has not posted an image yet</Card.Text>
+        </Card.Body>
+      )}
     </Card>
   </Link>
 );
