@@ -10,7 +10,7 @@ import { Posts } from '../../api/Posts/Posts';
 const ProfileTab = ({ userName, userProfilePic, userEmail, href, onePost, userBio }) => (
   <Link to={href} className="text-decoration-none">
     <Card className="h-100">
-      <Card.Header className="py-3">
+      <Card.Header className="py-2">
         <Image src={userProfilePic} width={64} height={64} className="float-start" roundedCircle />
         <Card.Title className="text-end"><h2>@{userName}</h2></Card.Title>
         <Card.Subtitle className="text-end text-muted">{userEmail}</Card.Subtitle>
