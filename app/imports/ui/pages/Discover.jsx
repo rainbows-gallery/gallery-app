@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Posts } from '../../api/Posts/Posts';
+import ClickableImage from '../components/ClickableImage';
 
 const ProfileTab = ({ userName, userProfilePic, userEmail, href, onePost, userBio }) => (
   <Link to={href} className="text-decoration-none">
@@ -49,19 +50,32 @@ const Discover = () => {
             <h2>Click an account to view their profile</h2>
           </Col>
           <Row xs={1} md={2} lg={3} className="g-4">
-            {users.map((user) => {
+            {users.map((user, index) => {
               const userPost = Posts.collection.findOne({ owner: user.username });
               const onePost = userPost ? userPost.imageId : undefined;
+              // return (
+              //   <Col key={user._id}><ProfileTab
+              //     userProfilePic={user.profile.image}
+              //     userName={user.username}
+              //     userEmail={user.emails[0].address}
+              //     href={`/profile/${user._id}`}
+              //     userBio={user.profile.bio}
+              //     onePost={onePost}
+              //   />
+              //   </Col>
+              // );
               return (
-                <Col key={user._id}><ProfileTab
-                  userProfilePic={user.profile.image}
-                  userName={user.username}
-                  userEmail={user.emails[0].address}
+                <ClickableImage
+                  id={`profile-${index}`}
+                  key={user._id}
+                  src={onePost}
+                  alt="Placeholder"
+                  width="100%"
+                  height="300px"
                   href={`/profile/${user._id}`}
-                  userBio={user.profile.bio}
-                  onePost={onePost}
+                  userName={user.username}
+                  userProfile={user.profile.image}
                 />
-                </Col>
               );
             })}
           </Row>

@@ -43,20 +43,20 @@ const PhotoInteract = () => {
           style={{ maxWidth: '80%' }}
         />
         <Card.Body className="d-flex align-items-center justify-content-between">
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center ms-3">
             <Image
               src={currentUser.profile.image}
               alt={post.owner}
-              width="40"
-              height="40"
-              className="rounded-circle me-3"
+              width="60"
+              height="60"
+              className="rounded-circle"
             />
             <div>
               <Card.Title><Link style={{ color: 'black', textDecoration: 'none' }} to={`/profile/${Meteor.users.findOne({ username: post.owner })._id}`}>{post.owner}</Link></Card.Title>
               <Card.Text style={{ color: 'black' }}>{post.description}</Card.Text>
             </div>
           </div>
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center me-3">
             { Meteor.user() && <span><StarFill size={30} /></span> }
             { Meteor.user() && (Meteor.user().username === post.owner || Roles.userIsInRole(Meteor.user(), 'admin')) && <span><TrashPostButton postId={post._id} comments={comments} redirectTo="/" /></span>}
           </div>
