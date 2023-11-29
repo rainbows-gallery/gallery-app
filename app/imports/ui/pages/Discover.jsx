@@ -36,7 +36,7 @@ const Discover = () => {
     // Determine if the subscription is ready
     const rdy = userSubscriber.ready() && postSubscription.ready();
     // Get the Users
-    const userList = Meteor.users.find({ _id: { $ne: Meteor.user()._id }, username: { $ne: 'admin@foo.com' } }).fetch();
+    const userList = Meteor.users.find({ _id: { $ne: Meteor.user()._id } }).fetch();
     return {
       ready: rdy,
       users: userList,
