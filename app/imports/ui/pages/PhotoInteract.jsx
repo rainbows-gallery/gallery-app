@@ -52,8 +52,8 @@ const PhotoInteract = () => {
               className="rounded-circle me-3"
             />
             <div>
-              <Card.Title><Link to={`/profile/${Meteor.users.findOne({ username: post.owner })._id}`}>{post.owner}</Link></Card.Title>
-              <Card.Text>{post.description}</Card.Text>
+              <Card.Title><Link style={{ color: 'black', textDecoration: 'none' }} to={`/profile/${Meteor.users.findOne({ username: post.owner })._id}`}>{post.owner}</Link></Card.Title>
+              <Card.Text style={{ color: 'black' }}>{post.description}</Card.Text>
             </div>
           </div>
           <div className="d-flex align-items-center">
