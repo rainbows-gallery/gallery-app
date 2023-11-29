@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Navigate } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import { Alert, Card, Col, Container, Row, Button } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, TextField } from 'uniforms-bootstrap5';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -25,12 +25,14 @@ const SignUp = ({ location }) => {
   const submit = (doc) => {
     const { username, email, password } = doc;
     const image = 'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg';
+    const bio = '';
     const user = {
       username: username,
       email: email,
       password: password,
       profile: {
         image: image,
+        bio: bio,
       },
     };
     Accounts.createUser(user, (err) => {
@@ -58,13 +60,13 @@ const SignUp = ({ location }) => {
               <Card.Body>
                 <Card.Title><h2>Sign Up</h2></Card.Title>
                 <hr />
-                <TextField name="username" placeholder="Username" labelClassName="pt-3 pb-1 h5" inputClassName="rounded-pill border-dark" />
-                <TextField name="email" placeholder="Email address" labelClassName="pb-1 h5" inputClassName="rounded-pill border-dark" />
-                <TextField name="password" placeholder="Password" type="password" labelClassName="pb-1 h5" inputClassName="rounded-pill border-dark" />
+                <TextField id="username" name="username" placeholder="Username" labelClassName="pt-3 pb-1 h5" inputClassName="rounded-pill border-dark" />
+                <TextField id="email" name="email" placeholder="Email address" labelClassName="pb-1 h5" inputClassName="rounded-pill border-dark" />
+                <TextField id="password" name="password" placeholder="Password" type="password" labelClassName="pb-1 h5" inputClassName="rounded-pill border-dark" />
                 <ErrorsField />
                 <Row className="align-items-center py-3">
                   <Col>
-                    <SubmitField value="Submit" inputClassName="rounded-pill btn btn-primary px-3 py-2" />
+                    <Button id="signup-Submit" type="submit" className="rounded-pill btn btn-primary px-3 py-2">Submit</Button>
                   </Col>
                   <Col className="text-end login-signup-link">
                     <Link to="/signin">Already have an account?</Link>

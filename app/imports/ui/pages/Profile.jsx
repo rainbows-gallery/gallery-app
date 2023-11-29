@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Posts } from '../../api/Posts/Posts';
 import { Follows } from '../../api/Following/following';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -44,10 +45,15 @@ const Profile = () => {
     };
   }, [_id]);
   function isUserShownUser() {
+    console.log(shownUser);
     return shownUser.username === user.username;
   }
   return (ready ? (
-    <Container className="py-3">
+
+    <Container id="profile-page" className="py-3">
+      <Row className="text-center">
+        <h1>Profile</h1>
+      </Row>
       <Row>
         <Col />
         <Col className="d-flex flex-column align-items-center justify-content-center">
@@ -63,6 +69,10 @@ const Profile = () => {
             </Container>
           </Row>
         </Col>
+      </Row>
+      <Row className="p-2 text-center">
+        <p className="text-black text-center">{shownUser.profile.bio}</p>
+        {isUserShownUser() && <Link to="/EditProfile">Edit Profile</Link>}
       </Row>
       <Row className="text-center black Text pt-3">
         <Col />

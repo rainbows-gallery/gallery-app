@@ -4,11 +4,14 @@ import { StarFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
 import AddComment from '../components/AddComment';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Comments } from '../../api/comment/Comments';
 import Comment from '../components/Comment';
 import { Posts } from '../../api/Posts/Posts';
+import TrashPostButton from '../components/TrashPostButton';
 
 const PhotoInteract = () => {
   const { _id } = useParams();
@@ -22,7 +25,6 @@ const PhotoInteract = () => {
     const postItem = Posts.collection.findOne({ _id });
     const commentItems = Comments.collection.find({ postId: _id }).fetch();
     const usersDef = (Meteor.users.find({ username: postItem ? postItem.owner : '' }).fetch() ?? 'undefined');
-
     return {
       ready: rdy,
       post: postItem,
@@ -50,16 +52,17 @@ const PhotoInteract = () => {
               className="rounded-circle me-3"
             />
             <div>
-              <Card.Title>{post.owner}</Card.Title>
-              <Card.Text style={{ color: 'black' }}>{post.description}</Card.Text>
+              <Card.Title><Link to={`/profile/${Meteor.users.findOne({ username: post.owner })._id}`}>{post.owner}</Link></Card.Title>
+              <Card.Text>{post.description}</Card.Text>
             </div>
           </div>
           <div className="d-flex align-items-center">
             { Meteor.user() && <span><StarFill size={30} /></span> }
+            { Meteor.user() && (Meteor.user().username === post.owner || Roles.userIsInRole(Meteor.user(), 'admin')) && <span><TrashPostButton postId={post._id} comments={comments} redirectTo="/" /></span>}
           </div>
         </Card.Body>
         <ListGroup variant="flush">
-          {comments.map((comment, index) => <Comment key={index} comment={comment} post={post} />)}
+          {comments.map((comment, index) => <Comment id={index} key={index} comment={comment} post={post} />)}
         </ListGroup>
         { Meteor.user() && <AddComment owner={Meteor.user().username} postId={post._id} /> }
       </Card>

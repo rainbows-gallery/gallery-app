@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, HiddenField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { AutoForm, ErrorsField, HiddenField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
@@ -46,8 +46,8 @@ const AddComment = ({ owner, postId }) => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="comment" />
-                <SubmitField value="Submit" />
+                <TextField id="comment-input" name="comment" />
+                <Button id="comment-submit" color="primary" type="submit">Submit</Button>
                 <ErrorsField />
                 <HiddenField name="owner" value={owner} />
                 <HiddenField name="postId" value={postId} />

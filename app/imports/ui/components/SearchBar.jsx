@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const SearchBar = () => {
+const SearchBar = ({ id }) => {
   const [value, setValue] = useState('');
   const submitBtn = useRef(null);
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const SearchBar = () => {
       onSubmit={(e) => handleSubmit(e)}
     >
       <Form.Control
+        id={id}
         name="searchField"
         type="text"
         placeholder="Search for Profiles"
@@ -40,6 +42,10 @@ const SearchBar = () => {
       <Button ref={submitBtn} type="submit" className="invisible position-absolute" />
     </Form>
   );
+};
+
+SearchBar.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default SearchBar;
