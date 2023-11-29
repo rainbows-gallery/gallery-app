@@ -89,7 +89,7 @@
 
   "defaultFollow": [
     {
-      "isFollowingUser": "ohia@foo.com",
+      "isFollowingUser": "photography_by_aaron",
       "followerUser": "admin@foo.com",
       "deletedDate": null
     }
@@ -101,7 +101,7 @@
       "description":"Welcome to Rainbow Gallery",
       "owner": "admin@foo.com",
       "likes": 0,
-      "uploadedDate": "2023-11-26",
+      "uploadDate": "2023-11-26",
       "deletedDate": null,
       "imageId": "https://www.pgcps.org/globalassets/schools/elementary/thomas-s.-stone/images/h-welcome-bienvenidas-bienvenue.jpg"
     },

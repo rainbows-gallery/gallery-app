@@ -73,7 +73,7 @@ const Landing = () => {
     }
   }, [posts]);
   return ready ? (
-    <>
+    <div id="landing-page">
       <Container className="m-0 min-vw-100">
         {!Meteor.userId() && (
           <Row className="d-flex justify-content-center">
@@ -81,7 +81,7 @@ const Landing = () => {
           </Row>
         )}
       </Container>
-      <Container id="landing-page" className="py-3 bg-white rounded">
+      <Container className="py-3 bg-white rounded">
         {!Meteor.userId() && (
           <h2 className="py-4">Recent Posts</h2>
         )}
@@ -94,7 +94,7 @@ const Landing = () => {
           enableImageSelection={false}
         />
       </Container>
-    </>
+    </div>
   ) : <LoadingSpinner />;
 };
 
