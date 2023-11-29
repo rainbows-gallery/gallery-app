@@ -12,7 +12,7 @@ import { signupPage } from './signup.page';
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'admin@foo.com', password: 'changeme' };
-const testUser = { username: 'test@foo.com', password: 'changeme' };
+const testUser = { username: 'isa_sculpts', password: 'password123' };
 
 fixture('meteor-application-template-react localhost test with default db')
   .page('http://localhost:3000');
@@ -87,8 +87,8 @@ test('Follow & Unfollow test', async (testController) => {
   await resultPage.isDisplayed(testController);
   await resultPage.goToProfile(testController);
   await profilePage.isDisplayed(testController);
-  await profilePage.unFollow(testController);
   await profilePage.follow(testController);
+  await profilePage.unFollow(testController);
   await navBar.gotoHomePage(testController);
   await testController.wait(1000);
   await navBar.logout(testController);

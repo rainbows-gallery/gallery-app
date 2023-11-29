@@ -79,7 +79,7 @@ class NavBar {
     if (!visible) {
       await testController.click('button.navbar-toggler');
     }
-    await testController.typeText('#search-bar-nav', 'john\n');
+    await testController.typeText('#search-bar-nav', 'pots\n');
   }
 }
 
