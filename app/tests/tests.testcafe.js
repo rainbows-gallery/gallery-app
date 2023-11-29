@@ -12,7 +12,7 @@ import { signupPage } from './signup.page';
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'admin@foo.com', password: 'changeme' };
-const testUser = { username: 'test@foo.com', password: 'changeme' };
+const testUser = { username: 'isa_sculpts', password: 'password123' };
 
 fixture('meteor-application-template-react localhost test with default db')
   .page('http://localhost:3000');
