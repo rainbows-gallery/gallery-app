@@ -96,6 +96,15 @@
   ],
 
   "defaultPosts": [
+
+    {
+      "description":"Welcome to Rainbow Gallery",
+      "owner": "admin@foo.com",
+      "likes": 0,
+      "uploadedDate": "2023-11-26",
+      "deletedDate": null,
+      "imageId": "https://www.pgcps.org/globalassets/schools/elementary/thomas-s.-stone/images/h-welcome-bienvenidas-bienvenue.jpg"
+    },
     {
       "description": "morning thoughts on the east side",
       "owner": "photography_by_aaron",

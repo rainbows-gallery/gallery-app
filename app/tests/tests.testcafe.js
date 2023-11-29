@@ -87,8 +87,8 @@ test('Follow & Unfollow test', async (testController) => {
   await resultPage.isDisplayed(testController);
   await resultPage.goToProfile(testController);
   await profilePage.isDisplayed(testController);
-  await profilePage.unFollow(testController);
   await profilePage.follow(testController);
+  await profilePage.unFollow(testController);
   await navBar.gotoHomePage(testController);
   await testController.wait(1000);
   await navBar.logout(testController);
