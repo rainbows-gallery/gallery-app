@@ -21,6 +21,7 @@ const AddPosts = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [file, setFile] = useState(null);
   const [dropzoneKey, setDropzoneKey] = useState(0);
+  const [buttonDisable, setButtonDisable] = useState(false);
 
   const fileToDataURL = (fileVal) => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -41,10 +42,12 @@ const AddPosts = () => {
     const owner = Meteor.user().username;
 
     fileToDataURL(file).then((dataVal) => {
+      setButtonDisable(true);
       Meteor.call('image.upload', dataVal, (error, response) => {
         if (error) {
           // Handle the error
           console.error('Error uploading:', error);
+          setButtonDisable(false);
         } else {
           const returnedResponse = JSON.parse(response);
           console.log(returnedResponse);
@@ -62,6 +65,7 @@ const AddPosts = () => {
               }
             },
           );
+          setButtonDisable(false);
         }
       });
     });
@@ -102,7 +106,7 @@ const AddPosts = () => {
                 </Dropzone>
                 <TextField id="description" name="description" />
                 <ErrorsField />
-                <Button id="post-Submit" color="primary" type="submit">Submit</Button>
+                <Button id="post-Submit" color="primary" type="submit" disabled={buttonDisable}>Submit</Button>
               </Card.Body>
             </Card>
           </AutoForm>
