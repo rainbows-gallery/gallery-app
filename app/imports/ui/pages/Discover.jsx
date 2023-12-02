@@ -17,15 +17,9 @@ const ProfileTab = ({ userName, userProfilePic, userEmail, href, onePost, userBi
         <Card.Subtitle className="text-end text-muted">{userEmail}</Card.Subtitle>
         {userBio ? <Card.Text className="text-black pt-2 ">Bio: {userBio}</Card.Text> : ''}
       </Card.Header>
-      {onePost ? (
-        <Card.Body className="text-center">
-          <Image src={onePost} className="w-75" thumbnail />
-        </Card.Body>
-      ) : (
-        <Card.Body className="text-center">
-          <Card.Text className="text-muted">This profile has not posted an image yet</Card.Text>
-        </Card.Body>
-      )}
+      <Card.Body className="text-center">
+        <Image src={onePost} className="w-75" thumbnail />
+      </Card.Body>
     </Card>
   </Link>
 );
@@ -36,7 +30,7 @@ const Discover = () => {
     // Determine if the subscription is ready
     const rdy = userSubscriber.ready() && postSubscription.ready();
     // Get the Users
-    const userList = Meteor.users.find({ _id: { $ne: Meteor.user()._id } }).fetch();
+    const userList = Meteor.users.find({ _id: { $ne: Meteor.user()?._id } }).fetch() || undefined;
     return {
       ready: rdy,
       users: userList,
@@ -50,34 +44,28 @@ const Discover = () => {
             <h2>Click an account to view their profile</h2>
           </Col>
           <Row xs={1} md={2} lg={3} className="g-4">
-            {users.map((user, index) => {
-              const userPost = Posts.collection.findOne({ owner: user.username });
-              const onePost = userPost ? userPost.imageId : undefined;
-              // return (
-              //   <Col key={user._id}><ProfileTab
-              //     userProfilePic={user.profile.image}
-              //     userName={user.username}
-              //     userEmail={user.emails[0].address}
-              //     href={`/profile/${user._id}`}
-              //     userBio={user.profile.bio}
-              //     onePost={onePost}
-              //   />
-              //   </Col>
-              // );
-              return (
-                <ClickableImage
-                  id={`profile-${index}`}
-                  key={user._id}
-                  src={onePost}
-                  alt="Placeholder"
-                  width="100%"
-                  height="300px"
-                  href={`/profile/${user._id}`}
-                  userName={user.username}
-                  userProfile={user.profile.image}
-                />
-              );
-            })}
+            {users
+              .filter((user) => {
+                const userPost = Posts.collection.findOne({ owner: user.username });
+                return userPost; // Filter out users without posts
+              })
+              .map((user, index) => {
+                const userPost = Posts.collection.findOne({ owner: user.username });
+                const onePost = userPost ? userPost.imageId : undefined;
+                return (
+                  <ClickableImage
+                    id={`profile-${index}`}
+                    key={user._id}
+                    src={onePost}
+                    alt="Placeholder"
+                    width="100%"
+                    height="300px"
+                    href={`/profile/${user._id}`}
+                    userName={user.username}
+                    userProfile={user.profile.image}
+                  />
+                );
+              })}
           </Row>
         </Col>
       </Row>
