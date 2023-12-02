@@ -28,6 +28,7 @@ const AddPosts = () => {
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
     reader.readAsDataURL(fileVal);
+    setButtonDisable(true);
   });
 
   const handleDrop = (acceptedFiles) => {
@@ -42,7 +43,6 @@ const AddPosts = () => {
     const owner = Meteor.user().username;
 
     fileToDataURL(file).then((dataVal) => {
-      setButtonDisable(true);
       Meteor.call('image.upload', dataVal, (error, response) => {
         if (error) {
           // Handle the error
