@@ -17,15 +17,9 @@ const ProfileTab = ({ userName, userProfilePic, userEmail, href, onePost, userBi
         <Card.Subtitle className="text-end text-muted">{userEmail}</Card.Subtitle>
         {userBio ? <Card.Text className="text-black pt-2 ">Bio: {userBio}</Card.Text> : ''}
       </Card.Header>
-      {onePost ? (
-        <Card.Body className="text-center">
-          <Image src={onePost} className="w-75" thumbnail />
-        </Card.Body>
-      ) : (
-        <Card.Body className="text-center">
-          <Card.Text className="text-muted">This profile has not posted an image yet</Card.Text>
-        </Card.Body>
-      )}
+      <Card.Body className="text-center">
+        <Image src={onePost} className="w-75" thumbnail />
+      </Card.Body>
     </Card>
   </Link>
 );
@@ -58,17 +52,6 @@ const Discover = () => {
               .map((user, index) => {
                 const userPost = Posts.collection.findOne({ owner: user.username });
                 const onePost = userPost ? userPost.imageId : undefined;
-                // return (
-                //   <Col key={user._id}><ProfileTab
-                //     userProfilePic={user.profile.image}
-                //     userName={user.username}
-                //     userEmail={user.emails[0].address}
-                //     href={`/profile/${user._id}`}
-                //     userBio={user.profile.bio}
-                //     onePost={onePost}
-                //   />
-                //   </Col>
-                // );
                 return (
                   <ClickableImage
                     id={`profile-${index}`}
