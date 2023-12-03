@@ -33,7 +33,7 @@ class NavBar {
       await testController.click(overlay.find('.swal-button')); // Replace '.close-button-selector' with the actual selector for the close button or element
     }
 
-    await testController.skipJsErrors().click('#signOut');
+    await testController.click('#signOut');
   }
 
   /** Pull down login menu, go to sign up page. */

@@ -20,6 +20,18 @@ class PhotoInteractPage {
   async deleteComment(testController) {
     await testController.click('#delete-comment-0');
   }
+
+  async starPost(testController) {
+    await testController.click('#unStared');
+  }
+
+  async unStarPost(testController) {
+    await testController.click('#stared');
+  }
+
+  async deletePost(testController) {
+    await testController.click('#deletePost');
+  }
 }
 
 export const photoInteractPage = new PhotoInteractPage();

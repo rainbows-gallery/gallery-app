@@ -28,6 +28,7 @@ const PhotoInteract = () => {
     const commentItems = Comments.collection.find({ postId: _id }).fetch();
     const usersDef = (Meteor.users.find({ username: postItem ? postItem.owner : '' }).fetch() ?? 'undefined');
     const stars = Stars.collection.find({ post: _id }).fetch();
+    console.log(postItem);
     return {
       ready: rdy,
       post: postItem,
@@ -76,13 +77,17 @@ const PhotoInteract = () => {
           <div className="d-flex align-items-center me-3">
             <div>
               { stared
-                ? Meteor.user() && <Button className='bg-warning border-warning' type="button" aria-label="Fill star" onClick={starClick}>
-                  <StarFill color="white" size={30} />
-                </Button>
-                : Meteor.user() && <Button className='bg-white border-black' type="button" aria-label="Unfill star" onClick={starClick}>
-                  <StarFill color="black" size={30} />
-                </Button> }
-              <b><span className='ms-2' id="likeCount">{post.likes}</span> Stars</b>
+                ? Meteor.user() && (
+                  <Button id="stared" className="bg-warning border-warning" type="button" aria-label="Fill star" onClick={starClick}>
+                    <StarFill color="white" size={30} />
+                  </Button>
+                )
+                : Meteor.user() && (
+                  <Button id="unStared" className="bg-white border-black" type="button" aria-label="Unfill star" onClick={starClick}>
+                    <StarFill color="black" size={30} />
+                  </Button>
+                ) }
+              <b><span className="ms-2" id="likeCount">{post.likes}</span> Stars</b>
             </div>
             { Meteor.user() && (Meteor.user().username === post.owner || Roles.userIsInRole(Meteor.user(), 'admin')) && <span><TrashPostButton postId={post._id} comments={comments} redirectTo="/" /></span>}
           </div>
