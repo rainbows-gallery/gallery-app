@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Container, Image, ListGroup } from 'react-bootstrap';
+import { Card, Container, Image, ListGroup, Button } from 'react-bootstrap';
 import { StarFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -74,9 +74,16 @@ const PhotoInteract = () => {
             </div>
           </div>
           <div className="d-flex align-items-center me-3">
-            { stared
-              ? Meteor.user() && <button type="button" aria-label="Fill star" onClick={starClick} className="bg-white border-0"><StarFill color="yellow" size={30} /></button>
-              : Meteor.user() && <button type="button" aria-label="Unfill star" onClick={starClick} className="bg-white border-0"><StarFill size={30} /></button> }
+            <div>
+              { stared
+                ? Meteor.user() && <Button className='bg-warning border-warning' type="button" aria-label="Fill star" onClick={starClick}>
+                  <StarFill color="white" size={30} />
+                </Button>
+                : Meteor.user() && <Button className='bg-white border-black' type="button" aria-label="Unfill star" onClick={starClick}>
+                  <StarFill color="black" size={30} />
+                </Button> }
+              <b><span className='ms-2' id="likeCount">{post.likes}</span> Stars</b>
+            </div>
             { Meteor.user() && (Meteor.user().username === post.owner || Roles.userIsInRole(Meteor.user(), 'admin')) && <span><TrashPostButton postId={post._id} comments={comments} redirectTo="/" /></span>}
           </div>
         </Card.Body>
