@@ -29,7 +29,7 @@ const TrashPostButton = ({ postId, comments, redirectTo }) => {
 
   return (
     <>
-      <Button variant="link" className="text-danger" onClick={() => removePost()} onMouseLeave={() => handleMouseLeave()}>
+      <Button id="deletePost" variant="link" className="text-danger" onClick={() => removePost()} onMouseLeave={() => handleMouseLeave()}>
         <Trash3Fill ref={target} size={30} />
       </Button>
       <Overlay

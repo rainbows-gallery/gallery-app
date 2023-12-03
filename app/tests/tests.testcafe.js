@@ -42,10 +42,8 @@ test('Test that landing page and search profile without signing in', async (test
 test('Test that signin and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await testController.wait(2000);
   await landingPage.isDisplayed(testController);
   await navBar.logout(testController);
-  await testController.wait(2000);
   await landingPage.isDisplayed(testController);
 });
 
@@ -54,28 +52,20 @@ test('Test that signin landing and photoInteract and signout work', async (testC
   await signinPage.signin(testController, credentials.username, credentials.password);
   await landingPage.isDisplayed(testController);
   await landingPage.goToPhotoInteract(testController);
-  await testController.wait(2000);
   await navBar.logout(testController);
-  await testController.wait(2000);
   await landingPage.isDisplayed(testController);
 });
 
 test('Test that signin landing and search and profile and signout work', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await testController.wait(1000);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await testController.wait(1000);
   await landingPage.isDisplayed(testController);
   await navBar.search(testController);
-  await testController.wait(1000);
   await resultPage.isDisplayed(testController);
   await resultPage.goToProfile(testController);
-  await testController.wait(1000);
   await profilePage.isDisplayed(testController);
   await navBar.gotoHomePage(testController);
-  await testController.wait(2000);
   await navBar.logout(testController);
-  await testController.wait(2000);
   await landingPage.isDisplayed(testController);
 });
 
@@ -90,38 +80,32 @@ test('Follow & Unfollow test', async (testController) => {
   await profilePage.follow(testController);
   await profilePage.unFollow(testController);
   await navBar.gotoHomePage(testController);
-  await testController.wait(1000);
   await navBar.logout(testController);
   await landingPage.isDisplayed(testController);
 });
 
-test('PhotoInteract Comment Page test', async (testController) => {
+test('PhotoInteract Comment Page test and star and then delete post', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await testController.wait(1000);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await testController.wait(1000);
   await landingPage.isDisplayed(testController);
   await landingPage.goToPhotoInteract(testController);
-  await testController.wait(1000);
   await photoInteractPage.isDisplayed(testController);
   await photoInteractPage.comment(testController);
   await photoInteractPage.deleteComment(testController);
+  await photoInteractPage.starPost(testController);
+  await photoInteractPage.unStarPost(testController);
+  await photoInteractPage.deletePost(testController);
   await navBar.logout(testController);
-  await testController.wait(1000);
   await landingPage.isDisplayed(testController);
 });
 
 test('upload Image', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await testController.wait(1000);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await testController.wait(1000);
   await landingPage.isDisplayed(testController);
   await navBar.gotoUploadPage(testController);
-  await testController.wait(1000);
   await uploadPage.isDisplayed(testController);
   await uploadPage.postImage(testController);
-  await testController.wait(1000);
   await navBar.logout(testController);
 });
 

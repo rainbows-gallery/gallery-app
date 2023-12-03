@@ -1,12 +1,14 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 import SearchBar from './SearchBar';
 
 const NavBar = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+  const nav = useNavigate();
+
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
@@ -41,9 +43,17 @@ const NavBar = () => {
               <Nav.Link id="add-page-nav" as={NavLink} to="/addPosts" key="add">Add Post</Nav.Link>,
 
               <Nav.Link id="profile-nav" as={NavLink} to={`/profile/${Meteor.user()._id}`} key="profile">Profile</Nav.Link>,
-              <Link to="/" key="signOut">
-                <Button id="signOut" variant="primary" onClick={() => Meteor.logout()} className="rounded-corners">Sign Out</Button>
-              </Link>,
+              <Button
+                id="signOut"
+                variant="primary"
+                onClick={() => {
+                  Meteor.logout();
+                  nav('/');
+                }}
+                className="rounded-corners"
+              >
+                Sign Out
+              </Button>,
             ]}
           </Nav>
         </Navbar.Collapse>
