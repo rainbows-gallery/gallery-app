@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Container, Image, ListGroup } from 'react-bootstrap';
+import { Card, Container, Image, ListGroup, Button } from 'react-bootstrap';
 import { StarFill } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -11,27 +11,44 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { Comments } from '../../api/comment/Comments';
 import Comment from '../components/Comment';
 import { Posts } from '../../api/Posts/Posts';
+import { Stars } from '../../api/stars/Stars';
 import TrashPostButton from '../components/TrashPostButton';
 
 const PhotoInteract = () => {
   const { _id } = useParams();
 
-  const { ready, post, comments, users } = useTracker(() => {
+  const { ready, post, comments, users, stared } = useTracker(() => {
     const subscription = Meteor.subscribe(Posts.everyOnePublicationName); // Update with your actual publication name
     const subscription2 = Meteor.subscribe(Comments.userPublicationName); // Update with your actual publication name
     const userSubscriber = Meteor.subscribe('userList');
+    const starSubscription = Meteor.subscribe(Stars.userPublicationName);
 
-    const rdy = subscription.ready() && subscription2.ready() && userSubscriber.ready();
+    const rdy = subscription.ready() && subscription2.ready() && userSubscriber.ready() && starSubscription.ready();
     const postItem = Posts.collection.findOne({ _id });
     const commentItems = Comments.collection.find({ postId: _id }).fetch();
     const usersDef = (Meteor.users.find({ username: postItem ? postItem.owner : '' }).fetch() ?? 'undefined');
+    const stars = Stars.collection.find({ post: _id }).fetch();
     return {
       ready: rdy,
       post: postItem,
       comments: commentItems,
       users: usersDef,
+      stared: stars.length > 0,
     };
   }, []);
+
+  const starClick = () => {
+    if (stared) {
+      Stars.collection.find({ post: _id }).forEach((star) => {
+        Stars.collection.remove(star._id);
+      });
+      Posts.collection.update({ _id }, { $inc: { likes: -1 } });
+    } else {
+      Stars.collection.insert({ post: _id, user: Meteor.user().username });
+      Posts.collection.update({ _id }, { $inc: { likes: 1 } });
+    }
+  };
+
   const currentUser = users.find(x => x.username === post.owner);
   return ready ? (
     <Container id="photo-interact" className="py-3 bg-white rounded">
@@ -57,7 +74,16 @@ const PhotoInteract = () => {
             </div>
           </div>
           <div className="d-flex align-items-center me-3">
-            { Meteor.user() && <span><StarFill size={30} /></span> }
+            <div>
+              { stared
+                ? Meteor.user() && <Button className='bg-warning border-warning' type="button" aria-label="Fill star" onClick={starClick}>
+                  <StarFill color="white" size={30} />
+                </Button>
+                : Meteor.user() && <Button className='bg-white border-black' type="button" aria-label="Unfill star" onClick={starClick}>
+                  <StarFill color="black" size={30} />
+                </Button> }
+              <b><span className='ms-2' id="likeCount">{post.likes}</span> Stars</b>
+            </div>
             { Meteor.user() && (Meteor.user().username === post.owner || Roles.userIsInRole(Meteor.user(), 'admin')) && <span><TrashPostButton postId={post._id} comments={comments} redirectTo="/" /></span>}
           </div>
         </Card.Body>

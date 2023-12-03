@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Posts } from '../../api/Posts/Posts';
 import { Comments } from '../../api/comment/Comments';
 import { Follows } from '../../api/Following/following';
+import { Stars } from '../../api/stars/Stars';
 
 // Post Publishers
 Meteor.publish(Posts.userPublicationName, function () {
@@ -59,6 +60,22 @@ Meteor.publish(Comments.adminPublicationName, function () {
 
 Meteor.publish('userList', function () {
   return Meteor.users.find({});
+});
+
+// Star Pubhlishers
+
+Meteor.publish(Stars.userPublicationName, function () {
+  if (this.userId) {
+    return Stars.collection.find({ user: Meteor.users.find({ _id: this.userId }).fetch()[0].username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(Stars.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Stars.collection.find();
+  }
+  return this.ready();
 });
 
 // alanning:roles publication
