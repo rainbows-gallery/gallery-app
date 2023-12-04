@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Image } from 'react-bootstrap';
+import { Container, Row, Image, Col } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Gallery } from 'react-grid-gallery';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Posts } from '../../api/Posts/Posts';
 import { Follows } from '../../api/Following/following';
+import ClickableImage from '../components/ClickableImage';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => {
@@ -50,6 +50,8 @@ const Landing = () => {
           width: '100%',
           height: '100%',
           caption: post.description,
+          username: post.owner,
+          userProfile: currentUser.profile.image,
           thumbnailCaption: (
             <div
               id={`pic-${index.toString()}`}
@@ -62,16 +64,17 @@ const Landing = () => {
               <img
                 className="rounded-circle"
                 src={currentUser.profile ? currentUser.profile.image : ''}
-                alt={post.owner}
+                alt={post.userProfile}
                 width={40}
               />
-              <h5 className="text-black">@{post.owner}</h5>
+              <h5 className="text-black">@{post.username}</h5>
             </div>
           ),
         };
       }));
     }
   }, [posts]);
+
   return ready ? (
     <div id="landing-page">
       <Container className="m-0 min-vw-100">
@@ -86,13 +89,23 @@ const Landing = () => {
           <h2 className="py-4">Recent Posts</h2>
         )}
         { galleryPosts.length === 0 && (<h1 className="text-center">Follow some accounts to begin viewing artwork! For inspiration, check the discover tab!</h1>)}
-        <Gallery
-          images={galleryPosts}
-          onClick={(index) => {
-            navigate(`/photo-interact/${posts[index]._id}`);
-          }}
-          enableImageSelection={false}
-        />
+        <Row xs={1} md={2} lg={3} className="g-4">
+          {galleryPosts.map((post, index) => (
+            <Col key={index} className="mb-4">
+              <ClickableImage
+                id={`profile-${index}`}
+                key={post._id}
+                src={post.src}
+                alt="Placeholder"
+                width="100%"
+                height="300px"
+                href={`/photo-interact/${posts[index]._id}`}
+                userName={post.username}
+                userProfile={post.userProfile}
+              />
+            </Col>
+          ))}
+        </Row>
       </Container>
     </div>
   ) : <LoadingSpinner />;
