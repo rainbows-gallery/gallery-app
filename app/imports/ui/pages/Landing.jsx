@@ -73,7 +73,7 @@ const Landing = () => {
           {galleryPosts.map((post, index) => (
             <Col key={index} className="mb-4">
               <ClickableImage
-                id={`profile-${index}`}
+                id={`pic-${index}`}
                 key={post._id}
                 src={post.src}
                 alt="Placeholder"
