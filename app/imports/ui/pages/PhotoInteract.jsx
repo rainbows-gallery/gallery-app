@@ -70,7 +70,7 @@ const PhotoInteract = () => {
               className="rounded-circle"
             />
             <div>
-              <Card.Title><Link style={{ color: 'black', textDecoration: 'none' }} to={`/profile/${Meteor.users.findOne({ username: post.owner })._id}`}>{post.owner}</Link></Card.Title>
+              <Card.Title><Link style={{ color: 'black' }} to={`/profile/${Meteor.users.findOne({ username: post.owner })._id}`}>{post.owner}</Link></Card.Title>
               <Card.Text style={{ color: 'black' }}>{post.description}</Card.Text>
             </div>
           </div>

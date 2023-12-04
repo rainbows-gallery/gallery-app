@@ -59,7 +59,7 @@ const Discover = () => {
                     src={onePost}
                     alt="Placeholder"
                     width="100%"
-                    height="300px"
+                    height="250px"
                     href={`/profile/${user._id}`}
                     userName={user.username}
                     userProfile={user.profile.image}
