@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Image, Col } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Posts } from '../../api/Posts/Posts';
 import { Follows } from '../../api/Following/following';
@@ -11,7 +10,6 @@ import ClickableImage from '../components/ClickableImage';
 /* A simple static component to render some text for the landing page. */
 const Landing = () => {
   const [galleryPosts, setGalleryPosts] = useState([]);
-  const navigate = useNavigate();
 
   const { posts, users, ready } = useTracker(() => {
     // Note that this subscription will get cleaned up
