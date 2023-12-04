@@ -43,7 +43,7 @@ const Landing = () => {
 
   useEffect(() => {
     if (ready) {
-      setGalleryPosts(posts.map((post, index) => {
+      setGalleryPosts(posts.map((post) => {
         const currentUser = users.find(x => x.username === post.owner);
         return {
           src: post.imageId,
@@ -52,24 +52,6 @@ const Landing = () => {
           caption: post.description,
           username: post.owner,
           userProfile: currentUser.profile.image,
-          thumbnailCaption: (
-            <div
-              id={`pic-${index.toString()}`}
-              onClick={() => { navigate(`/photo-interact/${posts[index]._id}`); }}
-              onKeyDown={(e) => { if (e.key === 'Enter') navigate(`/photo-interact/${posts[index]._id}`); }}
-              role="button"
-              tabIndex="0"
-              className="p-2 d-flex position-absolute bottom-0 start-0 bg-white w-100 opacity-75"
-            >
-              <img
-                className="rounded-circle"
-                src={currentUser.profile ? currentUser.profile.image : ''}
-                alt={post.userProfile}
-                width={40}
-              />
-              <h5 className="text-black">@{post.username}</h5>
-            </div>
-          ),
         };
       }));
     }
@@ -98,7 +80,7 @@ const Landing = () => {
                 src={post.src}
                 alt="Placeholder"
                 width="100%"
-                height="300px"
+                height="250px"
                 href={`/photo-interact/${posts[index]._id}`}
                 userName={post.username}
                 userProfile={post.userProfile}
