@@ -41,7 +41,7 @@ const Discover = () => {
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
-            <h3>Click an image to view the post, if you like what you see, click the username to go to that account!</h3>
+            <h3>Click an image to view the account of the poster!</h3>
           </Col>
           <Row xs={1} md={2} lg={3} className="g-4">
             {users
