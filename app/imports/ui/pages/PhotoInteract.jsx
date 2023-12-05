@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card, Container, Image, ListGroup, Button } from 'react-bootstrap';
-import { StarFill } from 'react-bootstrap-icons';
+import React, { useState } from 'react';
+import { Card, Container, Image, ListGroup, Button, Modal, Form } from 'react-bootstrap';
+import { StarFill, PencilSquare } from 'react-bootstrap-icons';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
@@ -16,10 +16,12 @@ import TrashPostButton from '../components/TrashPostButton';
 
 const PhotoInteract = () => {
   const { _id } = useParams();
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editedDescription, setEditedDescription] = useState('');
 
   const { ready, post, comments, users, stared } = useTracker(() => {
-    const subscription = Meteor.subscribe(Posts.everyOnePublicationName); // Update with your actual publication name
-    const subscription2 = Meteor.subscribe(Comments.userPublicationName); // Update with your actual publication name
+    const subscription = Meteor.subscribe(Posts.everyOnePublicationName);
+    const subscription2 = Meteor.subscribe(Comments.userPublicationName);
     const userSubscriber = Meteor.subscribe('userList');
     const starSubscription = Meteor.subscribe(Stars.userPublicationName);
 
@@ -28,7 +30,6 @@ const PhotoInteract = () => {
     const commentItems = Comments.collection.find({ postId: _id }).fetch();
     const usersDef = (Meteor.users.find({ username: postItem ? postItem.owner : '' }).fetch() ?? 'undefined');
     const stars = Stars.collection.find({ post: _id }).fetch();
-    console.log(postItem);
     return {
       ready: rdy,
       post: postItem,
@@ -50,7 +51,23 @@ const PhotoInteract = () => {
     }
   };
 
+  const handleEditModalShow = () => {
+    setShowEditModal(true);
+    setEditedDescription(post.description);
+  };
+
+  const handleEditModalClose = () => {
+    setShowEditModal(false);
+  };
+
+  const handleEditDescription = () => {
+    // Update the post description
+    Posts.collection.update({ _id }, { $set: { description: editedDescription } });
+    setShowEditModal(false);
+  };
+
   const currentUser = users.find(x => x.username === post.owner);
+
   return ready ? (
     <Container id="photo-interact" className="py-3 bg-white rounded">
       <Card>
@@ -89,7 +106,19 @@ const PhotoInteract = () => {
                 ) }
               <b><span className="ms-2" id="likeCount">{post.likes}</span> Stars</b>
             </div>
-            { Meteor.user() && (Meteor.user().username === post.owner || Roles.userIsInRole(Meteor.user(), 'admin')) && <span><TrashPostButton postId={post._id} comments={comments} redirectTo="/" /></span>}
+            { Meteor.user() && (Meteor.user().username === post.owner || Roles.userIsInRole(Meteor.user(), 'admin')) && (
+              <span>
+                <TrashPostButton postId={post._id} comments={comments} redirectTo="/" />
+                <Button
+                  variant="link"
+                  className="text-dark"
+                  onClick={handleEditModalShow}
+                >
+                  <PencilSquare size={20} />
+                  {' Edit'}
+                </Button>
+              </span>
+            )}
           </div>
         </Card.Body>
         <ListGroup variant="flush">
@@ -97,6 +126,28 @@ const PhotoInteract = () => {
         </ListGroup>
         { Meteor.user() && <AddComment owner={Meteor.user().username} postId={post._id} /> }
       </Card>
+
+      {/* Edit Post Description Modal */}
+      <Modal show={showEditModal} onHide={handleEditModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Post Description</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Control
+            as="textarea"
+            value={editedDescription}
+            onChange={(e) => setEditedDescription(e.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleEditModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleEditDescription}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   ) : <LoadingSpinner />;
 };
