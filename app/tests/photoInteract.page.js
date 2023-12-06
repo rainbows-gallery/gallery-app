@@ -32,6 +32,12 @@ class PhotoInteractPage {
   async deletePost(testController) {
     await testController.click('#deletePost');
   }
+
+  async editPost(testController) {
+    await testController.click('#editDescription');
+    await testController.typeText('#description', 'Love the photo');
+    await testController.click('#save');
+  }
 }
 
 export const photoInteractPage = new PhotoInteractPage();

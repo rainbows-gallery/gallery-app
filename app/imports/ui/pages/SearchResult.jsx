@@ -1,31 +1,11 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Card, Container, Image } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { _ } from 'meteor/underscore';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useLocation } from 'react-router';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import SearchEntry from '../components/Users';
 import LoadingSpinner from '../components/LoadingSpinner';
-
-const SearchEntry = ({ userProfilePic, id, alt, userName, email, href, width = 64, height = 64 }) => (
-  <Link to={href} className="text-decoration-none">
-    <Card className="border-0 rounded px-4 my-3 align-content-center">
-      <Card.Body>
-        <Image
-          id={id}
-          src={userProfilePic}
-          alt={alt}
-          width={width}
-          height={height}
-          className="rounded-circle me-4 float-start"
-        />
-        <Card.Title><h2>@{userName}</h2></Card.Title>
-        <Card.Text className="text-muted">{email}</Card.Text>
-      </Card.Body>
-    </Card>
-  </Link>
-);
 
 const SearchResult = () => {
   const location = useLocation();
@@ -65,17 +45,6 @@ const SearchResult = () => {
       ) : <h2>No profiles matched your input</h2>}
     </Container>
   ) : <LoadingSpinner />);
-};
-
-SearchEntry.propTypes = {
-  userProfilePic: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
 };
 
 export default SearchResult;

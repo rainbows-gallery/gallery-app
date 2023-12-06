@@ -11,6 +11,10 @@ class ProfilePage {
     await testController.expect(this.pageSelector.exists).ok();
   }
 
+  async goToEditProfile(testController) {
+    await testController.click('#edit-profile');
+  }
+
   async unFollow(testController) {
     await testController.click(Selector('.btn').withText('Unfollow'));
   }

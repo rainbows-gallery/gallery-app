@@ -110,6 +110,7 @@ const PhotoInteract = () => {
               <span>
                 <TrashPostButton postId={post._id} comments={comments} redirectTo="/" />
                 <Button
+                  id="editDescription"
                   variant="link"
                   className="text-dark"
                   onClick={handleEditModalShow}
@@ -134,6 +135,7 @@ const PhotoInteract = () => {
         </Modal.Header>
         <Modal.Body>
           <Form.Control
+            id="description"
             as="textarea"
             value={editedDescription}
             onChange={(e) => setEditedDescription(e.target.value)}
@@ -143,7 +145,7 @@ const PhotoInteract = () => {
           <Button variant="secondary" onClick={handleEditModalClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleEditDescription}>
+          <Button id="save" variant="primary" onClick={handleEditDescription}>
             Save Changes
           </Button>
         </Modal.Footer>

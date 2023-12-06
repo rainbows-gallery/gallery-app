@@ -7,6 +7,7 @@ import { profilePage } from './profile.page';
 import { uploadPage } from './upload.page';
 import { navBar } from './navbar.component';
 import { signupPage } from './signup.page';
+import { EditProfile } from './editProfile.page';
 
 /* global fixture:false, test:false */
 
@@ -69,6 +70,19 @@ test('Test that signin landing and search and profile and signout work', async (
   await landingPage.isDisplayed(testController);
 });
 
+test('Test editProfile', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await landingPage.isDisplayed(testController);
+  await navBar.gotoProfilePage(testController);
+  await profilePage.isDisplayed(testController);
+  await profilePage.goToEditProfile(testController);
+  await EditProfile.isDisplayed(testController);
+  await EditProfile.editProfile(testController);
+  await navBar.logout(testController);
+  await landingPage.isDisplayed(testController);
+});
+
 test('Follow & Unfollow test', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
@@ -95,6 +109,7 @@ test('PhotoInteract Comment Page test and star and then delete post', async (tes
   await photoInteractPage.starPost(testController);
   await photoInteractPage.unStarPost(testController);
   await photoInteractPage.deletePost(testController);
+  await photoInteractPage.editPost(testController);
   await navBar.logout(testController);
   await landingPage.isDisplayed(testController);
 });
