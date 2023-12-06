@@ -46,6 +46,15 @@ class NavBar {
     await testController.click('#signup');
   }
 
+  async gotoProfilePage(testController) {
+    await this.ensureLogout(testController);
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#profile-nav');
+  }
+
   async gotoHomePage(testController) {
     await this.ensureLogout(testController);
     const visible = await Selector('#basic-navbar-nav').visible;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SubmitField } from 'uniforms-bootstrap5';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { AutoForm, ErrorsField, LongTextField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema from 'simpl-schema';
@@ -79,7 +79,7 @@ const EditProfile = () => {
   };
   let fRef = null;
   return ready ? (
-    <Container className="py-3">
+    <Container id="edit-profile-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={10}>
           <Col className="text-center"><h2>Edit Your Profile</h2></Col>
@@ -102,7 +102,7 @@ const EditProfile = () => {
                           // This is needed for the dropzone component for drag drop a file
                           // eslint-disable-next-line react/jsx-props-no-spreading
                           {
-                            ...getInputProps({ accept: 'image/*', name: 'FileImage' })
+                            ...getInputProps({ id: 'upload-input', accept: 'image/*', name: 'FileImage' })
                           }
                         />
                         <p>You may drag and drop your image here or click and select it</p>
@@ -112,9 +112,9 @@ const EditProfile = () => {
                   )}
                 </Dropzone>
                 <Row>
-                  <LongTextField className="pt-3" name="bio" />
+                  <LongTextField id="bio" className="pt-3" name="bio" />
                 </Row>
-                <SubmitField value="Submit" />
+                <Button id="edit-Submit" type="submit">Submit</Button>
                 <ErrorsField />
                 <Link to={`/profile/${Meteor.user()._id}`}> Back to Profile</Link>
                 <p className="text-black">Note: you must upload both a photo and a bio at the same time to successfully update your profile</p>

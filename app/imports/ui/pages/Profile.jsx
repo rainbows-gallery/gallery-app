@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -9,11 +9,16 @@ import { Follows } from '../../api/Following/following';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ClickableImage from '../components/ClickableImage';
 import FollowButton from '../components/FollowButton';
+import UserFollow from '../components/ShowFollowers';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Profile = () => {
   // get userID for the profile you are looking at
   const { _id } = useParams();
+
+  const [title, setTitle] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
   // Check to see if it is properly getting the value
   console.log(` id: ${_id}`);
   const { ready, posts, shownUser, user } = useTracker(() => {
@@ -45,12 +50,30 @@ const Profile = () => {
     };
   }, [_id]);
   function isUserShownUser() {
-    console.log(shownUser);
     return shownUser.username === user.username;
   }
+
+  const Users = () => {
+    if (title === 'Followers') {
+      const dataFollowers = Follows.collection.find({ isFollowingUser: shownUser.username }).fetch();
+      const followingUsernames = dataFollowers.map(follower => follower.followerUser);
+      return Meteor.users.find({ username: { $in: followingUsernames } }).fetch();
+    }
+    const dataFollowers = Follows.collection.find({ followerUser: shownUser.username }).fetch();
+    const followingUsernames = dataFollowers.map(follower => follower.isFollowingUser);
+    return Meteor.users.find({ username: { $in: followingUsernames } }).fetch();
+
+  };
+
   return (ready ? (
 
     <Container id="profile-page" className="py-3">
+      <UserFollow
+        show={showModal}
+        setShow={setShowModal}
+        title={title}
+        data={Users()}
+      />
       <Row>
         <Col />
         <Col className="d-flex flex-column align-items-center justify-content-center">
@@ -69,15 +92,27 @@ const Profile = () => {
       </Row>
       <Row className="p-2 text-center">
         <p className="text-black text-center">{shownUser.profile.bio}</p>
-        {isUserShownUser() && <Link to="/EditProfile">Edit Profile</Link>}
+        {isUserShownUser() && <Link id="edit-profile" to="/EditProfile">Edit Profile</Link>}
       </Row>
       <Row className="text-center black Text pt-3">
         <Col />
-        <Col>
+        <Col
+          style={{ cursor: 'pointer', textDecoration: 'underline' }}
+          onClick={() => {
+            setTitle('Followers');
+            setShowModal(true);
+          }}
+        >
           <h5>Followers</h5>
           <h5 className="black Text">{Follows.collection.find({ isFollowingUser: shownUser.username }).count()}</h5>
         </Col>
-        <Col>
+        <Col
+          style={{ cursor: 'pointer', textDecoration: 'underline' }}
+          onClick={() => {
+            setTitle('Following');
+            setShowModal(true);
+          }}
+        >
           <h5>Following</h5>
           <h5 className="black Text">{Follows.collection.find({ followerUser: shownUser.username }).count()}</h5>
         </Col>
@@ -90,7 +125,7 @@ const Profile = () => {
       <Row xs={1} md={2} lg={3} className="g-4">
         {posts.map((post) => (
           <Col key={post._id}>
-            <ClickableImage width="100%" height="300px" userProfile={shownUser.profile.image} src={post.imageId} userName={shownUser.username} href={`/photo-interact/${post._id}`} alt="data" />
+            <ClickableImage id={post._id} width="100%" height="300px" userProfile={shownUser.profile.image} src={post.imageId} userName={shownUser.username} href={`/photo-interact/${post._id}`} alt="data" />
           </Col>
         ))}
       </Row>
